@@ -14,6 +14,7 @@ from pathlib import Path
 
 from flask import Flask, g, jsonify, make_response, request, send_from_directory
 from werkzeug.exceptions import HTTPException
+from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.security import check_password_hash, generate_password_hash
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def create_app(test_config=None):
     team = json.loads((ROOT / "team.json").read_text())
     app = Flask(__name__, static_folder=None)
+    # Production binds to loopback behind one trusted Nginx proxy. This preserves
+    # the external HTTPS origin for host and CSRF validation.
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
     app.config.update(
         DATABASE=os.environ.get("DATABASE", str(ROOT / "instance" / "notevault.db")),
         TEAM_ID=os.environ.get("TEAM_ID", team["id"]),

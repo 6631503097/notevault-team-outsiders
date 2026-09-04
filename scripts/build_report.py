@@ -118,7 +118,7 @@ mermaid='''flowchart LR
     f'Team marker: `{base["marker"]}`. Application edition: {team["edition"]}.\n\n'
     'Assets: private notes, account password hashes, session tokens, team identity, audit history, source code, dependency inventory and release integrity. Attackers: unauthenticated registrants, malicious authenticated users, compromised dependencies, and a local privileged operator. Real university systems, real credentials and other teams’ databases are out of scope.\n\n'
     '## Data-flow diagram\n\n```mermaid\n'+mermaid+'```\n\n'
-    'HTTP is loopback-only for this lab. A future non-local deployment must add HTTPS. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.\n\n## STRIDE\n\n'+stride+'\n\n## Top risks\n\n'+risks+'\n\nThese qualitative scores prioritize remediation; they are not calculated CVSS scores or a guarantee of residual safety.\n')
+    f'The local preview is loopback-only. The live service at {team["live_url"]} uses HTTPS and a loopback-only application process behind Nginx. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.\n\n## STRIDE\n\n'+stride+'\n\n## Top risks\n\n'+risks+'\n\nThese qualitative scores prioritize remediation; they are not calculated CVSS scores or a guarantee of residual safety.\n')
 
 svg='''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#415d56"/></marker></defs><rect width="1000" height="420" fill="#ffffff"/><g font-family="Arial,sans-serif" fill="#233b35"><text x="20" y="28" font-size="20">NoteVault - data flows and trust boundaries</text><g stroke="#9aac9d" fill="#f4f7f2" stroke-dasharray="6 4"><rect x="20" y="55" width="230" height="190" rx="12"/><rect x="365" y="55" width="270" height="190" rx="12"/><rect x="750" y="55" width="230" height="190" rx="12"/><rect x="20" y="295" width="615" height="105" rx="12"/></g><g font-size="14"><text x="38" y="82">TB1 - browser</text><text x="383" y="82">TB2 - app container</text><text x="768" y="82">TB3 - storage</text><text x="38" y="322">TB4 - build and supply chain</text></g><g font-size="17" text-anchor="middle"><text x="135" y="135">User / administrator</text><text x="135" y="164">React interface</text><text x="500" y="135">Flask API</text><text x="500" y="164">Authorization / export</text><text x="865" y="132">SQLite</text><text x="865" y="161">Notes / accounts</text><text x="865" y="190">Sessions / audit</text></g><g fill="none" stroke="#415d56" stroke-width="2" marker-end="url(#arrow)"><path d="M250 120 H365"/><path d="M365 202 H250"/><path d="M635 120 H750"/><path d="M750 202 H635"/><path d="M500 295 V245"/></g><g font-size="12" text-anchor="middle"><text x="307" y="106">JSON + cookie</text><text x="307" y="145">+ CSRF</text><text x="307" y="226">Owned export</text><text x="693" y="106">Bound SQL</text><text x="693" y="226">Owned records</text><text x="564" y="275">Verified build</text></g><text x="40" y="357" font-size="15">Source + locks → Security CI → SBOM + signed release</text><text x="40" y="382" font-size="12">Local key signature proves integrity, not independent provenance.</text></g></svg>'''
 (ROOT/'docs/dfd.svg').write_text(svg)
@@ -132,7 +132,8 @@ report=f'''# Term Project Report - Secure Build
 | Team name | {team['id']} |
 | Members (name + ID) | {'; '.join(m['name']+' '+m['student_id'] for m in team['members'])} |
 | Target application | Provided NoteVault, upgraded to {team['edition']} |
-| Repository URL | Not supplied; local Git repository prepared |
+| Repository URL | {team['repository_url']} (private; instructor access must be granted) |
+| Live application | {team['live_url']} |
 | Date | 2026-09-04 |
 | Team marker | {base['marker']} |
 | Status | Evidence-backed implementation draft; team review and submission work remain |
@@ -153,7 +154,7 @@ The application provides local account creation/sign-in, note creation/view/edit
 
 The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener.
 
-Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The local preview uses loopback HTTP; HTTPS is mandatory for a future non-local deployment. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
+Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The live deployment terminates HTTPS in Nginx and forwards only to loopback Gunicorn. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
 
 ## 3. Threat Model - STRIDE (20 pts)
 
@@ -212,6 +213,7 @@ python_count=count_components('sbom-python.json');js_count=count_components('sbo
 verification=(E/'cosign-verification.txt').read_text() if (E/'cosign-verification.txt').exists() else 'Verification has not been completed.'
 container=json.loads((E/'container-check.json').read_text()) if (E/'container-check.json').exists() else None
 scan=json.loads((E/'sca-container.json').read_text()) if (E/'sca-container.json').exists() else None
+hosted_ci=json.loads((E/'verification-summary.json').read_text()).get('hosted_ci','Not recorded')
 vulns=[v for r in scan.get('Results',[]) for v in r.get('Vulnerabilities',[])] if scan else None
 report+=f'''## 6. Supply-Chain Hardening (15 pts)
 
@@ -241,13 +243,13 @@ Container vulnerability scan: {str(len(vulns))+' HIGH/CRITICAL issues in the sca
 
 The SAST gate fails on HIGH findings at MEDIUM/HIGH confidence; pip-audit fails on any known Python vulnerability, npm audit fails at HIGH, the container gate fails on HIGH/CRITICAL, and Gitleaks fails on detected secrets. Tool failures are not treated as success. Historical intentionally vulnerable lab source is excluded from the hardened release scan and kept only for the assessment; generated packages, local state and evidence are also excluded from secret scans using the committed configuration.
 
-Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. This verifies local gate behavior, not a hosted GitHub Actions run. After the teams provide repositories and push the branches themselves, capture a real passing and failing workflow run and add the URLs/screenshots. Organization repositories may require a Gitleaks Action license or a CLI-based equivalent.
+Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: {hosted_ci}. The intentional local failing-gate proof remains the negative control.
 
 ## 8. Conclusion & Reflection (5 pts - clarity)
 
 The verified baseline failures are addressed by removing unsafe interpretation, enforcing authorization at data access, using modern password hashing and revocable sessions, and making builds auditable. Tests also check legitimate note lifecycles, persistence, cross-database token rejection, CSV export protection, rate limiting and concurrent edits.
 
-Residual risks: this is a single-instance local course app with visible demo credentials only when demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. Public deployment needs HTTPS, exact trusted hosts, fresh non-demo data, backup/restore and monitoring work. No live public deployment was requested or performed.
+Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. The live deployment uses HTTPS, an exact trusted host, fresh non-demo data and separate service identities; backup/restore and monitoring work remain.
 
 Student reflection is pending. Each team member should write what they personally reproduced, what failed, why their fix is appropriate and which residual risk they would address next. Do not present this implementation session as semester-long individual contribution.
 
@@ -262,9 +264,9 @@ Student reflection is pending. Each team member should write what they personall
 | Vulnerability report | Week 11 | Actual local probe and regression evidence included; student screenshots pending |
 | Remediation + SBOM + signature | Week 14 | Code, local SBOMs and local signature present; team review required |
 | WIP demo + peer review | Week 16 | Runbook provided; actual demo and feedback pending |
-| Final report + prerecorded demo + Q&A | Week 19 | Repository URL, final PDF review, video and live Q&A remain |
+| Final report + prerecorded demo + Q&A | Week 19 | Repository and live URLs added; final PDF review, video and live Q&A remain |
 
-Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. No Classroom post, repository push, portal upload, peer rating or video submission has been performed.
+Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
 
 ### Tools and evidence index
 

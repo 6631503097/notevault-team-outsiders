@@ -4,6 +4,8 @@
   "edition": "Fieldnotes",
   "theme": "outsiders",
   "port": 8081,
+  "repository_url": "https://github.com/Thiha-Lynn/notevault-team-outsiders",
+  "live_url": "https://outsiders.3-0-126-159.nip.io/",
   "members": [
     {"name":"Zaw Win Htut", "student_id":"6631503101"},
     {"name":"Wanna San", "student_id":"6631503097"},

@@ -1,0 +1,42 @@
+[Unit]
+Description=NoteVault - Team Outsiders
+After=network.target
+
+[Service]
+Type=simple
+User=notevault-outsiders
+Group=notevault-outsiders
+WorkingDirectory=/srv/notevault/team-outsiders/current
+EnvironmentFile=/etc/notevault/team-outsiders.env
+ExecStart=/srv/notevault/team-outsiders/current/.venv/bin/gunicorn backend.app:create_app() --bind 127.0.0.1:9081 --workers 1 --threads 4 --worker-tmp-dir /tmp --access-logfile -
+Restart=on-failure
+RestartSec=3
+PrivateTmp=true
+PrivateDevices=true
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectProc=invisible
+ProcSubset=pid
+LockPersonality=true
+MemoryDenyWriteExecute=true
+RemoveIPC=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+IPAddressDeny=any
+IPAddressAllow=localhost
+ReadWritePaths=/var/lib/notevault/team-outsiders
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
