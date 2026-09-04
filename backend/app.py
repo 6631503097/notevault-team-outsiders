@@ -36,7 +36,7 @@ def create_app(test_config=None):
     )
     if test_config:
         app.config.update(test_config)
-    Path(app.config["DATABASE"]).parent.mkdir(parents=True, exist_ok=True)
+    Path(app.config["DATABASE"]).parent.mkdir(parents=True, exist_ok=True, mode=0o700)
 
     def db():
         if "db" not in g:
@@ -145,6 +145,8 @@ def create_app(test_config=None):
             db().execute("INSERT INTO notes (owner_id,title,body,collection,created_at,updated_at) VALUES (?,?,?,?,?,?)",
                          (admin_id, "build-tag", f"team={app.config['TEAM_ID']} marker={marker()}", team["collections"][0], now, now))
         db().commit()
+
+    os.chmod(app.config["DATABASE"], 0o600)
 
     @app.before_request
     def guard():

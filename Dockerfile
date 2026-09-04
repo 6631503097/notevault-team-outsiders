@@ -5,13 +5,13 @@ RUN npm ci
 COPY frontend/ ./
 RUN npm run build
 
-FROM python:3.12-slim-bookworm@sha256:782412e85d0f0984994c290652577d4018aff08145c85b262bb63dc0c7522254
+FROM python:3.12-alpine@sha256:b64631e04e4920160c50fbe8d8df828f7f35f06f425cb44aa09bca53e708a35a
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 DATABASE=/data/notevault.db DEMO_MODE=false
 WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir --require-hashes -r requirements.txt \
-    && groupadd --gid 10001 notevault \
-    && useradd --uid 10001 --gid 10001 --no-create-home notevault \
+    && addgroup -g 10001 notevault \
+    && adduser -D -H -u 10001 -G notevault notevault \
     && mkdir /data && chown 10001:10001 /data
 COPY backend/ ./backend/
 COPY team.json ./

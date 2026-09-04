@@ -7,6 +7,7 @@ from pathlib import Path
 import secrets
 import shutil
 import subprocess
+import tempfile
 ROOT=Path(__file__).resolve().parents[1]
 team=json.loads((ROOT/'team.json').read_text())
 keys=ROOT/'.keys';keys.mkdir(mode=0o700,exist_ok=True)
@@ -26,3 +27,11 @@ result=subprocess.run(['cosign','verify-blob','--key',str(ROOT/'release/cosign.p
 (ROOT/'evidence/cosign-verification.txt').write_text('Local key signature; transparency log intentionally not used.\n'+result.stdout+result.stderr)
 result.check_returncode()
 print(result.stdout+result.stderr)
+
+with tempfile.TemporaryDirectory(prefix='notevault-tamper-') as directory:
+    changed=Path(directory)/'tampered.tar.gz'
+    changed.write_bytes(artifact.read_bytes()+b'local integrity probe')
+    bad=subprocess.run(['cosign','verify-blob','--key',str(ROOT/'release/cosign.pub'),'--bundle',str(bundle),'--insecure-ignore-tlog',str(changed)],capture_output=True,text=True)
+    (ROOT/'evidence/cosign-tamper-rejection.txt').write_text('Changed artifact verification exit code: '+str(bad.returncode)+'\n'+bad.stdout+bad.stderr)
+    if bad.returncode==0:raise RuntimeError('Tampered artifact was incorrectly accepted')
+    print('Tampered artifact correctly rejected.')
