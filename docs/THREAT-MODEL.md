@@ -34,7 +34,7 @@ flowchart LR
   S -.->|Verified release| A
 ```
 
-HTTP is loopback-only for this lab. A future non-local deployment must add HTTPS. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.
+The local preview is loopback-only. The live service at https://outsiders.3-0-126-159.nip.io/ uses HTTPS and a loopback-only application process behind Nginx. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.
 
 ## STRIDE
 

@@ -7,7 +7,8 @@
 | Team name | Team Outsiders |
 | Members (name + ID) | Zaw Win Htut 6631503101; Wanna San 6631503097; Myo Zin Thant 6631503076 |
 | Target application | Provided NoteVault, upgraded to Fieldnotes |
-| Repository URL | Not supplied; local Git repository prepared |
+| Repository URL | https://github.com/Thiha-Lynn/notevault-team-outsiders (private; instructor access must be granted) |
+| Live application | https://outsiders.3-0-126-159.nip.io/ |
 | Date | 2026-09-04 |
 | Team marker | 3d821afbe8a0 |
 | Status | Evidence-backed implementation draft; team review and submission work remain |
@@ -28,7 +29,7 @@ The application provides local account creation/sign-in, note creation/view/edit
 
 The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener.
 
-Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The local preview uses loopback HTTP; HTTPS is mandatory for a future non-local deployment. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
+Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The live deployment terminates HTTPS in Nginx and forwards only to loopback Gunicorn. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
 
 ## 3. Threat Model - STRIDE (20 pts)
 
@@ -198,7 +199,7 @@ Use bound SQL parameters, fetch the canonical user row, and verify its password 
 + row = db().execute("SELECT * FROM users WHERE username=?", (name,)).fetchone()
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:249.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:253.
 
 Proof: test_f01_sql_injection_login_and_search. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -211,7 +212,7 @@ Every read and write constrains both the note ID and authenticated owner ID. The
 + SELECT * FROM notes WHERE id=? AND owner_id=?
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:316.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:320.
 
 Proof: test_f02_owner_isolation_and_mass_assignment. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -224,7 +225,7 @@ Registration always inserts role=user; admin-only routes check the role loaded f
 + INSERT INTO users (username,password_hash,role,created_at) VALUES (?,?,'user',?)
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:228.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:232.
 
 Proof: test_f03_registration_never_accepts_admin_role. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -237,7 +238,7 @@ Serve notes as JSON and render them through React text nodes. No dynamic templat
 + <h2>{note.title}</h2><p>{note.body}</p>
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:173 and frontend/src/main.tsx.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:177 and frontend/src/main.tsx.
 
 Proof: test_f04_html_and_template_payloads_remain_data; frontend App.test.tsx. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -250,7 +251,7 @@ Remove subprocess execution entirely. An allowlist selects real JSON, CSV or tex
 + if fmt not in ('json', 'csv', 'txt'): return fail(...)
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:341.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:345.
 
 Proof: test_f05_export_rejects_command_input. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -263,7 +264,7 @@ Use Werkzeug scrypt with per-password salts; return only allowlisted account met
 + generate_password_hash(password)
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:229.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:233.
 
 Proof: test_f06_password_hashes_and_admin_redaction. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -276,7 +277,7 @@ Replace JWTs with random 256-bit opaque tokens. Store only SHA-256 token digests
 + SELECT * FROM sessions WHERE token_hash=? AND expires_at>?
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:156.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:160.
 
 Proof: test_f07_session_revocation_expiry_and_forgery. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -289,7 +290,7 @@ Require a custom request header and JSON, validate Origin when supplied, and req
 + if origin and origin != request.host_url.rstrip("/"): return fail(..., 403)
 ```
 
-Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:166.
+Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:170.
 
 Proof: test_f08_csrf_origin_and_cookie_flags. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
 
@@ -323,13 +324,13 @@ Container vulnerability scan: 0 HIGH/CRITICAL issues in the scanned image (see e
 
 The SAST gate fails on HIGH findings at MEDIUM/HIGH confidence; pip-audit fails on any known Python vulnerability, npm audit fails at HIGH, the container gate fails on HIGH/CRITICAL, and Gitleaks fails on detected secrets. Tool failures are not treated as success. Historical intentionally vulnerable lab source is excluded from the hardened release scan and kept only for the assessment; generated packages, local state and evidence are also excluded from secret scans using the committed configuration.
 
-Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. This verifies local gate behavior, not a hosted GitHub Actions run. After the teams provide repositories and push the branches themselves, capture a real passing and failing workflow run and add the URLs/screenshots. Organization repositories may require a Gitleaks Action license or a CLI-based equivalent.
+Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: Not run - repository URL not provided. The intentional local failing-gate proof remains the negative control.
 
 ## 8. Conclusion & Reflection (5 pts - clarity)
 
 The verified baseline failures are addressed by removing unsafe interpretation, enforcing authorization at data access, using modern password hashing and revocable sessions, and making builds auditable. Tests also check legitimate note lifecycles, persistence, cross-database token rejection, CSV export protection, rate limiting and concurrent edits.
 
-Residual risks: this is a single-instance local course app with visible demo credentials only when demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. Public deployment needs HTTPS, exact trusted hosts, fresh non-demo data, backup/restore and monitoring work. No live public deployment was requested or performed.
+Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. The live deployment uses HTTPS, an exact trusted host, fresh non-demo data and separate service identities; backup/restore and monitoring work remain.
 
 Student reflection is pending. Each team member should write what they personally reproduced, what failed, why their fix is appropriate and which residual risk they would address next. Do not present this implementation session as semester-long individual contribution.
 
@@ -344,9 +345,9 @@ Student reflection is pending. Each team member should write what they personall
 | Vulnerability report | Week 11 | Actual local probe and regression evidence included; student screenshots pending |
 | Remediation + SBOM + signature | Week 14 | Code, local SBOMs and local signature present; team review required |
 | WIP demo + peer review | Week 16 | Runbook provided; actual demo and feedback pending |
-| Final report + prerecorded demo + Q&A | Week 19 | Repository URL, final PDF review, video and live Q&A remain |
+| Final report + prerecorded demo + Q&A | Week 19 | Repository and live URLs added; final PDF review, video and live Q&A remain |
 
-Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. No Classroom post, repository push, portal upload, peer rating or video submission has been performed.
+Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
 
 ### Tools and evidence index
 
