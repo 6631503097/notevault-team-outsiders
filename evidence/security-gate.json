@@ -1,0 +1,67 @@
+[
+  {
+    "command": [
+      "/Users/thomas/Outside_projects/SoftwareSecurityLabs/projects/team-outsiders/.venv/bin/python",
+      "-m",
+      "bandit",
+      "-r",
+      "backend",
+      "-lll",
+      "-ii",
+      "-f",
+      "json",
+      "-o",
+      "evidence/sast.json"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "[main]\tINFO\tprofile include tests: None\n[main]\tINFO\tprofile exclude tests: None\n[main]\tINFO\tcli include tests: None\n[main]\tINFO\tcli exclude tests: None\n[json]\tINFO\tJSON output written to file: evidence/sast.json\n"
+  },
+  {
+    "command": [
+      "/Users/thomas/Outside_projects/SoftwareSecurityLabs/projects/team-outsiders/.venv/bin/python",
+      "-m",
+      "pip_audit",
+      "-r",
+      "requirements.txt",
+      "--require-hashes",
+      "--disable-pip",
+      "-f",
+      "json",
+      "-o",
+      "evidence/sca-python.json"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "No known vulnerabilities found\n"
+  },
+  {
+    "command": [
+      "npm",
+      "audit",
+      "--prefix",
+      "frontend",
+      "--audit-level=high",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"auditReportVersion\": 2,\n  \"vulnerabilities\": {},\n  \"metadata\": {\n    \"vulnerabilities\": {\n      \"info\": 0,\n      \"low\": 0,\n      \"moderate\": 0,\n      \"high\": 0,\n      \"critical\": 0,\n      \"total\": 0\n    },\n    \"dependencies\": {\n      \"prod\": 3,\n      \"dev\": 142,\n      \"optional\": 27,\n      \"peer\": 11,\n      \"peerOptional\": 0,\n      \"total\": 146\n    }\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "gitleaks",
+      "dir",
+      ".",
+      "--no-banner",
+      "--redact",
+      "--report-format",
+      "json",
+      "--report-path",
+      "evidence/secrets.json"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "9:31PM INF scanned ~333507 bytes (333.51 KB) in 95.7ms\n9:31PM INF no leaks found\n"
+  }
+]

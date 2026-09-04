@@ -1,0 +1,32 @@
+{
+  "team": "Team Outsiders",
+  "members": [
+    {
+      "name": "Zaw Win Htut",
+      "student_id": "6631503101"
+    },
+    {
+      "name": "Wanna San",
+      "student_id": "6631503097"
+    },
+    {
+      "name": "Myo Zin Thant",
+      "student_id": "6631503076"
+    }
+  ],
+  "checked_at": "2026-09-04T14:37:34.047591+00:00",
+  "backend_tests": 25,
+  "backend_failures": 0,
+  "frontend_tests": 3,
+  "frontend_evidence": "verification.log",
+  "marker": "3d821afbe8a0",
+  "container_image": "sha256:bc284862e39684b03f83dc0a3ef796a12acdf33323268d06f93207e8e8db84ae",
+  "container_high_critical": 0,
+  "python_components": 8,
+  "frontend_build_components": 146,
+  "cosign_verified": true,
+  "tampered_artifact_rejected": true,
+  "artifact_sha256": "2c960b698cf5ea1c5a0bedc45f86510abb92d6d4e3be6ac1795af07d5c790df6",
+  "hosted_ci": "Not run - repository URL not provided",
+  "student_evidence": "Identity-stamped screenshots, independent reproduction/contribution records, demo/video and viva remain"
+}

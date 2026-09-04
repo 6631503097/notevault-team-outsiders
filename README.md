@@ -52,8 +52,17 @@ Both teams must review and understand the shared implementation, independently r
 
 ## Scope and limits
 
-This is a single-machine course workspace, not a public hosted service. Demo accounts are intentionally visible only in demo mode. For any future HTTPS deployment, use a new database with `DEMO_MODE=false`, configure exact `TRUSTED_HOSTS` and `COOKIE_SECURE=true`, arrange TLS, backups, monitoring and administrator provisioning. Notes are private per account, not shared automatically among teammates. Team IDs are shown only after sign-in, except the non-secret team name and marker.
+This is a single-machine course workspace, not a public hosted service. Demo accounts are intentionally visible only in demo mode. For any future HTTPS deployment, use a new database with `DEMO_MODE=false`, configure exact `TRUSTED_HOSTS` and `COOKIE_SECURE=true`, arrange TLS, backups, monitoring and administrator provisioning. Notes are private per account, not shared automatically among teammates. Student IDs are shown only after sign-in, except the non-secret team name and marker.
 
 The single SQLite database supports modest course use; auth throttles are stored there and survive restarts. A user can hold at most 1,000 notes, including removed notes; administrators see up to 500 accounts. Audit records are operational history, not tamper-proof evidence. There is no password recovery, MFA, email service, upload or public deployment. Restarts never reset existing data. Archive/remove are reversible; no destructive delete endpoint is exposed.
 
 The original target remains unchanged in `lab/original`, excluded from the runtime image and release. Its initial Git commit and later remediation commits honestly record this session; no past weekly work or student authorship is fabricated.
+
+## Regenerate the report draft
+
+```sh
+uv pip install --python .venv/bin/python --require-hashes -r requirements-report.txt
+.venv/bin/python scripts/build_report.py
+```
+
+Run the evidence scripts first. The report generator reads actual local evidence and Git fix references. Review the generated PDF visually before submitting it; it remains a draft until the team completes its missing evidence and personal sections.
