@@ -1,0 +1,11 @@
+title = "NoteVault release-source secret policy"
+[extend]
+useDefault = true
+[allowlist]
+description = "Course baseline, scanner evidence, generated packages and local state are not release source; baseline is scanned separately for the assessment."
+paths = [
+  '''(^|/)lab/original/''',
+  '''(^|/)evidence/''',
+  '''(^|/)(node_modules|\.venv|\.lab-venv|\.git|instance|release|\.keys|output)/''',
+  '''(^|/)frontend/dist/'''
+]
