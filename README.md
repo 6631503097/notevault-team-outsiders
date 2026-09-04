@@ -38,7 +38,7 @@ npm ci --prefix frontend
 .venv/bin/python scripts/container_check.py
 ```
 
-`docs/BASELINE.md` documents safe reproduction of the original course vulnerabilities without starting a vulnerable public server. `evidence/` contains real local outputs; it is not a substitute for student identity-stamped screenshots or hosted CI run evidence.
+`docs/BASELINE.md` documents safe reproduction of the original course vulnerabilities without starting a vulnerable public server. `evidence/` contains real local outputs and the linked hosted CI record; it is not a substitute for student identity-stamped screenshots or independent reproduction.
 
 ## Rubric and handoff
 

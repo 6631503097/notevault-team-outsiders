@@ -27,6 +27,8 @@
   "cosign_verified": true,
   "tampered_artifact_rejected": true,
   "artifact_sha256": "2c960b698cf5ea1c5a0bedc45f86510abb92d6d4e3be6ac1795af07d5c790df6",
-  "hosted_ci": "Not run - repository URL not provided",
+  "hosted_ci": "Passed full-history GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/33889073165",
+  "live_url": "https://outsiders.3-0-126-159.nip.io/",
+  "deployment_e2e": "Passed HTTPS health, registration, secure-cookie, CSRF, note creation, owner-isolation, marker-separation, restart-persistence, and test-data cleanup checks.",
   "student_evidence": "Identity-stamped screenshots, independent reproduction/contribution records, demo/video and viva remain"
 }
