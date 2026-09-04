@@ -1,0 +1,14 @@
+.git
+.venv
+.lab-venv
+instance
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+frontend/dist
+lab
+evidence
+release
+.keys
+.env
+output
