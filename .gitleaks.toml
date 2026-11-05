@@ -6,6 +6,6 @@ description = "Course baseline, scanner evidence, generated packages and local s
 paths = [
   '''(^|/)lab/original/''',
   '''(^|/)evidence/''',
-  '''(^|/)(node_modules|\.venv|\.lab-venv|\.git|instance|release|\.keys|output)/''',
+  '''(^|/)(\.tooling|node_modules|\.venv|\.lab-venv|\.git|instance|release|\.keys|output)/''',
   '''(^|/)frontend/dist/'''
 ]

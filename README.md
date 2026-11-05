@@ -54,7 +54,7 @@ npm ci --prefix frontend
 - `.github/workflows/security.yml` - tests, SAST, SCA, secret scanning, container checks and signed tag releases.
 - `release/` - actual locally signed release, verification bundle, public key and digests; never distribute `.keys/`.
 
-Both teams must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The current private repository at https://github.com/Thiha-Lynn/notevault-team-outsiders is a staging/handoff source. Team Outsiders must create its final private repository under a verified member or team-owned organization, preserve the disclosed history, add all three members and the instructor, and update the report URL. Peer feedback, completed personal reflections, the recorded demo and portal submission remain team actions.
+Both teams must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The team-owned private repository is https://github.com/6631503097/notevault-team-outsiders. The disclosed history is preserved. All three members have access; instructor access remains pending. Peer feedback, completed personal reflections, the recorded demo and portal submission remain team actions.
 
 ## Scope and limits
 

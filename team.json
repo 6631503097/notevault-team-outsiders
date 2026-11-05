@@ -4,18 +4,46 @@
   "edition": "Fieldnotes",
   "theme": "outsiders",
   "port": 8081,
-  "repository_url": "https://github.com/Thiha-Lynn/notevault-team-outsiders",
+  "repository_url": "https://github.com/6631503097/notevault-team-outsiders",
   "live_url": "https://outsiders.3-0-126-159.nip.io/",
   "members": [
-    {"name":"Zaw Win Htut", "student_id":"6631503101"},
-    {"name":"Wanna San", "student_id":"6631503097"},
-    {"name":"Myo Zin Thant", "student_id":"6631503076"}
+    {
+      "name": "Zaw Win Htut",
+      "student_id": "6631503101"
+    },
+    {
+      "name": "Wanna San",
+      "student_id": "6631503097"
+    },
+    {
+      "name": "Myo Zin Thant",
+      "student_id": "6631503076"
+    }
   ],
-  "collections": ["Fieldwork", "Research", "Personal"],
+  "collections": [
+    "Fieldwork",
+    "Research",
+    "Personal"
+  ],
   "welcome": "A clear space for your next discovery.",
   "seed_notes": [
-    {"title":"Start with a question", "body":"What happens at the boundary between a browser and a server?\n\nRecord an observation, keep the exact request, and test your explanation. This notebook is your private working space.", "collection":"Fieldwork", "pinned":true},
-    {"title":"The research trail", "body":"A useful finding tells a complete story: the trigger, the impact, the cause, and the fix.\n\nKeep source links and reproduction steps beside your observations.", "collection":"Research", "pinned":false},
-    {"title":"Before the next session", "body":"Review the threat model.\nReproduce one finding.\nExplain the fix to a teammate.\nRecord what remains uncertain.", "collection":"Personal", "pinned":false}
+    {
+      "title": "Start with a question",
+      "body": "What happens at the boundary between a browser and a server?\n\nRecord an observation, keep the exact request, and test your explanation. This notebook is your private working space.",
+      "collection": "Fieldwork",
+      "pinned": true
+    },
+    {
+      "title": "The research trail",
+      "body": "A useful finding tells a complete story: the trigger, the impact, the cause, and the fix.\n\nKeep source links and reproduction steps beside your observations.",
+      "collection": "Research",
+      "pinned": false
+    },
+    {
+      "title": "Before the next session",
+      "body": "Review the threat model.\nReproduce one finding.\nExplain the fix to a teammate.\nRecord what remains uncertain.",
+      "collection": "Personal",
+      "pinned": false
+    }
   ]
 }

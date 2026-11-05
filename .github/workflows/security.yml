@@ -38,12 +38,15 @@ jobs:
         run: |
           .venv/bin/pip-audit -r requirements.txt --require-hashes --disable-pip -f json -o evidence/sca-python.json
           npm audit --prefix frontend --audit-level=high --json > evidence/sca-npm.json
-      - name: Secret scanning of repository history
-        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_ENABLE_COMMENTS: false
-          GITLEAKS_ENABLE_SUMMARY: true
+      - name: Secret scanning of complete repository history
+        run: |
+          set -euo pipefail
+          scanner_dir=$(mktemp -d)
+          curl --fail --silent --show-error --location https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz -o "$scanner_dir/gitleaks_8.24.3_linux_x64.tar.gz"
+          curl --fail --silent --show-error --location https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_checksums.txt -o "$scanner_dir/checksums.txt"
+          (cd "$scanner_dir" && rg ' gitleaks_8.24.3_linux_x64.tar.gz$' checksums.txt | sha256sum --check --strict)
+          tar -xzf "$scanner_dir/gitleaks_8.24.3_linux_x64.tar.gz" -C "$scanner_dir" gitleaks
+          "$scanner_dir/gitleaks" git . --log-opts="--all" --no-banner --redact --report-format json --report-path evidence/secrets-history.json
       - name: Prove high severity gate rejection
         run: .venv/bin/python scripts/prove_gate.py
       - name: Build the hardened non-root container
