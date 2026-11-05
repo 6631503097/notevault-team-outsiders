@@ -1,4 +1,4 @@
-"""Build an evidence-linked Markdown and PDF draft without inventing student work."""
+"""Build an evidence-linked final submission draft without inventing student work."""
 from datetime import datetime,timezone
 import hashlib
 import html
@@ -123,6 +123,20 @@ mermaid='''flowchart LR
 svg='''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#415d56"/></marker></defs><rect width="1000" height="420" fill="#ffffff"/><g font-family="Arial,sans-serif" fill="#233b35"><text x="20" y="28" font-size="20">NoteVault - data flows and trust boundaries</text><g stroke="#9aac9d" fill="#f4f7f2" stroke-dasharray="6 4"><rect x="20" y="55" width="230" height="190" rx="12"/><rect x="365" y="55" width="270" height="190" rx="12"/><rect x="750" y="55" width="230" height="190" rx="12"/><rect x="20" y="295" width="615" height="105" rx="12"/></g><g font-size="14"><text x="38" y="82">TB1 - browser</text><text x="383" y="82">TB2 - app container</text><text x="768" y="82">TB3 - storage</text><text x="38" y="322">TB4 - build and supply chain</text></g><g font-size="17" text-anchor="middle"><text x="135" y="135">User / administrator</text><text x="135" y="164">React interface</text><text x="500" y="135">Flask API</text><text x="500" y="164">Authorization / export</text><text x="865" y="132">SQLite</text><text x="865" y="161">Notes / accounts</text><text x="865" y="190">Sessions / audit</text></g><g fill="none" stroke="#415d56" stroke-width="2" marker-end="url(#arrow)"><path d="M250 120 H365"/><path d="M365 202 H250"/><path d="M635 120 H750"/><path d="M750 202 H635"/><path d="M500 295 V245"/></g><g font-size="12" text-anchor="middle"><text x="307" y="106">JSON + cookie</text><text x="307" y="145">+ CSRF</text><text x="307" y="226">Owned export</text><text x="693" y="106">Bound SQL</text><text x="693" y="226">Owned records</text><text x="564" y="275">Verified build</text></g><text x="40" y="357" font-size="15">Source + locks → Security CI → SBOM + signed release</text><text x="40" y="382" font-size="12">Local key signature proves integrity, not independent provenance.</text></g></svg>'''
 (ROOT/'docs/dfd.svg').write_text(svg)
 
+python_count=count_components('sbom-python.json');js_count=count_components('sbom-frontend.json')
+verification=(E/'cosign-verification.txt').read_text() if (E/'cosign-verification.txt').exists() else 'Verification has not been completed.'
+container=json.loads((E/'container-check.json').read_text()) if (E/'container-check.json').exists() else None
+scan=json.loads((E/'sca-container.json').read_text()) if (E/'sca-container.json').exists() else None
+summary=json.loads((E/'verification-summary.json').read_text())
+hosted_ci=summary.get('hosted_ci','Not recorded')
+live_marker=summary.get('live_marker','Check /api/config')
+vulns=[v for r in scan.get('Results',[]) for v in (r.get('Vulnerabilities') or [])] if scan else None
+python_audit=json.loads((E/'sca-python.json').read_text()) if (E/'sca-python.json').exists() else {}
+python_vulns=sum(len(d.get('vulns',[])) for d in python_audit.get('dependencies',[]))
+npm_audit=json.loads((E/'sca-npm.json').read_text()) if (E/'sca-npm.json').exists() else {}
+npm_vulns=npm_audit.get('metadata',{}).get('vulnerabilities',{}).get('total','not recorded')
+secret_findings=len(json.loads((E/'secrets.json').read_text())) if (E/'secrets.json').exists() else 'not recorded'
+
 report=f'''# Term Project Report - Secure Build
 
 ## Cover
@@ -134,9 +148,11 @@ report=f'''# Term Project Report - Secure Build
 | Target application | Provided NoteVault, upgraded to {team['edition']} |
 | Repository URL | {team['repository_url']} (private; instructor access must be granted) |
 | Live application | {team['live_url']} |
-| Date | 2026-09-04 |
-| Team marker | {base['marker']} |
-| Status | Evidence-backed implementation draft; team review and submission work remain |
+| Evidence review date | {base["captured_at"][:10]} |
+| Recorded demo URL | Not supplied; required before portal upload |
+| Assessment baseline marker | {base['marker']} |
+| Live deployment marker | {live_marker} (separate production salt) |
+| Status | Final submission draft; technical verification complete; student attestation and demo URL required |
 
 ## AI-tool usage disclosure
 
@@ -146,13 +162,26 @@ OpenAI Codex assisted with requirements review, implementation, tests, local vul
 
 {team['id']} uses NoteVault as a local private notebook with account registration, sessions, owner-scoped notes and exports. Its {team['edition']} interface organizes notes into {', '.join(team['collections'])}. The assessment verified ten harmless baseline probes grouped into eight findings: two Critical, four High, and two Medium, using qualitative severity. The critical risks are shell injection and session forgery; authorization, SQL construction, interpreted content and password handling add further risk.
 
-The new React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. This draft does not claim a grade, independent team authorship, identity-stamped screenshots, or a completed live/video demo. The hosted Actions run is recorded as machine-generated evidence.
+The new React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
+
+## Verification at a glance
+
+| Control | Result | Evidence |
+|---|---|---|
+| Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/baseline.json |
+| Backend regression | 25 tests passed | evidence/regression.xml |
+| Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/frontend-build.log |
+| Dependency audit | {python_vulns} known Python vulnerabilities; {npm_vulns} npm vulnerabilities | evidence/sca-python.json; evidence/sca-npm.json |
+| Container gate | {len(vulns) if vulns is not None else 'not recorded'} HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
+| Secret scan | {secret_findings} findings | evidence/secrets.json |
+| Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
+| Hosted pipeline | {hosted_ci} | evidence/hosted-ci.json |
 
 ## 2. System Scope & Function
 
 The application provides local account creation/sign-in, note creation/view/edit, literal search, collections, pin/archive/restore, CSV/JSON/text downloads, personal audit history, a protected team directory, and an administrator account listing without passwords. Notes remain private per user, even for administrators. Both teams use separate projects, databases, volumes, cookies and ports.
 
-The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener.
+The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener. The assessment baseline retains marker {base['marker']}. The live production database uses an intentionally separate, secret deployment salt and currently exposes marker {live_marker}; both identify {team['id']}, and the production salt is not committed.
 
 Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The live deployment terminates HTTPS in Nginx and forwards only to loopback Gunicorn. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
 
@@ -206,15 +235,9 @@ for f in findings:
 
 Commit: {fix}. Location: backend/app.py:{line('backend/app.py',newneedle)}{' and frontend/src/main.tsx' if fid=='F-04' else ''}.
 
-Proof: {test}. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: {test}. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 '''
-python_count=count_components('sbom-python.json');js_count=count_components('sbom-frontend.json')
-verification=(E/'cosign-verification.txt').read_text() if (E/'cosign-verification.txt').exists() else 'Verification has not been completed.'
-container=json.loads((E/'container-check.json').read_text()) if (E/'container-check.json').exists() else None
-scan=json.loads((E/'sca-container.json').read_text()) if (E/'sca-container.json').exists() else None
-hosted_ci=json.loads((E/'verification-summary.json').read_text()).get('hosted_ci','Not recorded')
-vulns=[v for r in scan.get('Results',[]) for v in r.get('Vulnerabilities',[])] if scan else None
 report+=f'''## 6. Supply-Chain Hardening (15 pts)
 
 Python dependencies and transitive dependencies are pinned with hashes in requirements.txt; the frontend uses package-lock.json and npm ci. The runtime is a minimal multi-stage image with pinned base-image digests, a non-root user, a read-only filesystem, dropped capabilities, no-new-privileges, resource limits and a separate data volume. Original vulnerable code, tests, local credentials and signing keys are excluded from the runtime image.
@@ -232,6 +255,12 @@ Actual local verification output:
 The local workflow intentionally uses a self-managed key without publishing to a transparency log; signature verification checks bytes against that public key, not the identity of the students. Keyless, transparency-backed signing is configured for a future tagged GitHub Actions run. No formal SLSA level is claimed: a locally generated manifest and signature do not independently attest to an isolated builder or reviewed source. The team must explain key custody and trusted verification inputs.
 
 The initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
+
+### Emerging runtime advisory review (November 2026)
+
+The final review explicitly checked the two widely discussed “shell” advisory families instead of treating a green dependency scan as permanent evidence. Node2Shell (CVE-2026-111497) affects vulnerable Node.js Brotli decoding releases. This project pins the frontend build stage and both hosted Node setup steps to Node 24.22.1, a fixed release, and the package manifest rejects older Node 24 versions. Node is used only to compile the React bundle; the final Python/Alpine runtime contains no Node executable or Node package tree. The result is therefore **patched in the build boundary and absent from the deployed runtime**, not merely “not observed by a scanner.”
+
+The issues informally called PHP2Shell (CVE-2026-109618 and CVE-2026-109619) affect PHP web-request runtimes. This repository has no PHP source, PHP interpreter, Composer manifest, PHP container layer, or PHP request handler. They are **not applicable to this target**. This applicability decision is evidence-scoped and is not counted as an additional NoteVault vulnerability finding. If PHP is introduced later, the deployment must use a PHP security release at or above 8.2.35, 8.3.36, 8.4.27, or 8.5.12 as appropriate and rerun the full gate.
 
 Container runtime verification: {('passed; non-root UID '+container['user']+', read-only root, loopback-only port and expected marker verified in evidence/container-check.json') if container else 'not yet recorded in evidence/container-check.json'}.
 
@@ -251,22 +280,24 @@ The verified baseline failures are addressed by removing unsafe interpretation, 
 
 Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. The live deployment uses HTTPS, an exact trusted host, fresh non-demo data and separate service identities; backup/restore and monitoring work remain.
 
-Student reflection is pending. Each team member should write what they personally reproduced, what failed, why their fix is appropriate and which residual risk they would address next. Do not present this implementation session as semester-long individual contribution.
+Technical reflection: the strongest improvement was not any single patch, but the traceable chain from a harmless exploit to its root cause, focused remediation, regression proof, dependency and container gates, SBOM, and signed release. The final refresh also demonstrated why evidence must be rerun near submission: newly disclosed Werkzeug, Vitest, and Alpine issues were detected, upgraded, and rescanned instead of relying on an older green result. The next hardening priorities are MFA/recovery, encrypted backups, centralized monitoring, immutable audit storage, and a hosted keyless release signature.
 
 ## Appendix
 
-### Milestones and remaining submission work
+### Final submission controls
 
-| Milestone | Due | Status |
+| Control | Status | Evidence or required action |
 |---|---|---|
-| Team + target | Week 4 | Names supplied; NoteVault retained; House and registration confirmation remain |
-| Threat model | Week 7 | DFD, STRIDE and ranked-risk draft included; team review pending |
-| Vulnerability report | Week 11 | Actual local probe and regression evidence included; student screenshots pending |
-| Remediation + SBOM + signature | Week 14 | Code, local SBOMs and local signature present; team review required |
-| WIP demo + peer review | Week 16 | Runbook provided; actual demo and feedback pending |
-| Final report + prerecorded demo + Q&A | Week 19 | Repository and live URLs added; final PDF review, video and live Q&A remain |
+| Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
+| Tests, SAST, SCA, secrets, container | Complete locally | Verification-at-a-glance table and evidence directory |
+| SBOM, signed artifact, provenance | Complete locally | Section 6 and release directory |
+| Repository and live application | Present | Cover URLs; instructor access still must be confirmed |
+| All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
+| Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
+| Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
+| Portal upload with term-project code | Required | One representative uploads this PDF after all controls above are satisfied |
 
-Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
+The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
 
 ### Tools and evidence index
 
@@ -274,7 +305,7 @@ Flask test client and pytest reproduce and verify API behavior. React Testing Li
 
 ### Task split and authorship
 
-Membership is recorded on the cover. Actual student tasks and reviewers must be recorded in docs/WEEKLY-LOG.md. No member has been assigned credit for this AI-assisted implementation. Each member should reproduce different findings, review the other members’ work, and be able to explain the full system. The course's peer-rating procedure remains private student work.
+Membership is recorded on the cover. The initial implementation and automated evidence generation are disclosed as AI-assisted and are not reassigned to any student. Actual student review, reproduction, demo work, and peer ratings must be recorded truthfully by Zaw Win Htut, Wanna San, and Myo Zin Thant; the repository cannot establish those personal actions on their behalf.
 
 ### References
 
@@ -287,10 +318,12 @@ Membership is recorded on the cover. Actual student tasks and reviewers must be 
 - Flask security guidance: https://flask.palletsprojects.com/en/stable/web-security/
 - React rendering: https://react.dev/learn
 - Cosign signing and verification: https://docs.sigstore.dev/cosign/signing/signing_with_blobs/
+- Node.js October 2026 security releases (CVE-2026-111497): https://nodejs.org/en/blog/vulnerability/october-2026-security-releases
+- PHP critical RCE security advisory (CVE-2026-109618 and CVE-2026-109619): https://www.php.net/archive/2026.php#2026-10-21-5
 '''
 (ROOT/'docs/REPORT.md').write_text(report)
 
-# Render the same report into a clean, reviewable PDF with explicit draft status.
+# Render the same report into a clean, reviewable final submission draft.
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
@@ -336,7 +369,7 @@ while i<len(lines):
     if not s:i+=1;continue
     if s.startswith('# '):
         story.append(para(team['id'].upper(),'Sub'));story.append(Paragraph('NoteVault<br/>Secure Build',ParagraphStyle('TitleCustom',fontName='Times-Roman',fontSize=34,leading=38,textColor=ink,spaceAfter=14)))
-        story.append(para('IMPLEMENTATION REPORT DRAFT | '+team['edition'].upper(),'Sub'));i+=1;continue
+        story.append(para('FINAL SUBMISSION DRAFT | '+team['edition'].upper(),'Sub'));i+=1;continue
     if s.startswith('## '):
         title=s[3:];story.append(para(title,'Section'));i+=1
         if title.startswith('3. Threat'):story.append(diagram())
@@ -363,10 +396,10 @@ while i<len(lines):
     story.append(para('\n'.join(content)))
 
 out=ROOT/'output/pdf';out.mkdir(parents=True,exist_ok=True)
-filename=out/(team['slug']+'-report-draft.pdf')
+filename=out/(team['slug']+'-report-final-draft.pdf')
 def page(canvas,doc):
     canvas.saveState();canvas.setStrokeColor(colors.HexColor('#dbe2dd'));canvas.line(60,48,535,48)
-    canvas.setFillColor(ink);canvas.setFont('Helvetica',8);canvas.drawString(60,35,team['id']+' | NoteVault | Draft for team review')
+    canvas.setFillColor(ink);canvas.setFont('Helvetica',8);canvas.drawString(60,35,team['id']+' | NoteVault | Final submission draft')
     canvas.drawRightString(535,35,str(doc.page));canvas.restoreState()
-SimpleDocTemplate(str(filename),pagesize=(595.28,841.89),leftMargin=60,rightMargin=60,topMargin=45,bottomMargin=62,title=team['id']+' - NoteVault Secure Build Draft',author='AI-assisted draft; team review pending').build(story,onFirstPage=page,onLaterPages=page)
+SimpleDocTemplate(str(filename),pagesize=(595.28,841.89),leftMargin=60,rightMargin=60,topMargin=45,bottomMargin=62,title=team['id']+' - NoteVault Secure Build Final Submission Draft',author='AI-assisted; student attestation required before submission').build(story,onFirstPage=page,onLaterPages=page)
 print(filename)

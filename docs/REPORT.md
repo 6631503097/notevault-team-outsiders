@@ -9,9 +9,11 @@
 | Target application | Provided NoteVault, upgraded to Fieldnotes |
 | Repository URL | https://github.com/Thiha-Lynn/notevault-team-outsiders (private; instructor access must be granted) |
 | Live application | https://outsiders.3-0-126-159.nip.io/ |
-| Date | 2026-09-04 |
-| Team marker | 3d821afbe8a0 |
-| Status | Evidence-backed implementation draft; team review and submission work remain |
+| Evidence review date | 2026-09-04 |
+| Recorded demo URL | Not supplied; required before portal upload |
+| Assessment baseline marker | 3d821afbe8a0 |
+| Live deployment marker | 65c6084b6e8e (separate production salt) |
+| Status | Final submission draft; technical verification complete; student attestation and demo URL required |
 
 ## AI-tool usage disclosure
 
@@ -21,13 +23,26 @@ OpenAI Codex assisted with requirements review, implementation, tests, local vul
 
 Team Outsiders uses NoteVault as a local private notebook with account registration, sessions, owner-scoped notes and exports. Its Fieldnotes interface organizes notes into Fieldwork, Research, Personal. The assessment verified ten harmless baseline probes grouped into eight findings: two Critical, four High, and two Medium, using qualitative severity. The critical risks are shell injection and session forgery; authorization, SQL construction, interpreted content and password handling add further risk.
 
-The new React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. This draft does not claim a grade, independent team authorship, identity-stamped screenshots, or a completed live/video demo. The hosted Actions run is recorded as machine-generated evidence.
+The new React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
+
+## Verification at a glance
+
+| Control | Result | Evidence |
+|---|---|---|
+| Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/baseline.json |
+| Backend regression | 25 tests passed | evidence/regression.xml |
+| Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/frontend-build.log |
+| Dependency audit | 0 known Python vulnerabilities; 0 npm vulnerabilities | evidence/sca-python.json; evidence/sca-npm.json |
+| Container gate | 0 HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
+| Secret scan | 0 findings | evidence/secrets.json |
+| Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
+| Hosted pipeline | Passed full-history GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/33889073165 | evidence/hosted-ci.json |
 
 ## 2. System Scope & Function
 
 The application provides local account creation/sign-in, note creation/view/edit, literal search, collections, pin/archive/restore, CSV/JSON/text downloads, personal audit history, a protected team directory, and an administrator account listing without passwords. Notes remain private per user, even for administrators. Both teams use separate projects, databases, volumes, cookies and ports.
 
-The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener.
+The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener. The assessment baseline retains marker 3d821afbe8a0. The live production database uses an intentionally separate, secret deployment salt and currently exposes marker 65c6084b6e8e; both identify Team Outsiders, and the production salt is not committed.
 
 Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The live deployment terminates HTTPS in Nginx and forwards only to loopback Gunicorn. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
 
@@ -201,7 +216,7 @@ Use bound SQL parameters, fetch the canonical user row, and verify its password 
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:253.
 
-Proof: test_f01_sql_injection_login_and_search. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f01_sql_injection_login_and_search. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-02
 
@@ -214,7 +229,7 @@ Every read and write constrains both the note ID and authenticated owner ID. The
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:320.
 
-Proof: test_f02_owner_isolation_and_mass_assignment. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f02_owner_isolation_and_mass_assignment. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-03
 
@@ -227,7 +242,7 @@ Registration always inserts role=user; admin-only routes check the role loaded f
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:232.
 
-Proof: test_f03_registration_never_accepts_admin_role. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f03_registration_never_accepts_admin_role. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-04
 
@@ -240,7 +255,7 @@ Serve notes as JSON and render them through React text nodes. No dynamic templat
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:177 and frontend/src/main.tsx.
 
-Proof: test_f04_html_and_template_payloads_remain_data; frontend App.test.tsx. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f04_html_and_template_payloads_remain_data; frontend App.test.tsx. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-05
 
@@ -253,7 +268,7 @@ Remove subprocess execution entirely. An allowlist selects real JSON, CSV or tex
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:345.
 
-Proof: test_f05_export_rejects_command_input. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f05_export_rejects_command_input. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-06
 
@@ -266,7 +281,7 @@ Use Werkzeug scrypt with per-password salts; return only allowlisted account met
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:233.
 
-Proof: test_f06_password_hashes_and_admin_redaction. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f06_password_hashes_and_admin_redaction. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-07
 
@@ -279,7 +294,7 @@ Replace JWTs with random 256-bit opaque tokens. Store only SHA-256 token digests
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:160.
 
-Proof: test_f07_session_revocation_expiry_and_forgery. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f07_session_revocation_expiry_and_forgery. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ### Fix for F-08
 
@@ -292,7 +307,7 @@ Require a custom request header and JSON, validate Origin when supplied, and req
 
 Commit: a19ccf2926cc72c22ebe3f7084bae943c973d8bf. Location: backend/app.py:170.
 
-Proof: test_f08_csrf_origin_and_cookie_flags. See evidence/regression.xml and frontend/src/App.test.tsx. These tests verify the rejected attack and relevant legitimate behavior. Grading screenshots still need to be captured by the team with the required real identity/date stamp.
+Proof: test_f08_csrf_origin_and_cookie_flags. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
 
 ## 6. Supply-Chain Hardening (15 pts)
 
@@ -314,6 +329,12 @@ The local workflow intentionally uses a self-managed key without publishing to a
 
 The initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
 
+### Emerging runtime advisory review (November 2026)
+
+The final review explicitly checked the two widely discussed “shell” advisory families instead of treating a green dependency scan as permanent evidence. Node2Shell (CVE-2026-111497) affects vulnerable Node.js Brotli decoding releases. This project pins the frontend build stage and both hosted Node setup steps to Node 24.22.1, a fixed release, and the package manifest rejects older Node 24 versions. Node is used only to compile the React bundle; the final Python/Alpine runtime contains no Node executable or Node package tree. The result is therefore **patched in the build boundary and absent from the deployed runtime**, not merely “not observed by a scanner.”
+
+The issues informally called PHP2Shell (CVE-2026-109618 and CVE-2026-109619) affect PHP web-request runtimes. This repository has no PHP source, PHP interpreter, Composer manifest, PHP container layer, or PHP request handler. They are **not applicable to this target**. This applicability decision is evidence-scoped and is not counted as an additional NoteVault vulnerability finding. If PHP is introduced later, the deployment must use a PHP security release at or above 8.2.35, 8.3.36, 8.4.27, or 8.5.12 as appropriate and rerun the full gate.
+
 Container runtime verification: passed; non-root UID 10001:10001, read-only root, loopback-only port and expected marker verified in evidence/container-check.json.
 
 Container vulnerability scan: 0 HIGH/CRITICAL issues in the scanned image (see evidence/sca-container.json).
@@ -332,22 +353,24 @@ The verified baseline failures are addressed by removing unsafe interpretation, 
 
 Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. The live deployment uses HTTPS, an exact trusted host, fresh non-demo data and separate service identities; backup/restore and monitoring work remain.
 
-Student reflection is pending. Each team member should write what they personally reproduced, what failed, why their fix is appropriate and which residual risk they would address next. Do not present this implementation session as semester-long individual contribution.
+Technical reflection: the strongest improvement was not any single patch, but the traceable chain from a harmless exploit to its root cause, focused remediation, regression proof, dependency and container gates, SBOM, and signed release. The final refresh also demonstrated why evidence must be rerun near submission: newly disclosed Werkzeug, Vitest, and Alpine issues were detected, upgraded, and rescanned instead of relying on an older green result. The next hardening priorities are MFA/recovery, encrypted backups, centralized monitoring, immutable audit storage, and a hosted keyless release signature.
 
 ## Appendix
 
-### Milestones and remaining submission work
+### Final submission controls
 
-| Milestone | Due | Status |
+| Control | Status | Evidence or required action |
 |---|---|---|
-| Team + target | Week 4 | Names supplied; NoteVault retained; House and registration confirmation remain |
-| Threat model | Week 7 | DFD, STRIDE and ranked-risk draft included; team review pending |
-| Vulnerability report | Week 11 | Actual local probe and regression evidence included; student screenshots pending |
-| Remediation + SBOM + signature | Week 14 | Code, local SBOMs and local signature present; team review required |
-| WIP demo + peer review | Week 16 | Runbook provided; actual demo and feedback pending |
-| Final report + prerecorded demo + Q&A | Week 19 | Repository and live URLs added; final PDF review, video and live Q&A remain |
+| Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
+| Tests, SAST, SCA, secrets, container | Complete locally | Verification-at-a-glance table and evidence directory |
+| SBOM, signed artifact, provenance | Complete locally | Section 6 and release directory |
+| Repository and live application | Present | Cover URLs; instructor access still must be confirmed |
+| All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
+| Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
+| Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
+| Portal upload with term-project code | Required | One representative uploads this PDF after all controls above are satisfied |
 
-Actual calendar deadlines and the project submission code were not supplied. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
+The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
 
 ### Tools and evidence index
 
@@ -355,7 +378,7 @@ Flask test client and pytest reproduce and verify API behavior. React Testing Li
 
 ### Task split and authorship
 
-Membership is recorded on the cover. Actual student tasks and reviewers must be recorded in docs/WEEKLY-LOG.md. No member has been assigned credit for this AI-assisted implementation. Each member should reproduce different findings, review the other members’ work, and be able to explain the full system. The course's peer-rating procedure remains private student work.
+Membership is recorded on the cover. The initial implementation and automated evidence generation are disclosed as AI-assisted and are not reassigned to any student. Actual student review, reproduction, demo work, and peer ratings must be recorded truthfully by Zaw Win Htut, Wanna San, and Myo Zin Thant; the repository cannot establish those personal actions on their behalf.
 
 ### References
 
@@ -368,3 +391,5 @@ Membership is recorded on the cover. Actual student tasks and reviewers must be 
 - Flask security guidance: https://flask.palletsprojects.com/en/stable/web-security/
 - React rendering: https://react.dev/learn
 - Cosign signing and verification: https://docs.sigstore.dev/cosign/signing/signing_with_blobs/
+- Node.js October 2026 security releases (CVE-2026-111497): https://nodejs.org/en/blog/vulnerability/october-2026-security-releases
+- PHP critical RCE security advisory (CVE-2026-109618 and CVE-2026-109619): https://www.php.net/archive/2026.php#2026-10-21-5
