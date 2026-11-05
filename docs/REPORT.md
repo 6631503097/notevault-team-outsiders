@@ -36,7 +36,7 @@ The new React/TypeScript client and Flask API remove the demonstrated mechanisms
 | Container gate | 0 HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
 | Secret scan | 0 findings | evidence/secrets.json |
 | Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
-| Hosted pipeline | Passed full-history GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/33889073165 | evidence/hosted-ci.json |
+| Hosted pipeline | Passed final-evidence GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047 | evidence/hosted-ci.json |
 
 ## 2. System Scope & Function
 
@@ -345,7 +345,7 @@ Container vulnerability scan: 0 HIGH/CRITICAL issues in the scanned image (see e
 
 The SAST gate fails on HIGH findings at MEDIUM/HIGH confidence; pip-audit fails on any known Python vulnerability, npm audit fails at HIGH, the container gate fails on HIGH/CRITICAL, and Gitleaks fails on detected secrets. Tool failures are not treated as success. Historical intentionally vulnerable lab source is excluded from the hardened release scan and kept only for the assessment; generated packages, local state and evidence are also excluded from secret scans using the committed configuration.
 
-Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: Passed full-history GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/33889073165. The intentional local failing-gate proof remains the negative control.
+Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: Passed final-evidence GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047. The intentional local failing-gate proof remains the negative control.
 
 ## 8. Conclusion & Reflection (5 pts - clarity)
 
