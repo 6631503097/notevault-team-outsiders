@@ -13,7 +13,7 @@ if subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=n
     raise SystemExit('Commit reviewed tracked changes before packaging the handoff.')
 bundle = OUT / 'Team_Outsiders_Repository.bundle'
 subprocess.run(['git', 'bundle', 'create', str(bundle), '--all'], cwd=ROOT, check=True)
-files = [ROOT / p for p in subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).splitlines()]
+files = [ROOT / p for p in subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).splitlines() if not Path(p).name.startswith('.env')]
 files += [ROOT / 'output/pdf/team-outsiders-report-final-draft.pdf', bundle]
 files += [p for p in (ROOT / 'release').glob('*') if p.is_file()]
 final_ci = json.loads((OUT / 'final-ci.json').read_text())
