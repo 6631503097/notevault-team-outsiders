@@ -21,3 +21,5 @@ Each person must use their own clone, confirm their own GitHub-linked Git email,
 Team owner: resolve instructor access (read-only invitation was rejected on the personal repository; write invitation requires an explicit choice). Confirm instructor acceptance of the disclosed shared AI-assisted scaffold. After merging reviews, rerun CI and regenerate the report with the actual demo URL; inspect the PDF together. Obtain the private term-project code yourself, upload the final PDF through the portal, and retain the receipt outside Git. Never send the private code or login credentials to the assistant.
 
 No student contribution, reflection, instructor acceptance, private rating, demo upload or portal receipt can be truthfully completed by an assistant on your behalf.
+
+Observed update: Myo has merged PR #1 and completed his reflection. See docs/REVIEW-FOLLOWUPS.md for his technical correction and the missing recorded teammate review. Zaw and Wanna still need their personal PRs/reflections.

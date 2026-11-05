@@ -60,7 +60,7 @@ All Team Outsiders members must review and understand the shared implementation,
 
 The live service uses HTTPS, an exact trusted host, secure cookies, loopback-only Gunicorn, a separate database and `DEMO_MODE=false`. Demo accounts are intentionally visible only in local demo mode. Backups, monitoring, MFA/recovery and administrator provisioning remain operational limits. Notes are private per account, not shared automatically among teammates. Student IDs are shown only after sign-in, except the non-secret team name and marker.
 
-The single SQLite database supports modest course use; auth throttles are stored there and survive restarts. A user can hold at most 1,000 notes, including removed notes; administrators see up to 500 accounts. Audit records are operational history, not tamper-proof evidence. There is no password recovery, MFA, email service, upload or public deployment. Restarts never reset existing data. Archive/remove are reversible; no destructive delete endpoint is exposed.
+The single SQLite database supports modest course use; auth throttles are stored there and survive restarts. A user can hold at most 1,000 notes, including removed notes; administrators see up to 500 accounts. Audit records are operational history, not tamper-proof evidence. There is no password recovery, MFA, email service or file-upload feature. Restarts never reset existing data. Archive/remove are reversible; no destructive delete endpoint is exposed.
 
 The original target remains unchanged in `lab/original`, excluded from the runtime image and release. Its initial Git commit and later remediation commits honestly record this session; no past weekly work or student authorship is fabricated.
 
