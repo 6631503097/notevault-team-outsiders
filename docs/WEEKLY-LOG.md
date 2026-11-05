@@ -7,6 +7,7 @@ No retrospective weekly work is claimed. Record actual dates, authors, reviewed 
 | 4 - injection | F-01, F-05 | To be recorded | To be recorded | Local implementation probes exist; student reproduction pending | To be recorded | Pending team review |
 | 5 - client-side injection | F-04 | To be recorded | To be recorded | Student browser evidence pending | To be recorded | Pending team review |
 | 6 - authentication/authorization | F-02, F-03, F-07, F-08 | To be recorded | To be recorded | Student reproduction pending | To be recorded | Pending team review |
+| 6 - auth (session forgery) | F-07 | Myo Zin Thant (6631503076) | pending teammate review | evidence/baseline.json F-07 (marker 3d821afbe8a0) + evidence/wk6-f07-myo.png; GET /admin → 200 | branch review/myo-f07 | Reproduced: forged admin session via source SECRET; admin hash dumped |
 | 10 - API security | Cross-owner writes; mass assignment | To be recorded | To be recorded | Tests included | To be recorded | Pending team review |
 | 12 - supply chain | Dependency scan, SBOM and signatures | To be recorded | To be recorded | Local artifacts generated | To be recorded | Pending team review |
 | 13 - containers | Non-root/read-only deployment | To be recorded | To be recorded | Runtime inspection | To be recorded | Pending team review |
