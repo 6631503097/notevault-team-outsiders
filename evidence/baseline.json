@@ -1,7 +1,7 @@
 {
   "team": "Team Outsiders",
   "marker": "3d821afbe8a0",
-  "captured_at": "2026-11-05T07:32:48.406540+00:00",
+  "captured_at": "2026-11-05T16:39:20.201739+00:00",
   "baseline_sha256": "2d25d7dc1282cf743c9702e910f090b81fad6272a8b8793156d8431c5ab3aaa6",
   "method": "Flask test client on a fresh temporary DB; no public listener; harmless output probes",
   "limitations": "XSS injection and SSTI expression evaluation proven server-side; no browser script execution screenshot in this evidence.",
