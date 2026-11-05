@@ -47,10 +47,14 @@ npm ci --prefix frontend
 - `docs/DEMO.md` - Week 16/19 walkthrough and viva preparation.
 - `docs/WEEKLY-LOG.md` - real investigation and contribution tracking.
 - `docs/AI-DISCLOSURE.md` - shared AI-assisted code disclosure for both teams.
+- `docs/SEVEN-PHASE-TEAM-HANDOFF.md` - identity-safe repository migration and rubric completion procedure.
+- `docs/STUDENT-REFLECTIONS.md` - per-member technical review, reflection, and attestation worksheet.
+- `docs/PEER-FEEDBACK-TEMPLATE.md` - private Full/Most/Some/Little peer-rating form.
+- `docs/MACHINE-EXECUTION-PROMPT.md` - location and usage boundary for the packaged copy/paste machine prompt.
 - `.github/workflows/security.yml` - tests, SAST, SCA, secret scanning, container checks and signed tag releases.
 - `release/` - actual locally signed release, verification bundle, public key and digests; never distribute `.keys/`.
 
-Both teams must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The private repository is https://github.com/Thiha-Lynn/notevault-team-outsiders; instructor access, House assignments, peer feedback, student reflections, the recorded demo and portal submission remain team actions.
+Both teams must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The current private repository at https://github.com/Thiha-Lynn/notevault-team-outsiders is a staging/handoff source. Team Outsiders must create its final private repository under a verified member or team-owned organization, preserve the disclosed history, add all three members and the instructor, and update the report URL. Peer feedback, completed personal reflections, the recorded demo and portal submission remain team actions.
 
 ## Scope and limits
 

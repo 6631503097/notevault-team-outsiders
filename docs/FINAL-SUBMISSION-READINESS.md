@@ -27,6 +27,8 @@ This checklist separates verified repository evidence from human actions that ca
 - [ ] Confirm the instructor can open the private repository and confirm acceptance of the shared AI-assisted scaffold.
 - [ ] Each student submits a truthful private peer rating (Full / Most / Some / Little) with a one-line reason.
 - [ ] One representative obtains the private **term-project** submission code, uploads the final PDF, and saves the portal receipt.
+- [ ] Follow `docs/SEVEN-PHASE-TEAM-HANDOFF.md`: create the final private repository under a verified Team Outsiders identity, preserve history, add all members/instructor, update `team.json`, rerun CI, and rebuild the report.
+- [ ] Each member completes `docs/STUDENT-REFLECTIONS.md` personally and submits `docs/PEER-FEEDBACK-TEMPLATE.md` privately.
 
 ## Five-minute pre-upload review
 
