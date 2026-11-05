@@ -62,7 +62,7 @@ response: {"body":"team=Team Outsiders marker=3d821afbe8a0","id":3,"owner":"admi
 Alice, an ordinary user, receives note `id=3` whose `owner` is `admin`, including the team build
 marker. That is the vulnerability: authentication succeeded, authorization did not exist.
 
-![F-02 before](f02-before-zaw-2026-11-05.png)
+![F-02 before](../evidence/f02-before-zaw-2026-11-05.png)
 
 *`evidence/f02-before-zaw-2026-11-05.png` — my own session, stamped with name/ID, team marker and timestamp.*
 
@@ -80,7 +80,7 @@ The regression test asserts the three things that matter together:
 3. a client-supplied `owner_id` on create is **ignored** — the created note's owner is the
    authenticated user, so the fix is not bypassable by mass assignment.
 
-![F-02 after](f02-after-zaw-2026-11-05.png)
+![F-02 after](../evidence/f02-after-zaw-2026-11-05.png)
 
 *`evidence/f02-after-zaw-2026-11-05.png` — the passing test plus the predicates it depends on.*
 
