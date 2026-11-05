@@ -16,18 +16,18 @@ Verified technical facts are provided below. Personal reflection, contribution, 
 
 ## Zaw Win Htut — 6631503101
 
-- Verified GitHub username:
-- Verified Git email:
-- Review date/time/timezone:
-- Finding/fix personally reproduced:
-- Exact command or browser action:
-- Evidence filename/link:
-- Result observed in my own words:
-- Why the fix addresses the root cause:
-- One limitation/residual risk I identified:
-- My actual contribution to review/demo/submission:
-- What I learned or would do differently:
-- I reviewed and understand the AI-assisted material — **yes/no**
+- Verified GitHub username: zawwinhtutdev
+- Verified Git email: 156650937+zawwinhtutdev@users.noreply.github.com
+- Review date/time/timezone: 2026-11-05, Asia/Bangkok (+07)
+- Finding/fix personally reproduced: F-02 — broken object-level authorization (CWE-639), before on `lab/original`, after on `backend/app.py`; plus the DFD/STRIDE review of `docs/THREAT-MODEL.md`
+- Exact command or browser action: `.lab-venv/bin/python scripts/reproduce_baseline.py` (before) and `PYTHONPATH=. .venv/bin/pytest -q tests/test_security.py::test_f02_owner_isolation_and_mass_assignment` (after); both against an isolated test client, no listener
+- Evidence filename/link: `docs/REVIEW-ZAW-F02.md`; `evidence/f02-before-zaw-2026-11-05.png`; `evidence/f02-after-zaw-2026-11-05.png`
+- Result observed in my own words: Before the fix, logging in as alice and requesting note 3 returned HTTP 200 with `owner=admin` and the team marker in the body — an ordinary account read an administrator's note just by knowing its number. After the fix the same read, and the matching write, both return 404, and the regression test passes. The URL did not change; the query now also demands that the row belong to the caller.
+- Why the fix addresses the root cause: The original query filtered on the object ID alone, so authorization was never part of the data access. Adding `AND owner_id=?` means a foreign ID matches no row at all — nothing to leak even if a later check is forgotten — and the owner on create comes from the session rather than the request body, so it cannot be mass-assigned.
+- One limitation/residual risk I identified: The owner predicate is hand-written in six places and nothing enforces it centrally. A seventh notes endpoint added with only `WHERE id=?` would reopen F-02 and no existing test would fail, so today the guarantee is "fixed at the known sites", not "enforced by construction"; a shared `note_for_user()` helper or an authorization test matrix is the missing piece.
+- My actual contribution to review/demo/submission: Re-checked every DFD/STRIDE claim against the code (loopback binding, `foreign_keys=ON`, session expiry and revocation, login throttle, CSV formula guard, audit scoping, HTTPS/`COOKIE_SECURE` on the live deploy), reproduced F-02 before and after, wrote `docs/REVIEW-ZAW-F02.md`, captured the stamped evidence, and added the week-6 log row. Demo segment: F-02 attack → root cause → fix → retest.
+- What I learned or would do differently: A passing "authorization" control is easy to believe and hard to prove — the useful question was not "is there a check?" but "where is the ownership condition, and what happens to every other query that forgets it?". Next time I would write the authorization test matrix before adding endpoints, and I would read `compose.yaml` against `deploy/README.md` earlier: `COOKIE_SECURE: "false"` is right for loopback and wrong if copied to production.
+- I reviewed and understand the AI-assisted material — **yes/no** *(answer before merge)*
 - I confirm these are actions I personally performed — **yes/no**
 - Name/date:
 
