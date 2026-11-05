@@ -1,0 +1,16 @@
+{
+  "attempt": 1,
+  "conclusion": "success",
+  "createdAt": "2026-11-05T03:35:29Z",
+  "databaseId": 41962554047,
+  "event": "push",
+  "headBranch": "remediation",
+  "headSha": "de43edd679584f857c034997755e05912e2a4872",
+  "name": "NoteVault security and release",
+  "status": "completed",
+  "updatedAt": "2026-11-05T03:37:27Z",
+  "url": "https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047",
+  "workflowName": "NoteVault security and release",
+  "evidence_note": "Push-triggered hosted workflow completed the full security job on the recorded head commit. The signed-release job is tag-only and was correctly skipped.",
+  "checked_at": "2026-11-05T03:38:00.631Z"
+}

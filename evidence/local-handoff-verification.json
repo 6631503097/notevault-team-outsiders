@@ -1,0 +1,21 @@
+{
+  "date_local": "2026-11-05",
+  "timezone": "Asia/Bangkok",
+  "team": "Team Outsiders",
+  "backend_passed": 25,
+  "frontend_passed": 3,
+  "frontend_build": "passed",
+  "node": "24.22.1",
+  "python": "3.12.4",
+  "baseline_probes_passed": 10,
+  "python_audit": "no known vulnerabilities",
+  "npm_install_audit": "zero vulnerabilities",
+  "bandit_high_gate": "passed",
+  "deliberate_high_rejection": "passed",
+  "container": "passed: hardened runtime and zero HIGH/CRITICAL Trivy findings",
+  "secret_history": "passed: zero findings across full preserved history",
+  "signature_tamper": "Cosign verified; altered copy rejected",
+  "hosted_ci": "passed security job at https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962",
+  "submission_receipt": "not observed",
+  "hosted_source_sha": "180958bb65578e97d60afa1b3c0cc4a723d8d581"
+}

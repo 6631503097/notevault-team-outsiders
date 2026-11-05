@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-11-05T16:26:16.877490+00:00",
+  "base_url": "https://outsiders.3-0-126-159.nip.io",
+  "scope": "Read-only public HTTPS health and team configuration; no end-to-end deployment claims",
+  "health": {
+    "status": "ok"
+  },
+  "config": {
+    "collections": [
+      "Fieldwork",
+      "Research",
+      "Personal"
+    ],
+    "demo": false,
+    "edition": "Fieldnotes",
+    "marker": "65c6084b6e8e",
+    "slug": "team-outsiders",
+    "team": "Team Outsiders",
+    "theme": "outsiders",
+    "welcome": "A clear space for your next discovery."
+  }
+}

@@ -1,97 +1,299 @@
  Image team-outsiders-app Building 
 #1 [internal] load local bake definitions
-#1 reading from stdin 604B done
+#1 reading from stdin 626B done
 #1 DONE 0.0s
 
 #2 [internal] load build definition from Dockerfile
-#2 transferring dockerfile: 1.16kB done
-#2 DONE 0.0s
+#2 transferring dockerfile: 30B 0.0s
+#2 transferring dockerfile: 1.17kB 2.1s done
+#2 DONE 2.2s
 
-#3 [internal] load metadata for docker.io/library/python:3.12-alpine@sha256:b64631e04e4920160c50fbe8d8df828f7f35f06f425cb44aa09bca53e708a35a
-#3 DONE 0.0s
+#3 [internal] load metadata for docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#3 DONE 4.2s
 
-#4 [internal] load metadata for docker.io/library/node:24-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e
-#4 DONE 0.0s
+#4 [internal] load metadata for docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#4 DONE 4.3s
 
 #5 [internal] load .dockerignore
-#5 transferring context: 173B done
-#5 DONE 0.0s
+#5 transferring context: 33B
+#5 transferring context: 173B 2.7s done
+#5 DONE 2.7s
 
-#6 [frontend 1/6] FROM docker.io/library/node:24-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e
-#6 resolve docker.io/library/node:24-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e 0.0s done
-#6 DONE 0.0s
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 resolve docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 0.0s done
+#6 DONE 0.1s
 
-#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:b64631e04e4920160c50fbe8d8df828f7f35f06f425cb44aa09bca53e708a35a
-#7 resolve docker.io/library/python:3.12-alpine@sha256:b64631e04e4920160c50fbe8d8df828f7f35f06f425cb44aa09bca53e708a35a 0.0s done
-#7 DONE 0.0s
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 resolve docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8 0.0s done
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 0B / 13.92MB 0.2s
+#7 sha256:70ad141c380e304a6b7b6e838d80aa595964f83ef639d37e83c2375669dab7b4 0B / 249B 0.2s
+#7 sha256:d2521f7ab0b815cf80ad40aa1f09cbb45d2e6b624a2b663f3fe12637e9387bbc 0B / 415.57kB 0.2s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 0B / 4.19MB 0.2s
+#7 sha256:70ad141c380e304a6b7b6e838d80aa595964f83ef639d37e83c2375669dab7b4 249B / 249B 0.4s done
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 1.05MB / 13.92MB 2.9s
+#7 sha256:d2521f7ab0b815cf80ad40aa1f09cbb45d2e6b624a2b663f3fe12637e9387bbc 415.57kB / 415.57kB 3.4s done
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 0B / 4.19MB 5.3s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 1.05MB / 4.19MB 5.7s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 2.10MB / 13.92MB 6.0s
+#7 ...
 
 #8 [internal] load build context
-#8 transferring context: 50.60kB done
-#8 DONE 0.0s
+#8 transferring context: 153.71kB 9.9s
+#8 ...
 
-#9 [frontend 3/6] COPY frontend/package*.json ./
-#9 CACHED
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:9130dcb32e6292e58f3c0cbeb5c6cfa33ada46d8bb3cec7ca8f9cd1dd9921fd1 449B / 449B 0.5s done
+#6 sha256:f0255b2bdd97305010c24b423d47bb5890a11e56fbde6f84b8dda632b7a48a66 1.05MB / 1.71MB 9.2s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 1.05MB / 51.05MB 6.8s
+#6 ...
 
-#10 [frontend 2/6] WORKDIR /ui
-#10 CACHED
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 3.15MB / 13.92MB 10.5s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 1.05MB / 4.19MB 10.8s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 2.10MB / 4.19MB 11.1s
+#7 ...
 
-#11 [frontend 4/6] RUN npm ci
-#11 CACHED
+#8 [internal] load build context
+#8 transferring context: 162.98kB 12.0s done
+#8 DONE 12.0s
 
-#12 [frontend 5/6] COPY frontend/ ./
-#12 DONE 0.0s
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 4.19MB / 13.92MB 14.7s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 3.15MB / 4.19MB 15.6s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 5.24MB / 13.92MB 17.6s
+#7 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 4.19MB / 4.19MB 19.8s done
+#7 extracting sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0
+#7 extracting sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 0.4s done
+#7 extracting sha256:d2521f7ab0b815cf80ad40aa1f09cbb45d2e6b624a2b663f3fe12637e9387bbc
+#7 extracting sha256:d2521f7ab0b815cf80ad40aa1f09cbb45d2e6b624a2b663f3fe12637e9387bbc 0.2s done
+#7 ...
 
-#13 [frontend 6/6] RUN npm run build
-#13 0.276 
-#13 0.276 > notevault-team-outsiders@1.0.0 build
-#13 0.276 > tsc -b && vite build
-#13 0.276 
-#13 1.881 vite v8.2.2 building client environment for production...
-#13 1.895 transforming...
-#13 2.085 ✓ 1729 modules transformed.
-#13 2.152 rendering chunks...
-#13 2.200 computing gzip size...
-#13 2.203 dist/index.html                   0.50 kB │ gzip:  0.34 kB
-#13 2.203 dist/assets/index-B_GonhN8.css   25.07 kB │ gzip:  5.74 kB
-#13 2.203 dist/assets/index-DiHBkH3K.js   222.15 kB │ gzip: 69.38 kB
-#13 2.203 
-#13 2.204 ✓ built in 321ms
-#13 DONE 2.3s
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:f0255b2bdd97305010c24b423d47bb5890a11e56fbde6f84b8dda632b7a48a66 1.71MB / 1.71MB 11.5s done
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 3.15MB / 51.05MB 17.0s
+#6 sha256:80ce8e2829e20f02257346f4cf67216f31015ae72d246c114c91f429ba29f623 3.31kB / 3.31kB 0.5s done
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 1.05MB / 28.14MB 7.5s
+#6 ...
 
-#14 [stage-1 2/7] WORKDIR /app
-#14 CACHED
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 6.29MB / 13.92MB 21.9s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 7.34MB / 13.92MB 25.2s
+#7 ...
 
-#15 [stage-1 4/7] RUN pip install --no-cache-dir --require-hashes -r requirements.txt     && addgroup -g 10001 notevault     && adduser -D -H -u 10001 -G notevault notevault     && mkdir /data && chown 10001:10001 /data
-#15 CACHED
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 6.29MB / 51.05MB 24.8s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 3.15MB / 28.14MB 15.2s
+#6 ...
 
-#16 [stage-1 5/7] COPY backend/ ./backend/
-#16 CACHED
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 8.39MB / 13.92MB 28.4s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 9.44MB / 13.92MB 33.0s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 10.49MB / 13.92MB 35.4s
+#7 ...
 
-#17 [stage-1 3/7] COPY requirements.txt ./
-#17 CACHED
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 8.39MB / 51.05MB 32.6s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 5.24MB / 28.14MB 23.0s
+#6 ...
 
-#18 [stage-1 6/7] COPY team.json ./
-#18 CACHED
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 11.53MB / 13.92MB 37.5s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 12.58MB / 13.92MB 40.7s
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 13.63MB / 13.92MB 43.4s
+#7 ...
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 11.53MB / 51.05MB 40.4s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 7.34MB / 28.14MB 30.8s
+#6 ...
+
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 13.92MB / 13.92MB 45.7s done
+#7 extracting sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d
+#7 extracting sha256:59fd86b461b1d10e6236ed55231ff21ac611a27cf7c9adbdf6e8615e004f665d 0.6s done
+#7 DONE 46.4s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 ...
+
+#7 [stage-1 1/7] FROM docker.io/library/python:3.12-alpine@sha256:e6dae589c1c05976188fd3bd019afd091445fc533ed2ea29001beddc7368a9c8
+#7 extracting sha256:70ad141c380e304a6b7b6e838d80aa595964f83ef639d37e83c2375669dab7b4 0.0s done
+#7 DONE 46.5s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 ...
+
+#9 [stage-1 2/7] WORKDIR /app
+#9 DONE 0.1s
+
+#10 [stage-1 3/7] COPY requirements.txt ./
+#10 DONE 0.0s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 8.39MB / 28.14MB 35.9s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 12.58MB / 51.05MB 45.5s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 9.44MB / 28.14MB 41.0s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 13.63MB / 51.05MB 50.6s
+#6 ...
+
+#11 [stage-1 4/7] RUN pip install --no-cache-dir --require-hashes -r requirements.txt     && addgroup -g 10001 notevault     && adduser -D -H -u 10001 -G notevault notevault     && mkdir /data && chown 10001:10001 /data
+#11 2.839 Collecting blinker==1.9.0 (from -r requirements.txt (line 3))
+#11 3.531   Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+#11 3.916 Collecting click==8.5.0 (from -r requirements.txt (line 7))
+#11 3.990   Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#11 4.790 Collecting flask==3.1.3 (from -r requirements.txt (line 11))
+#11 4.869   Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+#11 6.076 Collecting gunicorn==26.2.0 (from -r requirements.txt (line 15))
+#11 6.170   Downloading gunicorn-26.2.0-py3-none-any.whl (228 kB)
+#11 8.298 Collecting itsdangerous==2.2.0 (from -r requirements.txt (line 19))
+#11 8.365   Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+#11 8.988 Collecting jinja2==3.1.6 (from -r requirements.txt (line 23))
+#11 9.063   Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+#11 ...
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 10.49MB / 28.14MB 46.1s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 14.68MB / 51.05MB 55.7s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 11.53MB / 28.14MB 51.2s
+#6 ...
+
+#11 [stage-1 4/7] RUN pip install --no-cache-dir --require-hashes -r requirements.txt     && addgroup -g 10001 notevault     && adduser -D -H -u 10001 -G notevault notevault     && mkdir /data && chown 10001:10001 /data
+#11 11.62 Collecting markupsafe==3.0.3 (from -r requirements.txt (line 27))
+#11 11.72   Downloading markupsafe-3.0.3-cp312-cp312-musllinux_1_2_aarch64.whl (23 kB)
+#11 12.07 Collecting werkzeug==3.1.9 (from -r requirements.txt (line 121))
+#11 12.26   Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+#11 15.82 Installing collected packages: markupsafe, itsdangerous, gunicorn, click, blinker, werkzeug, jinja2, flask
+#11 16.47 Successfully installed blinker-1.9.0 click-8.5.0 flask-3.1.3 gunicorn-26.2.0 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 werkzeug-3.1.9
+#11 16.47 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#11 17.29 
+#11 17.29 [notice] A new release of pip is available: 25.0.1 -> 26.3
+#11 17.29 [notice] To update, run: pip install --upgrade pip
+#11 DONE 17.5s
+
+#12 [stage-1 5/7] COPY backend/ ./backend/
+#12 DONE 0.1s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 15.73MB / 51.05MB 60.8s
+#6 ...
+
+#13 [stage-1 6/7] COPY team.json ./
+#13 DONE 0.0s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 11.53MB / 28.14MB 56.3s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 15.73MB / 51.05MB 65.9s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 12.58MB / 28.14MB 61.4s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 16.78MB / 51.05MB 71.0s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 13.63MB / 28.14MB 66.5s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 17.83MB / 51.05MB 76.1s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 15.73MB / 28.14MB 71.4s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 18.87MB / 51.05MB 81.2s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 16.78MB / 28.14MB 76.5s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 20.97MB / 51.05MB 86.3s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 18.87MB / 28.14MB 80.9s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 22.02MB / 51.05MB 91.3s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 19.92MB / 28.14MB 85.9s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 24.12MB / 51.05MB 96.5s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 20.97MB / 28.14MB 91.1s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 25.17MB / 51.05MB 101.6s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 23.07MB / 28.14MB 95.4s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 27.26MB / 51.05MB 106.7s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 23.07MB / 28.14MB 100.5s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 28.31MB / 51.05MB 111.8s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 24.12MB / 28.14MB 105.6s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 28.31MB / 51.05MB 116.9s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 25.17MB / 28.14MB 110.7s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 29.36MB / 51.05MB 122.0s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 26.21MB / 28.14MB 115.8s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 30.41MB / 51.05MB 127.1s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 26.21MB / 28.14MB 120.9s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 31.46MB / 51.05MB 132.2s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 27.26MB / 28.14MB 126.0s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 31.46MB / 51.05MB 137.3s
+#6 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 28.14MB / 28.14MB 128.2s done
+#6 extracting sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9
+#6 extracting sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 0.9s done
+#6 extracting sha256:80ce8e2829e20f02257346f4cf67216f31015ae72d246c114c91f429ba29f623 0.0s done
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 33.55MB / 51.05MB 142.4s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 35.65MB / 51.05MB 147.5s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 37.75MB / 51.05MB 152.6s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 38.80MB / 51.05MB 157.7s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 38.80MB / 51.05MB 162.8s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 39.85MB / 51.05MB 167.9s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 40.89MB / 51.05MB 173.0s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 41.94MB / 51.05MB 178.1s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 45.09MB / 51.05MB 181.7s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 46.14MB / 51.05MB 186.8s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 48.23MB / 51.05MB 191.8s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 49.28MB / 51.05MB 197.0s
+#6 sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 51.05MB / 51.05MB 198.7s done
+#6 extracting sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa
+#6 extracting sha256:98193c3221454f2732c00f7bf8b29e1cbadb4072498d03a5ad49ae8def4d1afa 0.7s done
+#6 DONE 202.8s
+
+#6 [frontend 1/6] FROM docker.io/library/node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
+#6 extracting sha256:f0255b2bdd97305010c24b423d47bb5890a11e56fbde6f84b8dda632b7a48a66 0.0s done
+#6 extracting sha256:9130dcb32e6292e58f3c0cbeb5c6cfa33ada46d8bb3cec7ca8f9cd1dd9921fd1 0.0s done
+#6 DONE 202.9s
+
+#14 [frontend 2/6] WORKDIR /ui
+#14 DONE 0.3s
+
+#15 [frontend 3/6] COPY frontend/package*.json ./
+#15 DONE 0.1s
+
+#16 [frontend 4/6] RUN npm ci
+#16 19.90 
+#16 19.90 added 122 packages, and audited 123 packages in 19s
+#16 19.90 
+#16 19.90 27 packages are looking for funding
+#16 19.90   run `npm fund` for details
+#16 19.90 
+#16 19.90 found 0 vulnerabilities
+#16 19.90 npm notice
+#16 19.90 npm notice New major version of npm available! 11.19.1 -> 12.2.2
+#16 19.90 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+#16 19.90 npm notice To update run: npm install -g npm@12.2.2
+#16 19.90 npm notice
+#16 DONE 20.4s
+
+#17 [frontend 5/6] COPY frontend/ ./
+#17 DONE 0.1s
+
+#18 [frontend 6/6] RUN npm run build
+#18 0.407 
+#18 0.407 > notevault-team-outsiders@1.0.0 build
+#18 0.407 > tsc -b && vite build
+#18 0.407 
+#18 4.772 vite v8.3.5 building client environment for production...
+#18 4.922 transforming...
+#18 5.446 ✓ 1729 modules transformed.
+#18 5.626 rendering chunks...
+#18 5.780 computing gzip size...
+#18 5.788 dist/index.html                   0.50 kB │ gzip:  0.33 kB
+#18 5.788 dist/assets/index-B_GonhN8.css   25.07 kB │ gzip:  5.74 kB
+#18 5.788 dist/assets/index-BXPjeina.js   222.11 kB │ gzip: 69.38 kB
+#18 5.788 
+#18 5.789 ✓ built in 997ms
+#18 DONE 5.9s
 
 #19 [stage-1 7/7] COPY --from=frontend /ui/dist ./frontend/dist
 #19 DONE 0.0s
 
 #20 exporting to image
-#20 exporting layers 0.0s done
-#20 exporting manifest sha256:d924e9946bb4a111483cda2e72162e3976173ad72f04888d8f52470db790b7ce done
-#20 exporting config sha256:96306e5d2c7a340ed0f2dae7cbd9b9a0903764aaf6ab892409ba1c5752c3e02b done
-#20 exporting attestation manifest sha256:18607b03b6cee656cb2917adf5a0d9eecfa670f47b48c7ce5daa2325aeb430a0 done
-#20 exporting manifest list sha256:bc284862e39684b03f83dc0a3ef796a12acdf33323268d06f93207e8e8db84ae done
+#20 exporting layers
+#20 exporting layers 1.1s done
+#20 exporting manifest sha256:b687ad3ba788f09cfc41d8c0f04d9130f276d87281be1e3ed948f6af50e7f7f3 0.0s done
+#20 exporting config sha256:ba1203acd85ce6857fb602e6029b49d2758f879327e6978ec2a80de8821c8b07 0.0s done
+#20 exporting attestation manifest sha256:6f4bd608abd790e993fe0f8f03802a613cbeb8e243d48a95e09683d47ba58e94
+#20 exporting attestation manifest sha256:6f4bd608abd790e993fe0f8f03802a613cbeb8e243d48a95e09683d47ba58e94 0.0s done
+#20 exporting manifest list sha256:8b7ba8de53e420aec4634831a6c0b0cfb229a8312a971b34d563bb99cf66832e 0.0s done
 #20 naming to docker.io/library/team-outsiders-app:latest done
-#20 unpacking to docker.io/library/team-outsiders-app:latest 0.0s done
-#20 DONE 0.1s
+#20 unpacking to docker.io/library/team-outsiders-app:latest
+#20 unpacking to docker.io/library/team-outsiders-app:latest 0.4s done
+#20 DONE 1.8s
 
 #21 resolving provenance for metadata file
-#21 DONE 0.0s
+#21 DONE 0.2s
  Image team-outsiders-app Built 
- Container team-outsiders-app-1 Recreate 
- Container team-outsiders-app-1 Recreated 
- Container team-outsiders-app-1 Starting 
- Container team-outsiders-app-1 Started 
- Container team-outsiders-app-1 Waiting 
- Container team-outsiders-app-1 Healthy 

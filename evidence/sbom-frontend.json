@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:c04c75f3-cf54-444c-829f-3485a13eb1d4",
+  "serialNumber": "urn:uuid:6d96dd75-ed04-4d89-9b1d-9bba91863657",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-05T03:30:25.572Z",
+    "timestamp": "2026-11-05T07:33:08.352Z",
     "lifecycles": [
       {
         "phase": "pre-build"
@@ -15,7 +15,7 @@
       {
         "vendor": "npm",
         "name": "cli",
-        "version": "11.19.1"
+        "version": "10.9.3"
       }
     ],
     "component": {
@@ -26,6 +26,10 @@
       "scope": "required",
       "purl": "pkg:npm/notevault-team-outsiders@1.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": ""
+        },
         {
           "name": "cdx:npm:package:private",
           "value": "true"
@@ -43,6 +47,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40acemir/cssom@0.9.31",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@acemir/cssom"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -77,6 +85,10 @@
       "purl": "pkg:npm/%40adobe/css-tools@4.5.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@adobe/css-tools"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -109,6 +121,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40asamuzakjp/css-color@5.1.11",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@asamuzakjp/css-color"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -143,6 +159,10 @@
       "purl": "pkg:npm/%40asamuzakjp/dom-selector@6.8.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@asamuzakjp/dom-selector"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -175,6 +195,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40asamuzakjp/generational-cache@1.0.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@asamuzakjp/generational-cache"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -209,6 +233,10 @@
       "purl": "pkg:npm/%40asamuzakjp/nwsapi@2.3.9",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@asamuzakjp/nwsapi"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -241,6 +269,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40babel/code-frame@7.29.7",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/code-frame"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -275,6 +307,10 @@
       "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/helper-validator-identifier"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -307,6 +343,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40babel/runtime@7.29.7",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@babel/runtime"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -341,6 +381,10 @@
       "purl": "pkg:npm/%40bramus/specificity@2.4.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@bramus/specificity"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -373,6 +417,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40csstools/color-helpers@6.1.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/color-helpers"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -407,6 +455,10 @@
       "purl": "pkg:npm/%40csstools/css-calc@3.3.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/css-calc"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -439,6 +491,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40csstools/css-color-parser@4.2.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/css-color-parser"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -473,6 +529,10 @@
       "purl": "pkg:npm/%40csstools/css-parser-algorithms@4.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/css-parser-algorithms"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -505,6 +565,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40csstools/css-syntax-patches-for-csstree@1.1.12",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/css-syntax-patches-for-csstree"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -539,6 +603,10 @@
       "purl": "pkg:npm/%40csstools/css-tokenizer@4.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@csstools/css-tokenizer"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -571,6 +639,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40exodus/bytes@1.15.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@exodus/bytes"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -605,6 +677,10 @@
       "purl": "pkg:npm/%40jridgewell/sourcemap-codec@1.6.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@jridgewell/sourcemap-codec"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -637,6 +713,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40oxc-project/types@0.155.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@oxc-project/types"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -671,6 +751,10 @@
       "purl": "pkg:npm/%40rolldown/binding-android-arm-eabi@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-android-arm-eabi"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -703,6 +787,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-android-arm64@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-android-arm64"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -737,6 +825,10 @@
       "purl": "pkg:npm/%40rolldown/binding-darwin-arm64@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-darwin-arm64"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -769,6 +861,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-darwin-x64@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-darwin-x64"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -803,6 +899,10 @@
       "purl": "pkg:npm/%40rolldown/binding-freebsd-x64@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-freebsd-x64"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -835,6 +935,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-linux-arm-gnueabihf@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-arm-gnueabihf"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -869,6 +973,10 @@
       "purl": "pkg:npm/%40rolldown/binding-linux-arm64-gnu@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-arm64-gnu"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -901,6 +1009,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-linux-arm64-musl@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-arm64-musl"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -935,6 +1047,10 @@
       "purl": "pkg:npm/%40rolldown/binding-linux-ppc64-gnu@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-ppc64-gnu"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -967,6 +1083,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-linux-s390x-gnu@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-s390x-gnu"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1001,6 +1121,10 @@
       "purl": "pkg:npm/%40rolldown/binding-linux-x64-gnu@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-x64-gnu"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1033,6 +1157,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-linux-x64-musl@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-linux-x64-musl"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1067,6 +1195,10 @@
       "purl": "pkg:npm/%40rolldown/binding-openharmony-arm64@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-openharmony-arm64"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1099,6 +1231,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/binding-win32-arm64-msvc@1.2.15",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-win32-arm64-msvc"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1133,6 +1269,10 @@
       "purl": "pkg:npm/%40rolldown/binding-win32-x64-msvc@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/binding-win32-x64-msvc"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1165,6 +1305,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40rolldown/pluginutils@1.0.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@rolldown/pluginutils"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1199,6 +1343,10 @@
       "purl": "pkg:npm/%40standard-schema/spec@1.1.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@standard-schema/spec"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1231,6 +1379,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40testing-library/dom@10.4.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@testing-library/dom"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1265,6 +1417,10 @@
       "purl": "pkg:npm/%40testing-library/jest-dom@6.9.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@testing-library/jest-dom"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1297,6 +1453,10 @@
       "scope": "optional",
       "purl": "pkg:npm/dom-accessibility-api@0.6.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@testing-library/jest-dom/node_modules/dom-accessibility-api"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1331,6 +1491,10 @@
       "purl": "pkg:npm/%40testing-library/react@16.3.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@testing-library/react"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1363,6 +1527,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40testing-library/user-event@14.6.7",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@testing-library/user-event"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1397,6 +1565,10 @@
       "purl": "pkg:npm/%40types/aria-query@5.0.4",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/aria-query"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1429,6 +1601,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40types/chai@5.2.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/chai"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1463,6 +1639,10 @@
       "purl": "pkg:npm/%40types/deep-eql@4.0.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/deep-eql"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1495,6 +1675,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40types/estree@1.0.10",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/estree"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1529,6 +1713,10 @@
       "purl": "pkg:npm/%40types/react@19.2.18",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/react"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1561,6 +1749,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40types/react-dom@19.2.7",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/react-dom"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1595,6 +1787,10 @@
       "purl": "pkg:npm/%40vitest/expect@4.1.12",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/expect"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1627,6 +1823,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40vitest/mocker@4.1.12",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/mocker"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1661,6 +1861,10 @@
       "purl": "pkg:npm/%40vitest/pretty-format@4.1.12",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/pretty-format"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1693,6 +1897,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40vitest/runner@4.1.12",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/runner"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1727,6 +1935,10 @@
       "purl": "pkg:npm/%40vitest/snapshot@4.1.12",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/snapshot"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1759,6 +1971,10 @@
       "scope": "optional",
       "purl": "pkg:npm/%40vitest/spy@4.1.12",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/spy"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1793,6 +2009,10 @@
       "purl": "pkg:npm/%40vitest/utils@4.1.12",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@vitest/utils"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1825,6 +2045,10 @@
       "scope": "optional",
       "purl": "pkg:npm/agent-base@7.1.4",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/agent-base"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1859,6 +2083,10 @@
       "purl": "pkg:npm/ansi-regex@5.0.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/ansi-regex"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1891,6 +2119,10 @@
       "scope": "optional",
       "purl": "pkg:npm/ansi-styles@5.2.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/ansi-styles"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1925,6 +2157,10 @@
       "purl": "pkg:npm/aria-query@5.3.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/aria-query"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -1957,6 +2193,10 @@
       "scope": "optional",
       "purl": "pkg:npm/assertion-error@2.0.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/assertion-error"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -1991,6 +2231,10 @@
       "purl": "pkg:npm/bidi-js@1.0.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/bidi-js"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2023,6 +2267,10 @@
       "scope": "optional",
       "purl": "pkg:npm/chai@6.3.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/chai"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2057,6 +2305,10 @@
       "purl": "pkg:npm/convert-source-map@2.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/convert-source-map"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2089,6 +2341,10 @@
       "scope": "optional",
       "purl": "pkg:npm/css-tree@3.2.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/css-tree"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2123,6 +2379,10 @@
       "purl": "pkg:npm/css.escape@1.5.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/css.escape"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2155,6 +2415,10 @@
       "scope": "optional",
       "purl": "pkg:npm/cssstyle@6.2.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/cssstyle"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2189,6 +2453,10 @@
       "purl": "pkg:npm/csstype@3.2.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/csstype"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2221,6 +2489,10 @@
       "scope": "optional",
       "purl": "pkg:npm/data-urls@7.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/data-urls"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2255,6 +2527,10 @@
       "purl": "pkg:npm/debug@4.4.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/debug"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2287,6 +2563,10 @@
       "scope": "optional",
       "purl": "pkg:npm/decimal.js@10.6.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/decimal.js"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2321,6 +2601,10 @@
       "purl": "pkg:npm/dequal@2.0.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/dequal"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2353,6 +2637,10 @@
       "scope": "optional",
       "purl": "pkg:npm/detect-libc@2.1.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/detect-libc"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2387,6 +2675,10 @@
       "purl": "pkg:npm/dom-accessibility-api@0.5.16",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/dom-accessibility-api"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2419,6 +2711,10 @@
       "scope": "optional",
       "purl": "pkg:npm/entities@8.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/entities"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2453,6 +2749,10 @@
       "purl": "pkg:npm/es-module-lexer@2.3.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/es-module-lexer"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2485,6 +2785,10 @@
       "scope": "optional",
       "purl": "pkg:npm/estree-walker@3.0.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/estree-walker"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2519,6 +2823,10 @@
       "purl": "pkg:npm/expect-type@1.4.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/expect-type"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2551,6 +2859,10 @@
       "scope": "optional",
       "purl": "pkg:npm/fdir@6.5.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/fdir"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2585,6 +2897,10 @@
       "purl": "pkg:npm/fsevents@2.3.3",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/fsevents"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2617,6 +2933,10 @@
       "scope": "optional",
       "purl": "pkg:npm/html-encoding-sniffer@6.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/html-encoding-sniffer"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2651,6 +2971,10 @@
       "purl": "pkg:npm/http-proxy-agent@7.0.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/http-proxy-agent"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2683,6 +3007,10 @@
       "scope": "optional",
       "purl": "pkg:npm/https-proxy-agent@7.0.6",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/https-proxy-agent"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2717,6 +3045,10 @@
       "purl": "pkg:npm/indent-string@4.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/indent-string"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2749,6 +3081,10 @@
       "scope": "optional",
       "purl": "pkg:npm/is-potential-custom-element-name@1.0.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/is-potential-custom-element-name"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2783,6 +3119,10 @@
       "purl": "pkg:npm/js-tokens@4.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/js-tokens"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2815,6 +3155,10 @@
       "scope": "optional",
       "purl": "pkg:npm/jsdom@28.1.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/jsdom"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2849,6 +3193,10 @@
       "purl": "pkg:npm/lightningcss@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2881,6 +3229,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-android-arm64@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-android-arm64"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2915,6 +3267,10 @@
       "purl": "pkg:npm/lightningcss-darwin-arm64@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-darwin-arm64"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -2947,6 +3303,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-darwin-x64@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-darwin-x64"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -2981,6 +3341,10 @@
       "purl": "pkg:npm/lightningcss-freebsd-x64@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-freebsd-x64"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3013,6 +3377,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-linux-arm-gnueabihf@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-linux-arm-gnueabihf"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3047,6 +3415,10 @@
       "purl": "pkg:npm/lightningcss-linux-arm64-gnu@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-linux-arm64-gnu"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3079,6 +3451,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-linux-arm64-musl@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-linux-arm64-musl"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3113,6 +3489,10 @@
       "purl": "pkg:npm/lightningcss-linux-x64-gnu@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-linux-x64-gnu"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3145,6 +3525,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-linux-x64-musl@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-linux-x64-musl"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3179,6 +3563,10 @@
       "purl": "pkg:npm/lightningcss-win32-arm64-msvc@1.33.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-win32-arm64-msvc"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3211,6 +3599,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lightningcss-win32-x64-msvc@1.33.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lightningcss-win32-x64-msvc"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3245,6 +3637,10 @@
       "purl": "pkg:npm/lru-cache@11.5.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lru-cache"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3276,7 +3672,12 @@
       "version": "0.577.0",
       "scope": "required",
       "purl": "pkg:npm/lucide-react@0.577.0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lucide-react"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
@@ -3305,6 +3706,10 @@
       "scope": "optional",
       "purl": "pkg:npm/lz-string@1.5.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/lz-string"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3339,6 +3744,10 @@
       "purl": "pkg:npm/magic-string@0.30.21",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/magic-string"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3371,6 +3780,10 @@
       "scope": "optional",
       "purl": "pkg:npm/mdn-data@2.27.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/mdn-data"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3405,6 +3818,10 @@
       "purl": "pkg:npm/min-indent@1.0.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/min-indent"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3437,6 +3854,10 @@
       "scope": "optional",
       "purl": "pkg:npm/ms@2.1.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/ms"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3471,6 +3892,10 @@
       "purl": "pkg:npm/nanoid@3.3.20",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/nanoid"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3503,6 +3928,10 @@
       "scope": "optional",
       "purl": "pkg:npm/obug@2.1.4",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/obug"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3537,6 +3966,10 @@
       "purl": "pkg:npm/parse5@8.0.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/parse5"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3569,6 +4002,10 @@
       "scope": "optional",
       "purl": "pkg:npm/pathe@2.0.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/pathe"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3603,6 +4040,10 @@
       "purl": "pkg:npm/picocolors@1.1.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/picocolors"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3635,6 +4076,10 @@
       "scope": "optional",
       "purl": "pkg:npm/picomatch@4.0.7",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/picomatch"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3669,6 +4114,10 @@
       "purl": "pkg:npm/postcss@8.5.31",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/postcss"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3701,6 +4150,10 @@
       "scope": "optional",
       "purl": "pkg:npm/pretty-format@27.5.1",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/pretty-format"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3735,6 +4188,10 @@
       "purl": "pkg:npm/punycode@2.3.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/punycode"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3766,7 +4223,12 @@
       "version": "19.2.8",
       "scope": "required",
       "purl": "pkg:npm/react@19.2.8",
-      "properties": [],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
@@ -3794,7 +4256,12 @@
       "version": "19.2.8",
       "scope": "required",
       "purl": "pkg:npm/react-dom@19.2.8",
-      "properties": [],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-dom"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
@@ -3823,6 +4290,10 @@
       "scope": "optional",
       "purl": "pkg:npm/react-is@17.0.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-is"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3857,6 +4328,10 @@
       "purl": "pkg:npm/redent@3.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/redent"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3889,6 +4364,10 @@
       "scope": "optional",
       "purl": "pkg:npm/require-from-string@2.0.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/require-from-string"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -3923,6 +4402,10 @@
       "purl": "pkg:npm/rolldown@1.2.15",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/rolldown"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3956,6 +4439,10 @@
       "purl": "pkg:npm/saxes@6.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/saxes"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -3987,7 +4474,12 @@
       "version": "0.27.0",
       "scope": "required",
       "purl": "pkg:npm/scheduler@0.27.0",
-      "properties": [],
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/scheduler"
+        }
+      ],
       "externalReferences": [
         {
           "type": "distribution",
@@ -4016,6 +4508,10 @@
       "scope": "optional",
       "purl": "pkg:npm/siginfo@2.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/siginfo"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4050,6 +4546,10 @@
       "purl": "pkg:npm/source-map-js@1.2.2",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/source-map-js"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4082,6 +4582,10 @@
       "scope": "optional",
       "purl": "pkg:npm/stackback@0.0.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/stackback"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4116,6 +4620,10 @@
       "purl": "pkg:npm/std-env@4.2.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/std-env"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4148,6 +4656,10 @@
       "scope": "optional",
       "purl": "pkg:npm/strip-indent@3.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/strip-indent"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4182,6 +4694,10 @@
       "purl": "pkg:npm/symbol-tree@3.2.4",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/symbol-tree"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4214,6 +4730,10 @@
       "scope": "optional",
       "purl": "pkg:npm/tinybench@2.9.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tinybench"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4248,6 +4768,10 @@
       "purl": "pkg:npm/tinyexec@1.3.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tinyexec"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4280,6 +4804,10 @@
       "scope": "optional",
       "purl": "pkg:npm/tinyglobby@0.2.17",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tinyglobby"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4314,6 +4842,10 @@
       "purl": "pkg:npm/tinyrainbow@3.2.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tinyrainbow"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4346,6 +4878,10 @@
       "scope": "optional",
       "purl": "pkg:npm/tldts@7.4.11",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tldts"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4380,6 +4916,10 @@
       "purl": "pkg:npm/tldts-core@7.4.11",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tldts-core"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4412,6 +4952,10 @@
       "scope": "optional",
       "purl": "pkg:npm/tough-cookie@6.0.2",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tough-cookie"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4446,6 +4990,10 @@
       "purl": "pkg:npm/tr46@6.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tr46"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4478,6 +5026,10 @@
       "scope": "optional",
       "purl": "pkg:npm/typescript@5.9.3",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/typescript"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4512,6 +5064,10 @@
       "purl": "pkg:npm/undici@7.30.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/undici"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4544,6 +5100,10 @@
       "scope": "optional",
       "purl": "pkg:npm/vite@8.3.5",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/vite"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4578,6 +5138,10 @@
       "purl": "pkg:npm/vitest@4.1.12",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/vitest"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4610,6 +5174,10 @@
       "scope": "optional",
       "purl": "pkg:npm/w3c-xmlserializer@5.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/w3c-xmlserializer"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4644,6 +5212,10 @@
       "purl": "pkg:npm/webidl-conversions@8.0.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/webidl-conversions"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4676,6 +5248,10 @@
       "scope": "optional",
       "purl": "pkg:npm/whatwg-mimetype@5.0.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/whatwg-mimetype"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4710,6 +5286,10 @@
       "purl": "pkg:npm/whatwg-url@16.0.1",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/whatwg-url"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4742,6 +5322,10 @@
       "scope": "optional",
       "purl": "pkg:npm/why-is-node-running@2.3.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/why-is-node-running"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"
@@ -4776,6 +5360,10 @@
       "purl": "pkg:npm/xml-name-validator@5.0.0",
       "properties": [
         {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/xml-name-validator"
+        },
+        {
           "name": "cdx:npm:package:development",
           "value": "true"
         }
@@ -4808,6 +5396,10 @@
       "scope": "optional",
       "purl": "pkg:npm/xmlchars@2.2.0",
       "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/xmlchars"
+        },
         {
           "name": "cdx:npm:package:development",
           "value": "true"

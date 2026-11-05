@@ -1,16 +1,199 @@
 {
-  "attempt": 1,
   "conclusion": "success",
-  "createdAt": "2026-11-05T03:35:29Z",
-  "databaseId": 41962554047,
-  "event": "push",
-  "headBranch": "remediation",
-  "headSha": "de43edd679584f857c034997755e05912e2a4872",
-  "name": "NoteVault security and release",
+  "headSha": "180958bb65578e97d60afa1b3c0cc4a723d8d581",
+  "jobs": [
+    {
+      "completedAt": "2026-11-05T16:27:50Z",
+      "conclusion": "success",
+      "databaseId": 127374245350,
+      "name": "security",
+      "startedAt": "2026-11-05T16:25:55Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-05T16:25:57Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-05T16:25:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:25:58Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 2,
+          "startedAt": "2026-11-05T16:25:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:25:59Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+          "number": 3,
+          "startedAt": "2026-11-05T16:25:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:04Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+          "number": 4,
+          "startedAt": "2026-11-05T16:25:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:25Z",
+          "conclusion": "success",
+          "name": "Install exact, hash-verified Python dependencies",
+          "number": 5,
+          "startedAt": "2026-11-05T16:26:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:46Z",
+          "conclusion": "success",
+          "name": "Functional and security regression tests",
+          "number": 6,
+          "startedAt": "2026-11-05T16:26:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:46Z",
+          "conclusion": "success",
+          "name": "SAST - reject HIGH findings with MEDIUM or HIGH confidence",
+          "number": 7,
+          "startedAt": "2026-11-05T16:26:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:48Z",
+          "conclusion": "success",
+          "name": "SCA - reject any known Python issue and HIGH npm issues",
+          "number": 8,
+          "startedAt": "2026-11-05T16:26:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:49Z",
+          "conclusion": "success",
+          "name": "Secret scanning of complete repository history",
+          "number": 9,
+          "startedAt": "2026-11-05T16:26:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:26:49Z",
+          "conclusion": "success",
+          "name": "Prove high severity gate rejection",
+          "number": 10,
+          "startedAt": "2026-11-05T16:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:11Z",
+          "conclusion": "success",
+          "name": "Build the hardened non-root container",
+          "number": 11,
+          "startedAt": "2026-11-05T16:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:25Z",
+          "conclusion": "success",
+          "name": "Container vulnerability gate",
+          "number": 12,
+          "startedAt": "2026-11-05T16:27:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:33Z",
+          "conclusion": "success",
+          "name": "Container smoke test",
+          "number": 13,
+          "startedAt": "2026-11-05T16:27:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:36Z",
+          "conclusion": "success",
+          "name": "Generate CycloneDX SBOMs and release package",
+          "number": 14,
+          "startedAt": "2026-11-05T16:27:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:37Z",
+          "conclusion": "success",
+          "name": "Keep actual test and scan evidence",
+          "number": 15,
+          "startedAt": "2026-11-05T16:27:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:38Z",
+          "conclusion": "success",
+          "name": "Keep unsigned release for inspection",
+          "number": 16,
+          "startedAt": "2026-11-05T16:27:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:46Z",
+          "conclusion": "success",
+          "name": "Post Container vulnerability gate",
+          "number": 29,
+          "startedAt": "2026-11-05T16:27:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:47Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@820762786026740c76f36085b0efc47a31fe5020",
+          "number": 30,
+          "startedAt": "2026-11-05T16:27:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:48Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+          "number": 31,
+          "startedAt": "2026-11-05T16:27:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:48Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "number": 32,
+          "startedAt": "2026-11-05T16:27:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-05T16:27:48Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 33,
+          "startedAt": "2026-11-05T16:27:48Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962/job/127374245350"
+    },
+    {
+      "completedAt": "2026-11-05T16:27:50Z",
+      "conclusion": "skipped",
+      "databaseId": 127375467080,
+      "name": "signed-release",
+      "startedAt": "2026-11-05T16:27:51Z",
+      "status": "completed",
+      "steps": [],
+      "url": "https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962/job/127375467080"
+    }
+  ],
   "status": "completed",
-  "updatedAt": "2026-11-05T03:37:27Z",
-  "url": "https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047",
-  "workflowName": "NoteVault security and release",
-  "evidence_note": "Push-triggered hosted workflow completed the full security job on the recorded head commit. The signed-release job is tag-only and was correctly skipped.",
-  "checked_at": "2026-11-05T03:38:00.631Z"
+  "url": "https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962",
+  "checked_at": "2026-11-05T16:30:29.452300+00:00",
+  "evidence_note": "Observed team-owned security job passed. Tag-only signed-release job skipped; local key verification is separate evidence."
 }

@@ -12,7 +12,7 @@ Each person must use their own clone, confirm their own GitHub-linked Git email,
 
 1. Clone https://github.com/6631503097/notevault-team-outsiders and switch to remediation.
 2. Read docs/AI-DISCLOSURE.md, docs/BASELINE.md, docs/THREAT-MODEL.md and assigned findings in docs/REPORT.md. Use only the no-listener baseline harness; never publicly serve lab/original.
-3. Personally run the assigned reproduction and corresponding regression test. Capture exact commands/results with your name/ID, actual date/time/timezone and Team Outsiders marker. Do not label automated outputs as student screenshots.
+3. Personally run the assigned reproduction and corresponding regression test. Capture exact commands/results with your name/ID, actual date/time/timezone and Team Outsiders marker. Include a screenshot of the deliberate HIGH-severity rejection (scripts/prove_gate.py and evidence/gate-rejection.json), plus passing CI and SBOM/signature evidence. A failed infrastructure-only CI run is not proof of a HIGH finding rejection. Do not label automated outputs as student screenshots.
 4. Create a useful evidence/documentation improvement on a personal review branch. Record actual work in docs/WEEKLY-LOG.md and personally fill your own section of docs/STUDENT-REFLECTIONS.md.
 5. Commit only real work using your verified identity. Push and open a PR to remediation; another teammate must read and genuinely review it. Suggested review cycle: Zaw reviews Wanna, Wanna reviews Myo, Myo reviews Zaw.
 6. Rehearse and record docs/DEMO.md together: attack -> code root cause -> fix -> retest, then CI, SBOM/signature and residual risks. Upload to unlisted YouTube or viewable Drive; test while signed out. Supply only the public viewing URL.

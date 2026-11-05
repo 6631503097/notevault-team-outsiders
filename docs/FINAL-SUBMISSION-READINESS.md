@@ -6,6 +6,8 @@ This checklist separates verified repository evidence from human actions that ca
 
 ## Verified technical package
 
+Fresh local and team-owned hosted checks are summarized in evidence/verification-summary.json. The hosted run covers its recorded source SHA; later report-only commits must also pass CI. See docs/TEAM-NEXT-STEPS.md for personal tasks.
+
 - [x] Eight findings reproduced with harmless local probes and exact request/response evidence.
 - [x] Findings mapped to root causes, CWE, OWASP, impact, fixes, commits, and regression tests.
 - [x] 25 backend tests and 3 frontend tests pass; the production frontend builds.
@@ -32,7 +34,7 @@ This checklist separates verified repository evidence from human actions that ca
 
 ## Five-minute pre-upload review
 
-1. Open both repository and demo links from a signed-out/private browser window.
+1. Verify the private repository using the instructor's accepted account access; verify the demo link while signed out.
 2. Check that the PDF cover has the correct three names/IDs, repository URL, live URL, demo URL, and team marker.
 3. Show attack → root cause → fix → retest for F-02, plus one of F-01 or F-05.
 4. Explain the failing-gate negative control, current zero-known-issue scan result, SBOM, and signature limitation.

@@ -14,23 +14,26 @@
       "student_id": "6631503076"
     }
   ],
-  "checked_at": "2026-11-05T10:30:19+07:00",
+  "checked_at": "2026-11-05T16:30:29.452300+00:00",
   "backend_tests": 25,
   "backend_failures": 0,
   "frontend_tests": 3,
   "frontend_evidence": "verification.log",
   "marker": "3d821afbe8a0",
   "live_marker": "65c6084b6e8e",
-  "container_image": "sha256:ebee8fec54db9a237b77950629a817ea4a8de40dd761e8a53cab19f20fa609a1",
+  "container_image": "sha256:8b7ba8de53e420aec4634831a6c0b0cfb229a8312a971b34d563bb99cf66832e",
   "container_high_critical": 0,
   "python_components": 8,
   "frontend_build_components": 146,
   "cosign_verified": true,
   "tampered_artifact_rejected": true,
-  "artifact_sha256": "828d5ce5cee5c87151fb2147ff33968f4fd9a2dd8f567e90a76acfd0e6be6a6f",
-  "hosted_ci": "Passed final-evidence GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047",
+  "artifact_sha256": "587f0578afb24a4c663c7cb2192312964696d193914de6a07a66f1bc912ecadb",
+  "hosted_ci": "Passed team-owned security job on 180958bb65578e97d60afa1b3c0cc4a723d8d581: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962; tag-only signing skipped",
   "live_url": "https://outsiders.3-0-126-159.nip.io/",
-  "deployment_e2e": "Passed HTTPS health, registration, secure-cookie, CSRF, note creation, owner-isolation, marker-separation, restart-persistence, and test-data cleanup checks.",
-  "student_evidence": "Student attestation, contribution record, demo URL, peer ratings, project code and portal receipt remain external actions",
-  "dependency_audit": "0 Python and 0 npm known vulnerabilities after final refresh"
+  "deployment_e2e": "Current read-only HTTPS health/config check passed; historical full deployment checks are not a fresh retest",
+  "student_evidence": "Personal review PRs, reflections, demo, private ratings, instructor access/acceptance and portal receipt remain pending",
+  "dependency_audit": "0 Python and 0 npm known vulnerabilities after final refresh",
+  "repository_url": "https://github.com/6631503097/notevault-team-outsiders",
+  "hosted_head_sha": "180958bb65578e97d60afa1b3c0cc4a723d8d581",
+  "hosted_run_url": "https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962"
 }

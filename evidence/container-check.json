@@ -1,8 +1,8 @@
 {
   "team": "Team Outsiders",
   "marker": "3d821afbe8a0",
-  "captured_at": "2026-11-05T03:30:14.891560+00:00",
-  "image_id": "sha256:ebee8fec54db9a237b77950629a817ea4a8de40dd761e8a53cab19f20fa609a1",
+  "captured_at": "2026-11-05T16:19:07.264241+00:00",
+  "image_id": "sha256:8b7ba8de53e420aec4634831a6c0b0cfb229a8312a971b34d563bb99cf66832e",
   "user": "10001:10001",
   "read_only_rootfs": true,
   "cap_drop": [

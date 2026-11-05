@@ -22,7 +22,7 @@ Alternatively, install Python 3.12+ and Node 24+, then run `./scripts/start.sh`.
 - Wanna San - 6631503097
 - Myo Zin Thant - 6631503076
 
-`team.json` is the source of team identity. The database records the TEAM_ID at initialization and refuses to start with a different team name. This project and Team Imposters use different databases, volumes, ports, session-cookie names and markers.
+`team.json` is the source of team identity. The database records the TEAM_ID at initialization and refuses to start with a different team name. This team uses its own database, volume, port, session-cookie name and marker.
 
 ## Verification
 
@@ -54,7 +54,7 @@ npm ci --prefix frontend
 - `.github/workflows/security.yml` - tests, SAST, SCA, secret scanning, container checks and signed tag releases.
 - `release/` - actual locally signed release, verification bundle, public key and digests; never distribute `.keys/`.
 
-Both teams must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The team-owned private repository is https://github.com/6631503097/notevault-team-outsiders. The disclosed history is preserved. All three members have access; instructor access remains pending. Peer feedback, completed personal reflections, the recorded demo and portal submission remain team actions.
+All Team Outsiders members must review and understand the shared implementation, independently reproduce findings, capture required screenshots, keep real contribution histories, and confirm acceptance of shared scaffolding with the instructor. The team-owned private repository is https://github.com/6631503097/notevault-team-outsiders. The disclosed history is preserved. All three members have access; instructor access remains pending. Peer feedback, completed personal reflections, the recorded demo and portal submission remain team actions.
 
 ## Scope and limits
 

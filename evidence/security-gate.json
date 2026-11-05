@@ -1,7 +1,7 @@
 [
   {
     "command": [
-      "/Users/thomas/Outside_projects/SoftwareSecurityLabs/projects/team-outsiders/.venv/bin/python",
+      "/tmp/outsiders-report-env/bin/python",
       "-m",
       "bandit",
       "-r",
@@ -19,7 +19,7 @@
   },
   {
     "command": [
-      "/Users/thomas/Outside_projects/SoftwareSecurityLabs/projects/team-outsiders/.venv/bin/python",
+      "/tmp/outsiders-report-env/bin/python",
       "-m",
       "pip_audit",
       "-r",
@@ -62,6 +62,6 @@
     ],
     "exit_code": 0,
     "stdout": "",
-    "stderr": "10:29AM INF scanned ~391781 bytes (391.78 KB) in 90ms\n10:29AM INF no leaks found\n"
+    "stderr": "11:23PM INF scanned ~427765 bytes (427.77 KB) in 1m36s\n11:23PM INF no leaks found\n"
   }
 ]

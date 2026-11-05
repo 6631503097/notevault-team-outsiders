@@ -135,7 +135,7 @@ python_audit=json.loads((E/'sca-python.json').read_text()) if (E/'sca-python.jso
 python_vulns=sum(len(d.get('vulns',[])) for d in python_audit.get('dependencies',[]))
 npm_audit=json.loads((E/'sca-npm.json').read_text()) if (E/'sca-npm.json').exists() else {}
 npm_vulns=npm_audit.get('metadata',{}).get('vulnerabilities',{}).get('total','not recorded')
-secret_findings=len(json.loads((E/'secrets.json').read_text())) if (E/'secrets.json').exists() else 'not recorded'
+secret_findings=len(json.loads((E/'secrets-history.json').read_text())) if (E/'secrets-history.json').exists() else 'not recorded'
 
 report=f'''# Term Project Report - Secure Build
 
@@ -149,10 +149,10 @@ report=f'''# Term Project Report - Secure Build
 | Repository URL | {team['repository_url']} (private; instructor access must be granted) |
 | Live application | {team['live_url']} |
 | Evidence review date | {base["captured_at"][:10]} |
-| Recorded demo URL | Not supplied; required before portal upload |
+| Recorded demo URL | {team.get('demo_url') or 'Not supplied; required before portal upload'} |
 | Assessment baseline marker | {base['marker']} |
 | Live deployment marker | {live_marker} (separate production salt) |
-| Status | Final submission draft; technical verification complete; student attestation and demo URL required |
+| Status | Draft; student reviews, instructor access, demo and final human approval required |
 
 ## AI-tool usage disclosure
 
@@ -166,6 +166,8 @@ The new React/TypeScript client and Flask API remove the demonstrated mechanisms
 
 ## Verification at a glance
 
+Evidence is machine-generated and linked to its recorded source commit. It does not establish student review, instructor acceptance, demo completion or portal submission. See docs/TEAM-NEXT-STEPS.md.
+
 | Control | Result | Evidence |
 |---|---|---|
 | Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/baseline.json |
@@ -173,7 +175,7 @@ The new React/TypeScript client and Flask API remove the demonstrated mechanisms
 | Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/frontend-build.log |
 | Dependency audit | {python_vulns} known Python vulnerabilities; {npm_vulns} npm vulnerabilities | evidence/sca-python.json; evidence/sca-npm.json |
 | Container gate | {len(vulns) if vulns is not None else 'not recorded'} HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
-| Secret scan | {secret_findings} findings | evidence/secrets.json |
+| Secret scan | {secret_findings} findings | evidence/secrets-history.json |
 | Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
 | Hosted pipeline | {hosted_ci} | evidence/hosted-ci.json |
 
@@ -254,7 +256,7 @@ Actual local verification output:
 
 The local workflow intentionally uses a self-managed key without publishing to a transparency log; signature verification checks bytes against that public key, not the identity of the students. Keyless, transparency-backed signing is configured for a future tagged GitHub Actions run. No formal SLSA level is claimed: a locally generated manifest and signature do not independently attest to an isolated builder or reviewed source. The team must explain key custody and trusted verification inputs.
 
-The initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
+Historical baseline evidence: the initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
 
 ### Emerging runtime advisory review (November 2026)
 
@@ -289,8 +291,8 @@ Technical reflection: the strongest improvement was not any single patch, but th
 | Control | Status | Evidence or required action |
 |---|---|---|
 | Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
-| Tests, SAST, SCA, secrets, container | Complete locally | Verification-at-a-glance table and evidence directory |
-| SBOM, signed artifact, provenance | Complete locally | Section 6 and release directory |
+| Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/verification-summary.json |
+| SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
 | Repository and live application | Present | Cover URLs; instructor access still must be confirmed |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
 | Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
@@ -342,7 +344,9 @@ styles.add(ParagraphStyle(name='CodeBlock',fontName='Courier',fontSize=7.5,leadi
 def clean(s):
     return s.replace('’',"'").replace('“','"').replace('”','"').replace('–','-').replace('—','-').replace('→',' -> ').replace('×',' x ').replace('…','...')
 def para(s,style='Body'):
-    return Paragraph(html.escape(clean(s)).replace('\n','<br/>'),styles[style])
+    escaped = html.escape(clean(s)).replace('\n','<br/>')
+    escaped = re.sub(r'https://[^\s<>]+', lambda m: '<link href="' + m.group(0).rstrip('.,;)') + '">' + m.group(0).rstrip('.,;)') + '</link>' + m.group(0)[len(m.group(0).rstrip('.,;)')):], escaped)
+    return Paragraph(escaped,styles[style])
 
 def diagram():
     d=Drawing(475,220)

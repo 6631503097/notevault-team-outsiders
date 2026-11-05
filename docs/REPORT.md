@@ -7,13 +7,13 @@
 | Team name | Team Outsiders |
 | Members (name + ID) | Zaw Win Htut 6631503101; Wanna San 6631503097; Myo Zin Thant 6631503076 |
 | Target application | Provided NoteVault, upgraded to Fieldnotes |
-| Repository URL | https://github.com/Thiha-Lynn/notevault-team-outsiders (private; instructor access must be granted) |
+| Repository URL | https://github.com/6631503097/notevault-team-outsiders (private; instructor access must be granted) |
 | Live application | https://outsiders.3-0-126-159.nip.io/ |
-| Evidence review date | 2026-09-04 |
+| Evidence review date | 2026-11-05 |
 | Recorded demo URL | Not supplied; required before portal upload |
 | Assessment baseline marker | 3d821afbe8a0 |
 | Live deployment marker | 65c6084b6e8e (separate production salt) |
-| Status | Final submission draft; technical verification complete; student attestation and demo URL required |
+| Status | Draft; student reviews, instructor access, demo and final human approval required |
 
 ## AI-tool usage disclosure
 
@@ -27,6 +27,8 @@ The new React/TypeScript client and Flask API remove the demonstrated mechanisms
 
 ## Verification at a glance
 
+Evidence is machine-generated and linked to its recorded source commit. It does not establish student review, instructor acceptance, demo completion or portal submission. See docs/TEAM-NEXT-STEPS.md.
+
 | Control | Result | Evidence |
 |---|---|---|
 | Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/baseline.json |
@@ -34,9 +36,9 @@ The new React/TypeScript client and Flask API remove the demonstrated mechanisms
 | Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/frontend-build.log |
 | Dependency audit | 0 known Python vulnerabilities; 0 npm vulnerabilities | evidence/sca-python.json; evidence/sca-npm.json |
 | Container gate | 0 HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
-| Secret scan | 0 findings | evidence/secrets.json |
+| Secret scan | 0 findings | evidence/secrets-history.json |
 | Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
-| Hosted pipeline | Passed final-evidence GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047 | evidence/hosted-ci.json |
+| Hosted pipeline | Passed team-owned security job on 180958bb65578e97d60afa1b3c0cc4a723d8d581: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962; tag-only signing skipped | evidence/hosted-ci.json |
 
 ## 2. System Scope & Function
 
@@ -327,7 +329,7 @@ Verified OK
 
 The local workflow intentionally uses a self-managed key without publishing to a transparency log; signature verification checks bytes against that public key, not the identity of the students. Keyless, transparency-backed signing is configured for a future tagged GitHub Actions run. No formal SLSA level is claimed: a locally generated manifest and signature do not independently attest to an isolated builder or reviewed source. The team must explain key custody and trusted verification inputs.
 
-The initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
+Historical baseline evidence: the initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
 
 ### Emerging runtime advisory review (November 2026)
 
@@ -345,7 +347,7 @@ Container vulnerability scan: 0 HIGH/CRITICAL issues in the scanned image (see e
 
 The SAST gate fails on HIGH findings at MEDIUM/HIGH confidence; pip-audit fails on any known Python vulnerability, npm audit fails at HIGH, the container gate fails on HIGH/CRITICAL, and Gitleaks fails on detected secrets. Tool failures are not treated as success. Historical intentionally vulnerable lab source is excluded from the hardened release scan and kept only for the assessment; generated packages, local state and evidence are also excluded from secret scans using the committed configuration.
 
-Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: Passed final-evidence GitHub Actions run: https://github.com/Thiha-Lynn/notevault-team-outsiders/actions/runs/41962554047. The intentional local failing-gate proof remains the negative control.
+Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: Passed team-owned security job on 180958bb65578e97d60afa1b3c0cc4a723d8d581: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42064352962; tag-only signing skipped. The intentional local failing-gate proof remains the negative control.
 
 ## 8. Conclusion & Reflection (5 pts - clarity)
 
@@ -362,8 +364,8 @@ Technical reflection: the strongest improvement was not any single patch, but th
 | Control | Status | Evidence or required action |
 |---|---|---|
 | Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
-| Tests, SAST, SCA, secrets, container | Complete locally | Verification-at-a-glance table and evidence directory |
-| SBOM, signed artifact, provenance | Complete locally | Section 6 and release directory |
+| Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/verification-summary.json |
+| SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
 | Repository and live application | Present | Cover URLs; instructor access still must be confirmed |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
 | Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
