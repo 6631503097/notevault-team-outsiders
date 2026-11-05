@@ -13,8 +13,12 @@ if subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=n
     raise SystemExit('Commit reviewed tracked changes before packaging the handoff.')
 bundle = OUT / 'Team_Outsiders_Repository.bundle'
 subprocess.run(['git', 'bundle', 'create', str(bundle), '--all'], cwd=ROOT, check=True)
-files = [ROOT / p for p in subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).splitlines() if not Path(p).name.startswith('.env')]
-files += [ROOT / 'output/pdf/team-outsiders-report-final-draft.pdf', bundle]
+tracked = subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).splitlines()
+ledger = json.loads((ROOT / 'evidence/audit/provenance.json').read_text())
+allowed_evidence = {r['path'] for r in ledger['report_inputs']} | set(ledger['retained_student_material']) | {'evidence/README.md', 'evidence/audit/provenance.json'}
+excluded = [p for p in tracked if p.startswith('evidence/') and p not in allowed_evidence]
+files = [ROOT / p for p in tracked if not Path(p).name.startswith('.env') and p not in excluded]
+files += [ROOT / 'output/pdf/team-outsiders-report-audited-draft.pdf', bundle]
 files += [p for p in (ROOT / 'release').glob('*') if p.is_file()]
 final_ci = json.loads((OUT / 'final-ci.json').read_text())
 if final_ci.get('headSha') != revision or final_ci.get('conclusion') != 'success' or final_ci.get('status') != 'completed':
@@ -30,13 +34,13 @@ for path in files:
     if not path.is_file():
         raise SystemExit('Missing package input: ' + str(relative))
 manifest = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
-archive = OUT / 'Team_Outsiders_Review_Draft.zip'
+archive = OUT / 'Team_Outsiders_Audited_Review_Draft.zip'
 with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
     for path in sorted(set(files)):
         z.write(path, 'Team_Outsiders/' + str(path.relative_to(ROOT)))
-    z.writestr('Team_Outsiders/HANDOFF-MANIFEST.json', json.dumps({'revision': revision, 'status': 'Review draft; human reviews, demo and submission pending', 'final_ci': final_ci['url'], 'files': manifest}, indent=2) + '\n')
+    z.writestr('Team_Outsiders/HANDOFF-MANIFEST.json', json.dumps({'revision': revision, 'status': 'Review draft; human reviews, demo and submission pending', 'final_ci': final_ci['url'], 'excluded_legacy_evidence': excluded, 'history_scope': 'The Git bundle preserves inherited history; historical contents are not current grading evidence.', 'files': manifest}, indent=2) + '\n')
 checksum = hashlib.sha256(archive.read_bytes()).hexdigest()
-pdf = ROOT / 'output/pdf/team-outsiders-report-final-draft.pdf'
+pdf = ROOT / 'output/pdf/team-outsiders-report-audited-draft.pdf'
 pdf_checksum = hashlib.sha256(pdf.read_bytes()).hexdigest()
 (OUT / 'SHA256SUMS').write_text(checksum + '  ' + archive.name + '\n' + pdf_checksum + '  ../pdf/' + pdf.name + '\n')
 (OUT / 'ARTIFACTS.json').write_text(json.dumps({'revision': revision, 'ci': final_ci['url'], 'pdf': {'path': str(pdf), 'sha256': pdf_checksum}, 'zip': {'path': str(archive), 'sha256': checksum}}, indent=2) + '\n')

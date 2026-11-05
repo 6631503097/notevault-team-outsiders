@@ -23,3 +23,5 @@ Team owner: resolve instructor access (read-only invitation was rejected on the 
 No student contribution, reflection, instructor acceptance, private rating, demo upload or portal receipt can be truthfully completed by an assistant on your behalf.
 
 Observed update: Myo has merged PR #1 and completed his reflection. See docs/REVIEW-FOLLOWUPS.md for his technical correction and the missing recorded teammate review. Zaw and Wanna still need their personal PRs/reflections.
+
+Audit update (6 November): Zaw's PR #2 and Myo's correction PR #3 are merged and preserved. Zaw no longer needs to recreate that PR; Myo no longer needs to repeat the corrected wording. Complete recorded teammate reviews, any missing actual-run screenshot context, Wanna's assigned review/reflection, the demo, private ratings and submission actions.

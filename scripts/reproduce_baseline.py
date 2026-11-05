@@ -1,6 +1,7 @@
 """Harmless probes against the unmodified starter in an isolated temporary DB.
 Run ONLY with .lab-venv/bin/python. No network listeners are created.
 """
+import argparse
 import hashlib
 import importlib.util
 import json
@@ -10,6 +11,12 @@ import tempfile
 from datetime import datetime, timezone
 
 ROOT=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser()
+parser.add_argument('--output', default='evidence/baseline.json')
+args=parser.parse_args()
+output_path=(ROOT/args.output).resolve()
+if not output_path.is_relative_to(ROOT/'evidence'):
+    parser.error('--output must stay within evidence/')
 team=json.loads((ROOT/'team.json').read_text())
 os.environ['TEAM_ID']=team['id']
 spec=importlib.util.spec_from_file_location('original',ROOT/'lab/original/app.py')
@@ -59,5 +66,6 @@ output={'team':team['id'],'marker':m.team_marker(),'captured_at':datetime.now(ti
         'limitations':'XSS injection and SSTI expression evaluation proven server-side; no browser script execution screenshot in this evidence.',
         'results':results}
 (ROOT/'evidence').mkdir(exist_ok=True)
-(ROOT/'evidence/baseline.json').write_text(json.dumps(output,indent=2))
-print(json.dumps({'team':output['team'],'marker':output['marker'],'probes_passed':len(results)-1,'evidence':'evidence/baseline.json'},indent=2))
+output_path.parent.mkdir(parents=True,exist_ok=True)
+output_path.write_text(json.dumps(output,indent=2))
+print(json.dumps({'team':output['team'],'marker':output['marker'],'probes_passed':len(results)-1,'evidence':str(output_path.relative_to(ROOT))},indent=2))

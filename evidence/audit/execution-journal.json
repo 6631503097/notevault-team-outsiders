@@ -1,0 +1,170 @@
+{
+  "executor": "Codex assistant; not student contribution evidence",
+  "records": [
+    {
+      "check": "baseline",
+      "command": [
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/.lab-venv/bin/python",
+        "scripts/reproduce_baseline.py",
+        "--output",
+        "evidence/audit/baseline.json"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:12:53.860846+00:00",
+      "finished_at": "2026-11-05T17:15:30.728739+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/baseline.log": "a6815b584bb8c5539d3bfe878be6d052dcc176e9633e6b8310549419fc7ff873",
+        "evidence/audit/baseline.json": "2da73ab00288ea7324593dc07e1e165b1831072ca6420b3c6cec180d5e4a1a74"
+      }
+    },
+    {
+      "check": "backend",
+      "command": [
+        "/tmp/outsiders-report-env/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "--junitxml=evidence/audit/regression.xml"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:15:30.729402+00:00",
+      "finished_at": "2026-11-05T17:15:44.420403+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/backend.log": "99c8d39af038cc46169198c906e867fba764a106942b8e299258779abf1e8086",
+        "evidence/audit/regression.xml": "991ce10cde0a6cd1114a9a70ab2036966a9a6ff5815575e9973ee8edde3213a9"
+      }
+    },
+    {
+      "check": "frontend-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "frontend",
+        "test",
+        "--",
+        "--run"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:15:44.421229+00:00",
+      "finished_at": "2026-11-05T17:20:28.368188+00:00",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "passed": false,
+      "outputs": {
+        "evidence/audit/frontend-tests.log": "8cfa9226fd078f06583cb3d17aca414eed16c7408613b0d440c6704623d4d14b"
+      }
+    },
+    {
+      "check": "frontend-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "/tmp/outsiders-frontend-audit",
+        "test",
+        "--",
+        "--run"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:21:57.804623+00:00",
+      "finished_at": "2026-11-05T17:22:02.875272+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/frontend-tests-attempt2.log": "6c55f5311ce931338583abf47f64387ae1636eae938084c49050e38a588e1f1d"
+      }
+    },
+    {
+      "check": "frontend-build",
+      "command": [
+        "npm",
+        "--prefix",
+        "/tmp/outsiders-frontend-audit",
+        "run",
+        "build"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:22:02.875946+00:00",
+      "finished_at": "2026-11-05T17:22:04.853371+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/frontend-build.log": "8de660306c6a578bcfc180c8430fa57a333d17bd2ef58977e06845f2aa483a21"
+      }
+    },
+    {
+      "check": "signature",
+      "command": [
+        "cosign",
+        "verify-blob",
+        "--key",
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/release/cosign.pub",
+        "--bundle",
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/release/release.sigstore.json",
+        "--insecure-ignore-tlog",
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/release/team-outsiders-notevault.tar.gz"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:22:04.854051+00:00",
+      "finished_at": "2026-11-05T17:22:12.011136+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/signature.log": "55252e0d86da4a6fa32b4e1272ec7aabe830dbe2d25c7f6092a180c0b8fa4242"
+      }
+    },
+    {
+      "check": "tamper-rejection",
+      "command": [
+        "cosign",
+        "verify-blob",
+        "--key",
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/release/cosign.pub",
+        "--bundle",
+        "/Users/wannasan/Documents/Software_security/software-security/notevault-team-outsiders/release/release.sigstore.json",
+        "--insecure-ignore-tlog",
+        "/var/folders/fs/rgqbgw2s6plbqr_gy208ls1w0000gn/T/outsiders-audit-tamper-lrxixhtw/tampered.tar.gz"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:22:12.016210+00:00",
+      "finished_at": "2026-11-05T17:22:12.317404+00:00",
+      "exit_code": 1,
+      "expected_exit": "nonzero signature rejection",
+      "passed": true,
+      "outputs": {
+        "evidence/audit/tamper-rejection.log": "73b1ff1de101707e2ff7858f3f429b5b1d309af7cc6dbe0c237024cdf9fb8127"
+      }
+    },
+    {
+      "check": "runtime-executables",
+      "command": [
+        "docker",
+        "compose",
+        "exec",
+        "-T",
+        "app",
+        "python",
+        "-c",
+        "import json,shutil; r={k:shutil.which(k) for k in (\"node\",\"npm\",\"php\")}; assert all(v is None for v in r.values()); print(json.dumps(r))"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:28:32.203983+00:00",
+      "finished_at": "2026-11-05T17:28:33.139981+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "outputs": {
+        "evidence/audit/runtime-executables.log": "ffab735bc0a7d8c51689382fe30398da6d568e39d1e840388946930420bf5461"
+      }
+    }
+  ]
+}

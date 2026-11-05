@@ -1,0 +1,13 @@
+
+> notevault-team-outsiders@1.0.0 test
+> vitest run --run
+
+
+ RUN  v4.1.12 /private/tmp/outsiders-frontend-audit
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  00:22:00
+   Duration  2.40s (transform 67ms, setup 110ms, import 140ms, tests 1.63s, environment 439ms)
+

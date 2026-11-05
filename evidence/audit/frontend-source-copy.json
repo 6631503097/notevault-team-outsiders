@@ -1,0 +1,46 @@
+{
+  "frontend/index.html": {
+    "copied_to": "/tmp/outsiders-frontend-audit/index.html",
+    "sha256": "d4e55f4b2d5b29614d227da2f0f69bfc185d8eed47a804044dc652c38b3e3a81"
+  },
+  "frontend/package-lock.json": {
+    "copied_to": "/tmp/outsiders-frontend-audit/package-lock.json",
+    "sha256": "4006d8befc4d2343abfa167572f4033fa115764a3d48dd1f46dda24f8db70f12"
+  },
+  "frontend/package.json": {
+    "copied_to": "/tmp/outsiders-frontend-audit/package.json",
+    "sha256": "de09236aa6a0216cc6205a047628236ec6a9ce87d0ba3c66e4b075d9feed8c6a"
+  },
+  "frontend/tsconfig.json": {
+    "copied_to": "/tmp/outsiders-frontend-audit/tsconfig.json",
+    "sha256": "d92b767ec311cfd7737b1b1507feba2b77612235c17c3ae28fb1a854f6760b9b"
+  },
+  "frontend/vite.config.ts": {
+    "copied_to": "/tmp/outsiders-frontend-audit/vite.config.ts",
+    "sha256": "b89e5d28b89292912229b1974fe2a41449aa1fce20f38ef529403eac652e7bf3"
+  },
+  "frontend/public/vault.svg": {
+    "copied_to": "/tmp/outsiders-frontend-audit/public/vault.svg",
+    "sha256": "06c333f25eba2b1dba59b6d5b29c70bcf02000efa983592c83c6ea5baf8e6fa1"
+  },
+  "frontend/src/main.tsx": {
+    "copied_to": "/tmp/outsiders-frontend-audit/src/main.tsx",
+    "sha256": "6b4d0350d5f024dba0e6f64b19f080e0d5a28986db8a2fd2d6337c76a3191b17"
+  },
+  "frontend/src/styles.css": {
+    "copied_to": "/tmp/outsiders-frontend-audit/src/styles.css",
+    "sha256": "5d7b8f69d779bb2a71b490a639a59800340a6f828666ffd174120bb3455ad501"
+  },
+  "frontend/src/App.test.tsx": {
+    "copied_to": "/tmp/outsiders-frontend-audit/src/App.test.tsx",
+    "sha256": "21c84e1bc120e484592580be2199ad22df741df6fd9598a24e40cef1ad4604e0"
+  },
+  "frontend/src/test-setup.ts": {
+    "copied_to": "/tmp/outsiders-frontend-audit/src/test-setup.ts",
+    "sha256": "4d9bd80c64d4854c212aac89e167e4037b6180756c5917a4e0031e1935035182"
+  },
+  "frontend/src/api.ts": {
+    "copied_to": "/tmp/outsiders-frontend-audit/src/api.ts",
+    "sha256": "1185980ead1e64962c8716aae818a333fc610fdc6b9680c063a09963c47f74cd"
+  }
+}

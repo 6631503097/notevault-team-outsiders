@@ -10,8 +10,17 @@ import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
 team=json.loads((ROOT/'team.json').read_text())
-E=ROOT/'evidence'
-base=json.loads((E/'baseline.json').read_text())
+E=ROOT/'evidence/audit/ci'
+audit=json.loads((ROOT/'evidence/audit/provenance.json').read_text())
+for record in audit['report_inputs']:
+    path=ROOT/record['path']
+    if hashlib.sha256(path.read_bytes()).hexdigest()!=record['sha256']:
+        raise RuntimeError('Report input changed since provenance audit: '+record['path'])
+if not audit['all_required_checks_passed']:
+    raise RuntimeError('Provenance audit contains incomplete or failed checks')
+base=json.loads((ROOT/'evidence/audit/baseline.json').read_text())
+if base['team']!=team['id'] or base['baseline_sha256']!=hashlib.sha256((ROOT/'lab/original/app.py').read_bytes()).hexdigest():
+    raise RuntimeError('Baseline identity/source does not match the audited project')
 fix=subprocess.check_output(['git','log','--format=%H','--grep=fix(F-01','-1'],cwd=ROOT,text=True).strip()
 revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
 
@@ -118,16 +127,16 @@ mermaid='''flowchart LR
     f'Team marker: `{base["marker"]}`. Application edition: {team["edition"]}.\n\n'
     'Assets: private notes, account password hashes, session tokens, team identity, audit history, source code, dependency inventory and release integrity. Attackers: unauthenticated registrants, malicious authenticated users, compromised dependencies, and a local privileged operator. Real university systems, real credentials and other teams’ databases are out of scope.\n\n'
     '## Data-flow diagram\n\n```mermaid\n'+mermaid+'```\n\n'
-    f'The local preview is loopback-only. The live service at {team["live_url"]} uses HTTPS and a loopback-only application process behind Nginx. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.\n\n## STRIDE\n\n'+stride+'\n\n## Top risks\n\n'+risks+'\n\nThese qualitative scores prioritize remediation; they are not calculated CVSS scores or a guarantee of residual safety.\n')
+    'The audited deployment is the loopback-only local Compose app and the container smoke test in the team-owned CI run. The inherited external host is not evidence of team deployment ownership or its reverse-proxy configuration. The original vulnerable app is accessed only by an isolated test client.\n\n## STRIDE\n\n'+stride+'\n\n## Top risks\n\n'+risks+'\n\nThese qualitative scores prioritize remediation; they are not calculated CVSS scores or a guarantee of residual safety.\n')
 
 svg='''<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#415d56"/></marker></defs><rect width="1000" height="420" fill="#ffffff"/><g font-family="Arial,sans-serif" fill="#233b35"><text x="20" y="28" font-size="20">NoteVault - data flows and trust boundaries</text><g stroke="#9aac9d" fill="#f4f7f2" stroke-dasharray="6 4"><rect x="20" y="55" width="230" height="190" rx="12"/><rect x="365" y="55" width="270" height="190" rx="12"/><rect x="750" y="55" width="230" height="190" rx="12"/><rect x="20" y="295" width="615" height="105" rx="12"/></g><g font-size="14"><text x="38" y="82">TB1 - browser</text><text x="383" y="82">TB2 - app container</text><text x="768" y="82">TB3 - storage</text><text x="38" y="322">TB4 - build and supply chain</text></g><g font-size="17" text-anchor="middle"><text x="135" y="135">User / administrator</text><text x="135" y="164">React interface</text><text x="500" y="135">Flask API</text><text x="500" y="164">Authorization / export</text><text x="865" y="132">SQLite</text><text x="865" y="161">Notes / accounts</text><text x="865" y="190">Sessions / audit</text></g><g fill="none" stroke="#415d56" stroke-width="2" marker-end="url(#arrow)"><path d="M250 120 H365"/><path d="M365 202 H250"/><path d="M635 120 H750"/><path d="M750 202 H635"/><path d="M500 295 V245"/></g><g font-size="12" text-anchor="middle"><text x="307" y="106">JSON + cookie</text><text x="307" y="145">+ CSRF</text><text x="307" y="226">Owned export</text><text x="693" y="106">Bound SQL</text><text x="693" y="226">Owned records</text><text x="564" y="275">Verified build</text></g><text x="40" y="357" font-size="15">Source + locks → Security CI → SBOM + signed release</text><text x="40" y="382" font-size="12">Local key signature proves integrity, not independent provenance.</text></g></svg>'''
 (ROOT/'docs/dfd.svg').write_text(svg)
 
 python_count=count_components('sbom-python.json');js_count=count_components('sbom-frontend.json')
-verification=(E/'cosign-verification.txt').read_text() if (E/'cosign-verification.txt').exists() else 'Verification has not been completed.'
+verification=(ROOT/'evidence/audit/signature.log').read_text()
 container=json.loads((E/'container-check.json').read_text()) if (E/'container-check.json').exists() else None
 scan=json.loads((E/'sca-container.json').read_text()) if (E/'sca-container.json').exists() else None
-summary=json.loads((E/'verification-summary.json').read_text())
+summary=audit['summary']
 hosted_ci=summary.get('hosted_ci','Not recorded')
 live_marker=summary.get('live_marker','Check /api/config')
 vulns=[v for r in scan.get('Results',[]) for v in (r.get('Vulnerabilities') or [])] if scan else None
@@ -147,45 +156,44 @@ report=f'''# Term Project Report - Secure Build
 | Members (name + ID) | {'; '.join(m['name']+' '+m['student_id'] for m in team['members'])} |
 | Target application | Provided NoteVault, upgraded to {team['edition']} |
 | Repository URL | {team['repository_url']} (private; instructor access must be granted) |
-| Live application | {team['live_url']} |
-| Evidence review date | {base["captured_at"][:10]} |
+| Audited application | Local loopback app at http://127.0.0.1:8081; no external deployment ownership claimed |
+| Evidence review date | {audit["checked_at"][:10]} (Asia/Bangkok) |
 | Recorded demo URL | {team.get('demo_url') or 'Not supplied; required before portal upload'} |
 | Assessment baseline marker | {base['marker']} |
-| Live deployment marker | {live_marker} (separate production salt) |
 | Status | Draft; student reviews, instructor access, demo and final human approval required |
 
 ## AI-tool usage disclosure
 
-OpenAI Codex assisted with requirements review, implementation, tests, local vulnerability reproduction, build/security tooling and this report. Both teams received shared AI-assisted code in the same session. Different team names and markers do not make shared source independently authored. See docs/AI-DISCLOSURE.md. Students must disclose this assistance, independently reproduce and understand results, and confirm acceptance of the shared scaffolding with the instructor. No student authorship, weekly history or personal reflection is fabricated. The hosted CI result is linked to its GitHub run and recorded in evidence/hosted-ci.json.
+OpenAI Codex assisted with requirements review, implementation, tests, local vulnerability reproduction, build/security tooling and this report. Both teams received shared AI-assisted code in the same session. Different team names and markers do not make shared source independently authored. See docs/AI-DISCLOSURE.md. Students must disclose this assistance, independently reproduce and understand results, and confirm acceptance of the shared scaffolding with the instructor. No student authorship, weekly history or personal reflection is fabricated. The hosted CI result is linked to its GitHub run and recorded in evidence/audit/hosted-ci.json.
 
 ## 1. Executive Summary
 
 {team['id']} uses NoteVault as a local private notebook with account registration, sessions, owner-scoped notes and exports. Its {team['edition']} interface organizes notes into {', '.join(team['collections'])}. The assessment verified ten harmless baseline probes grouped into eight findings: two Critical, four High, and two Medium, using qualitative severity. The critical risks are shell injection and session forgery; authorization, SQL construction, interpreted content and password handling add further risk.
 
-The new React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
+The inherited, disclosed React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
 
 ## Verification at a glance
 
-Evidence is machine-generated and linked to its recorded source commit. It does not establish student review, instructor acceptance, demo completion or portal submission. See docs/TEAM-NEXT-STEPS.md.
+Evidence is drawn from the independent local execution journal and explicitly generated outputs of the recorded team-owned CI job. The inherited source is not claimed as new implementation work. It does not establish student review, instructor acceptance, demo completion or portal submission. See docs/TEAM-NEXT-STEPS.md.
 
 | Control | Result | Evidence |
 |---|---|---|
-| Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/baseline.json |
-| Backend regression | 25 tests passed | evidence/regression.xml |
-| Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/frontend-build.log |
-| Dependency audit | {python_vulns} known Python vulnerabilities; {npm_vulns} npm vulnerabilities | evidence/sca-python.json; evidence/sca-npm.json |
-| Container gate | {len(vulns) if vulns is not None else 'not recorded'} HIGH/CRITICAL findings; hardened runtime controls verified | evidence/sca-container.json; evidence/container-check.json |
-| Secret scan | {secret_findings} findings | evidence/secrets-history.json |
-| Release integrity | Cosign verification passed; tampered copy rejected | evidence/cosign-verification.txt; evidence/cosign-tamper-rejection.txt |
-| Hosted pipeline | {hosted_ci} | evidence/hosted-ci.json |
+| Vulnerable baseline | 10 harmless probes reproduced across 8 findings | evidence/audit/baseline.json |
+| Backend regression | 25 tests passed | evidence/audit/regression.xml |
+| Frontend regression | 3 tests passed and production build completed | frontend/src/App.test.tsx; evidence/audit/frontend-build.log; evidence/audit/frontend-tests-attempt2.log |
+| Dependency audit | {python_vulns} known Python vulnerabilities; {npm_vulns} npm vulnerabilities | evidence/audit/ci/sca-python.json; evidence/audit/ci/sca-npm.json |
+| Container gate | {len(vulns) if vulns is not None else 'not recorded'} HIGH/CRITICAL findings; hardened runtime controls verified | evidence/audit/ci/sca-container.json; evidence/audit/ci/container-check.json |
+| Secret scan | {secret_findings} findings | evidence/audit/ci/secrets-history.json |
+| Release integrity | Cosign verification passed; tampered copy rejected | evidence/audit/signature.log; evidence/audit/tamper-rejection.log |
+| Hosted pipeline | {hosted_ci} | evidence/audit/hosted-ci.json |
 
 ## 2. System Scope & Function
 
-The application provides local account creation/sign-in, note creation/view/edit, literal search, collections, pin/archive/restore, CSV/JSON/text downloads, personal audit history, a protected team directory, and an administrator account listing without passwords. Notes remain private per user, even for administrators. Both teams use separate projects, databases, volumes, cookies and ports.
+The application provides local account creation/sign-in, note creation/view/edit, literal search, collections, pin/archive/restore, CSV/JSON/text downloads, personal audit history, a protected team directory, and an administrator account listing without passwords. Notes remain private per user, even for administrators. The audited Team Outsiders configuration uses its own team identity, database, volume, cookie name and port. Other teams are outside this assessment.
 
-The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener. The assessment baseline retains marker {base['marker']}. The live production database uses an intentionally separate, secret deployment salt and currently exposes marker {live_marker}; both identify {team['id']}, and the production salt is not committed.
+The original assessment target is lab/original/app.py from course revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176. It is excluded from runtime/release packaging. scripts/reproduce_baseline.py loads it in a separate old-dependency environment and temporary SQLite database; it does not start a listener. The assessment baseline retains marker {base['marker']}. The marker verifies the test fixture configuration; it does not establish independent authorship or the origin of an inherited screenshot.
 
-Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The live deployment terminates HTTPS in Nginx and forwards only to loopback Gunicorn. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
+Data-flow diagram: docs/dfd.svg and docs/THREAT-MODEL.md. Trust boundaries separate the browser, Flask process, local database and build/release pipeline. The audited container is loopback-bound. External reverse-proxy configuration and deployment ownership have not been verified in this audit. Protected assets include private notes, password hashes, session tokens, audit records and release integrity. Real university services and real credentials are out of scope.
 
 ## 3. Threat Model - STRIDE (20 pts)
 
@@ -199,7 +207,7 @@ Likelihood and impact are each ranked 1-5 to prioritize remediation. These are q
 
 ## 4. Vulnerability Findings (25 pts)
 
-Run the steps in docs/BASELINE.md. Every probe is linked to the exact team marker and original-source digest in evidence/baseline.json. Only temporary fake data is used.
+Run the steps in docs/BASELINE.md. Every probe is linked to the exact team marker and original-source digest in evidence/audit/baseline.json. Only temporary fake data is used.
 
 '''
 for f in findings:
@@ -213,7 +221,7 @@ for f in findings:
 | OWASP 2025 | {owasp} |
 | Severity | {severity} |
 | Location | lab/original/app.py:{oldline}; {endpoint} |
-| Evidence | evidence/baseline.json, finding {fid}, team marker {base['marker']} |
+| Evidence | evidence/audit/baseline.json, finding {fid}, team marker {base['marker']} |
 
 Reproduction: {reproduction}
 
@@ -223,7 +231,7 @@ Root cause: {cause}
 
 '''
 report+='## 5. Remediation (25 pts)\n\n'
-report+='The original source is preserved rather than rewritten. The application upgrade requested by the user is broader than a minimal patch; each security change below is tied to the specific unsafe mechanism. All listed fixes are in the actual AI-assisted remediation commit, not attributed to a student.\n\n'
+report+='The original source is preserved rather than rewritten. The inherited application upgrade is broader than a minimal patch; each security change below is tied to the specific unsafe mechanism. All listed fixes were already present in the inherited AI-assisted remediation commit. This audit independently checks their behavior; it does not claim to have implemented them anew or attribute them to a student.\n\n'
 for f in findings:
     fid,title,severity,cwe,owasp,endpoint,reproduction,impact,cause,mitigation,before,after,test,oldneedle,newneedle=f
     report+=f'''### Fix for {fid}
@@ -237,18 +245,18 @@ for f in findings:
 
 Commit: {fix}. Location: backend/app.py:{line('backend/app.py',newneedle)}{' and frontend/src/main.tsx' if fid=='F-04' else ''}.
 
-Proof: {test}. See evidence/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/baseline.json.
+Proof: {test}. See evidence/audit/regression.xml and frontend/src/App.test.tsx. These retained tests verify the rejected attack and relevant legitimate behavior. Every baseline behavior also retains its exact machine-generated request/response evidence in evidence/audit/baseline.json.
 
 '''
 report+=f'''## 6. Supply-Chain Hardening (15 pts)
 
 Python dependencies and transitive dependencies are pinned with hashes in requirements.txt; the frontend uses package-lock.json and npm ci. The runtime is a minimal multi-stage image with pinned base-image digests, a non-root user, a read-only filesystem, dropped capabilities, no-new-privileges, resource limits and a separate data volume. Original vulnerable code, tests, local credentials and signing keys are excluded from the runtime image.
 
-CycloneDX inventories: evidence/sbom-python.json contains {python_count} components; evidence/sbom-frontend.json contains {js_count} locked frontend and build components. This inventory includes development and platform-optional dependencies because the release contains the build source and lockfile. It includes React, React DOM, scheduler and Lucide, verified by the generation script; CI scans the full dependency set. The inventories describe application dependencies, not a claim of a full operating-system inventory.
+CycloneDX inventories generated by the recorded team-owned CI job: evidence/audit/ci/sbom-python.json contains {python_count} components; evidence/audit/ci/sbom-frontend.json contains {js_count} locked frontend and build components. This inventory includes development and platform-optional dependencies because the release contains the build source and lockfile. It includes React, React DOM, scheduler and Lucide, verified by the generation script; CI scans the full dependency set. The inventories describe application dependencies, not a claim of a full operating-system inventory.
 
-Artifact: release/{team['slug']}-notevault.tar.gz. This is the hardened application/build source plus compiled browser bundle and application SBOMs. It is signed locally with Cosign; it is not a published container registry signature. release/SHA256SUMS and release/provenance.json record the artifact digest and input hashes. Private key material stays in ignored .keys/ and must never be shared. The verification bundle and public key are in release/.
+Artifact: release/{team['slug']}-notevault.tar.gz. This is the hardened application/build source plus compiled browser bundle and application SBOMs. It is an existing locally signed artifact from source {audit['release']['source_head']}, SHA-256 {audit['release']['sha256']}. Its recorded runtime/build input hashes were compared with this workspace. The signature is re-verified in this audit; this is not a newly implemented release or a published container-registry signature. release/SHA256SUMS and release/provenance.json record the artifact digest and input hashes. Private key material stays in ignored .keys/ and must never be shared. The verification bundle and public key are in release/.
 
-Actual local verification output:
+Independent local re-verification of the existing signed artifact:
 
 ```text
 {verification.strip()}
@@ -256,17 +264,17 @@ Actual local verification output:
 
 The local workflow intentionally uses a self-managed key without publishing to a transparency log; signature verification checks bytes against that public key, not the identity of the students. Keyless, transparency-backed signing is configured for a future tagged GitHub Actions run. No formal SLSA level is claimed: a locally generated manifest and signature do not independently attest to an isolated builder or reviewed source. The team must explain key custody and trusted verification inputs.
 
-Historical baseline evidence: the initial Debian runtime image was rejected by the HIGH/CRITICAL gate. The current runtime uses a digest-pinned Alpine base; the original rejection is retained in evidence/container-base-rejected.json.
+The current digest-pinned Alpine runtime passed the recorded team-owned container scan. An inherited Debian-image rejection is excluded from this report because this audit did not reproduce that earlier image comparison.
 
 ### Emerging runtime advisory review (November 2026)
 
-The final review explicitly checked the two widely discussed “shell” advisory families instead of treating a green dependency scan as permanent evidence. Node2Shell (CVE-2026-111497) affects vulnerable Node.js Brotli decoding releases. This project pins the frontend build stage and both hosted Node setup steps to Node 24.22.1, a fixed release, and the package manifest rejects older Node 24 versions. Node is used only to compile the React bundle; the final Python/Alpine runtime contains no Node executable or Node package tree. The result is therefore **patched in the build boundary and absent from the deployed runtime**, not merely “not observed by a scanner.”
+The final review explicitly checked the two widely discussed “shell” advisory families instead of treating a green dependency scan as permanent evidence. Node2Shell (CVE-2026-111497) affects vulnerable Node.js Brotli decoding releases. This project pins the frontend build stage and both hosted Node setup steps to Node 24.22.1, a fixed release, and the package manifest rejects older Node 24 versions. Node is used only to compile the React bundle; the final Python/Alpine runtime contains no Node executable or Node package tree. The result is therefore **patched in the build boundary and absent from the audited container runtime**, not merely “not observed by a scanner.”
 
 The issues informally called PHP2Shell (CVE-2026-109618 and CVE-2026-109619) affect PHP web-request runtimes. This repository has no PHP source, PHP interpreter, Composer manifest, PHP container layer, or PHP request handler. They are **not applicable to this target**. This applicability decision is evidence-scoped and is not counted as an additional NoteVault vulnerability finding. If PHP is introduced later, the deployment must use a PHP security release at or above 8.2.35, 8.3.36, 8.4.27, or 8.5.12 as appropriate and rerun the full gate.
 
-Container runtime verification: {('passed; non-root UID '+container['user']+', read-only root, loopback-only port and expected marker verified in evidence/container-check.json') if container else 'not yet recorded in evidence/container-check.json'}.
+Container runtime verification: {('passed; non-root UID '+container['user']+', read-only root, loopback-only port and expected marker verified in evidence/audit/ci/container-check.json') if container else 'not yet recorded in evidence/audit/ci/container-check.json'}.
 
-Container vulnerability scan: {str(len(vulns))+' HIGH/CRITICAL issues in the scanned image (see evidence/sca-container.json).' if vulns is not None else 'not yet completed; see the container scan log.'}
+Container vulnerability scan: {str(len(vulns))+' HIGH/CRITICAL issues in the scanned image (see evidence/audit/ci/sca-container.json).' if vulns is not None else 'not yet completed; see the container scan log.'}
 
 ## 7. Security CI Pipeline (10 pts)
 
@@ -274,15 +282,15 @@ Container vulnerability scan: {str(len(vulns))+' HIGH/CRITICAL issues in the sca
 
 The SAST gate fails on HIGH findings at MEDIUM/HIGH confidence; pip-audit fails on any known Python vulnerability, npm audit fails at HIGH, the container gate fails on HIGH/CRITICAL, and Gitleaks fails on detected secrets. Tool failures are not treated as success. Historical intentionally vulnerable lab source is excluded from the hardened release scan and kept only for the assessment; generated packages, local state and evidence are also excluded from secret scans using the committed configuration.
 
-Local pass evidence is in evidence/security-gate.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The actual rejection is in evidence/gate-rejection.json. Hosted GitHub Actions status: {hosted_ci}. The intentional local failing-gate proof remains the negative control.
+Recorded team-owned CI scan evidence is in evidence/audit/ci/sast.json; evidence/audit/ci/sca-python.json; evidence/audit/ci/sca-npm.json. scripts/prove_gate.py creates a temporary nonexecuted shell-injection fixture and confirms that the same Bandit threshold returns nonzero. The CI fixture rejection is in evidence/audit/ci/gate-rejection.json. Hosted GitHub Actions status: {hosted_ci}. The intentional local failing-gate proof remains the negative control.
 
 ## 8. Conclusion & Reflection (5 pts - clarity)
 
 The verified baseline failures are addressed by removing unsafe interpretation, enforcing authorization at data access, using modern password hashing and revocable sessions, and making builds auditable. Tests also check legitimate note lifecycles, persistence, cross-database token rejection, CSV export protection, rate limiting and concurrent edits.
 
-Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. The live deployment uses HTTPS, an exact trusted host, fresh non-demo data and separate service identities; backup/restore and monitoring work remain.
+Residual risks: this is a single-instance course app with visible demo credentials only when local demo mode is explicitly enabled; it has no MFA/recovery, centralized alerts, immutable logs or encrypted notes at rest. SQLite and local key custody trust the machine operator. Each account is limited to 1,000 notes including removed notes; the admin directory is bounded to 500 accounts. External deployment ownership, reverse-proxy configuration, remote persistence and remote service isolation are not established by the local tests. Backup/restore and monitoring work remain.
 
-Technical reflection: the strongest improvement was not any single patch, but the traceable chain from a harmless exploit to its root cause, focused remediation, regression proof, dependency and container gates, SBOM, and signed release. The final refresh also demonstrated why evidence must be rerun near submission: newly disclosed Werkzeug, Vitest, and Alpine issues were detected, upgraded, and rescanned instead of relying on an older green result. The next hardening priorities are MFA/recovery, encrypted backups, centralized monitoring, immutable audit storage, and a hosted keyless release signature.
+AI-assisted technical assessment, not a student personal reflection: the strongest improvement was not any single patch, but the traceable chain from a harmless exploit to its root cause, focused remediation, regression proof, dependency and container gates, SBOM, and signed release. This audit checked the current locked dependencies and recorded actual scan results. An inherited story about detecting and upgrading Werkzeug, Vitest and Alpine issues is excluded because those upgrades were not performed in this audit. The next hardening priorities are MFA/recovery, encrypted backups, centralized monitoring, immutable audit storage, and a hosted keyless release signature.
 
 ## Appendix
 
@@ -291,15 +299,15 @@ Technical reflection: the strongest improvement was not any single patch, but th
 | Control | Status | Evidence or required action |
 |---|---|---|
 | Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
-| Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/verification-summary.json |
+| Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/audit/provenance.json |
 | SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
-| Repository and live application | Present | Cover URLs; instructor access still must be confirmed |
+| Team repository and local app | Verified within stated scope | External deployment ownership and instructor access remain unverified |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
 | Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
 | Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
 | Portal upload with term-project code | Required | One representative uploads this PDF after all controls above are satisfied |
 
-The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. Repository and live deployment are present; portal upload, peer rating and video submission remain.
+The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. The team repository and local app are present; portal upload, peer rating and video submission remain.
 
 ### Tools and evidence index
 
@@ -307,12 +315,18 @@ Flask test client and pytest reproduce and verify API behavior. React Testing Li
 
 ### Task split and authorship
 
-Membership is recorded on the cover. The initial implementation and automated evidence generation are disclosed as AI-assisted and are not reassigned to any student. Actual student review, reproduction, demo work, and peer ratings must be recorded truthfully by Zaw Win Htut, Wanna San, and Myo Zin Thant; the repository cannot establish those personal actions on their behalf.
+Membership is recorded on the cover. The implementation, initial tests, harness and original report design were inherited with an AI/shared-source disclosure. Independent verification and CI corrections in this conversation are separate work. Student-submitted evidence and reflections retain their own authorship and are not presented as assistant-generated evidence. Actual student review, reproduction, demo work, and peer ratings must be recorded truthfully by Zaw Win Htut, Wanna San, and Myo Zin Thant; the repository cannot establish those personal actions on their behalf.
+
+### Provenance and evidence limits
+
+The implementation, initial findings, tests and report generator arrived in the supplied bundle. The assistant did not create them anew in this conversation. The original shared-AI disclosure is retained. Independently executed checks are recorded with commands, timestamps, exit codes and output hashes in evidence/audit/execution-journal.json. CI evidence is accepted only for files rewritten by the observed workflow steps, not every file that happened to be uploaded with an artifact.
+
+Inherited staging CI records, the earlier rejected-image scan, and the unverified external-deployment narrative are excluded as proof of this assessment. Equal hashes do not by themselves establish origin: a successful empty scan or reproducible SBOM can legitimately match an earlier file byte-for-byte. The first local frontend attempt timed out while starting its worker and executed no tests. The unchanged source, copied and hash-compared in a temporary directory, then passed three tests and the production build. Both attempts are retained; the failed attempt is not counted as a pass. No finding is treated as verified solely because its team marker matches. See docs/EVIDENCE-PROVENANCE-AUDIT.md for the claim-by-claim disposition.
 
 ### References
 
-- Google Classroom project announcement, August 16: https://classroom.google.com/c/ODU1NTkwNjAzNzg2 (read on 2026-09-04).
-- Course project brief: repo/project/README.md, revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176.
+- Assignment requirements: the user-supplied software_security_project_prompt_guide.md. No claim is made that this audit accessed a private Classroom announcement.
+- Course source snapshot: project/starter-app/app.py at verified revision 6996818be46cfb3f26b9b9d88e7c95af7ae32176; evidence/audit/course-source-check.json.
 - Original report headings: docs/COURSE-REPORT-TEMPLATE.md.
 - OWASP Top 10:2025: https://owasp.org/Top10/2025/
 - OWASP API1:2023: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
@@ -345,6 +359,7 @@ def clean(s):
     return s.replace('’',"'").replace('“','"').replace('”','"').replace('–','-').replace('—','-').replace('→',' -> ').replace('×',' x ').replace('…','...')
 def para(s,style='Body'):
     escaped = html.escape(clean(s)).replace('\n','<br/>')
+    escaped = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', escaped)
     escaped = re.sub(r'https://[^\s<>]+', lambda m: '<link href="' + m.group(0).rstrip('.,;)') + '">' + m.group(0).rstrip('.,;)') + '</link>' + m.group(0)[len(m.group(0).rstrip('.,;)')):], escaped)
     return Paragraph(escaped,styles[style])
 
@@ -400,7 +415,7 @@ while i<len(lines):
     story.append(para('\n'.join(content)))
 
 out=ROOT/'output/pdf';out.mkdir(parents=True,exist_ok=True)
-filename=out/(team['slug']+'-report-final-draft.pdf')
+filename=out/(team['slug']+'-report-audited-draft.pdf')
 def page(canvas,doc):
     canvas.saveState();canvas.setStrokeColor(colors.HexColor('#dbe2dd'));canvas.line(60,48,535,48)
     canvas.setFillColor(ink);canvas.setFont('Helvetica',8);canvas.drawString(60,35,team['id']+' | NoteVault | Final submission draft')

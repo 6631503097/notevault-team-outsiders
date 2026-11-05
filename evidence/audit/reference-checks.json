@@ -1,0 +1,19 @@
+{
+  "checked_date_local": "2026-11-06",
+  "timezone": "Asia/Bangkok",
+  "method": "Official pages opened with the web tool during this audit; no private Classroom access claimed",
+  "sources": [
+    {
+      "url": "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases",
+      "supports": "CVE-2026-111497 and fixed Node.js 24.22.1 security release"
+    },
+    {
+      "url": "https://www.php.net/archive/2026.php",
+      "supports": "PHP request-runtime CVE-2026-109618 and CVE-2026-109619; repository/runtime applicability assessed separately"
+    },
+    {
+      "url": "https://owasp.org/Top10/2025/",
+      "supports": "2025 category numbers A01, A04, A05 and A07"
+    }
+  ]
+}

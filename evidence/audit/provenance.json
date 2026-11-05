@@ -1,0 +1,325 @@
+{
+  "checked_at": "2026-11-06T00:35:12.862885+07:00",
+  "restored_bundle_head": "eee868167d3bb1b9aefb6fba73aede7103308452",
+  "ci_source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+  "runtime_and_test_source_files_matching_ci": [
+    "Dockerfile",
+    "backend/__init__.py",
+    "backend/app.py",
+    "compose.yaml",
+    "frontend/package-lock.json",
+    "frontend/package.json",
+    "frontend/src/App.test.tsx",
+    "frontend/src/api.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/styles.css",
+    "frontend/src/test-setup.ts",
+    "frontend/vite.config.ts",
+    "requirements.txt",
+    "team.json",
+    "tests/test_security.py"
+  ],
+  "all_required_checks_passed": true,
+  "meaning_of_pass": "Latest required check passes; the failed initial local frontend attempt is retained and disclosed. This is not a claim that every attempt passed.",
+  "local_failed_attempts": [
+    {
+      "check": "frontend-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "frontend",
+        "test",
+        "--",
+        "--run"
+      ],
+      "source_head": "82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f",
+      "started_at": "2026-11-05T17:15:44.421229+00:00",
+      "finished_at": "2026-11-05T17:20:28.368188+00:00",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "passed": false,
+      "outputs": {
+        "evidence/audit/frontend-tests.log": "8cfa9226fd078f06583cb3d17aca414eed16c7408613b0d440c6704623d4d14b"
+      }
+    }
+  ],
+  "summary": {
+    "hosted_ci": "Passed security job at https://github.com/6631503097/notevault-team-outsiders/actions/runs/42068311164 on 82d6f4a05bb2bf3c92fd5d5b19ba56bb8c5fec2f; tag-only signing skipped"
+  },
+  "report_inputs": [
+    {
+      "path": "evidence/audit/backend.log",
+      "sha256": "99c8d39af038cc46169198c906e867fba764a106942b8e299258779abf1e8086",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/baseline.json",
+      "sha256": "2da73ab00288ea7324593dc07e1e165b1831072ca6420b3c6cec180d5e4a1a74",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/baseline.log",
+      "sha256": "a6815b584bb8c5539d3bfe878be6d052dcc176e9633e6b8310549419fc7ff873",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/ci/container-check.json",
+      "sha256": "b4f5b07125a881204840370832a2082eb50b93b75c8fcfe6d1c5b25e320742e1",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/gate-rejection.json",
+      "sha256": "e8be127c6f695faee8375d4a8ffa085e3b17f1eb4aeb47849cf44155f6c0d2f0",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/regression.xml",
+      "sha256": "9cbc635715f7a7d71a0edb02a89a35034596951f6da2d2c3a36e5a319bacb46c",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sast.json",
+      "sha256": "fb3b38a784f6b8f0d5f04c77f6df692e3ceb500e6e6fedf166d5ee739b66fe9d",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sbom-frontend.json",
+      "sha256": "835c10a630defa581912aea4f19a189da1d0305bbd74b4e26fec8265440d7c4d",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sbom-python.json",
+      "sha256": "9ec4174a29a0501ff6f50ba37fd5f9f02ca9da765d01cc3bda8a83bd963ecfe9",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sca-container.json",
+      "sha256": "47872d6ce3d0ac4e808b7ef0369ffdcd0e4bd97a33a75369837da021bece94fa",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sca-npm.json",
+      "sha256": "386d1b870d3043556600173594e4f1c8f568953eb869ba7aec4cce81be6b1101",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/sca-python.json",
+      "sha256": "2f7d9ee2189d3ce611a601f954e21bea808d40df32b46632300a67750e146af7",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/ci/secrets-history.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "scope": "own-repository-ci-generated-output"
+    },
+    {
+      "path": "evidence/audit/course-source-check.json",
+      "sha256": "033086d4b0357cfa110d2525c49744595a5559ad8387d38d764eca1b178b00c4",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/execution-journal.json",
+      "sha256": "e1c1993fb2e68d98ffb2d4760d738bcbed2efd8fb424c3635c791dcb4599f84b",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/frontend-build.log",
+      "sha256": "8de660306c6a578bcfc180c8430fa57a333d17bd2ef58977e06845f2aa483a21",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/frontend-source-copy.json",
+      "sha256": "8b2c4af1008b5de53cdccb3be8132687d9e82f900ff9714de8c4d81885ab66aa",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/frontend-temp-install.log",
+      "sha256": "742bf6dfc36e5c567444d44c54b7e01140554e767d8373d9bd0b19e334959b0c",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/frontend-tests-attempt2.log",
+      "sha256": "6c55f5311ce931338583abf47f64387ae1636eae938084c49050e38a588e1f1d",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/frontend-tests.log",
+      "sha256": "8cfa9226fd078f06583cb3d17aca414eed16c7408613b0d440c6704623d4d14b",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/hosted-ci.json",
+      "sha256": "6a6b4e1a35fcff15e0bc2b455ca7add4f564b9f977913a66a09adb27171379ca",
+      "scope": "own-repository-ci-observation"
+    },
+    {
+      "path": "evidence/audit/previous-pdf-inspection.json",
+      "sha256": "bce89a9a7c0bed89008c61b32a74d144f0801bee6462f9980421588fddfadb1e",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/reference-checks.json",
+      "sha256": "9de49ebfd76fafbe62074c99eb61a3674006005963c83bc7e1f21107afac9d6f",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/regression.xml",
+      "sha256": "991ce10cde0a6cd1114a9a70ab2036966a9a6ff5815575e9973ee8edde3213a9",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/runtime-executables.log",
+      "sha256": "ffab735bc0a7d8c51689382fe30398da6d568e39d1e840388946930420bf5461",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/signature.log",
+      "sha256": "55252e0d86da4a6fa32b4e1272ec7aabe830dbe2d25c7f6092a180c0b8fa4242",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "evidence/audit/tamper-rejection.log",
+      "sha256": "73b1ff1de101707e2ff7858f3f429b5b1d309af7cc6dbe0c237024cdf9fb8127",
+      "scope": "independent-local-audit-record"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "86a306367237d63afa5884e31a4daebf60b2b3b4f27aaaa764652f94aed6a8e7",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "backend/__init__.py",
+      "sha256": "4034136651f99496def2cc1e0e151cd15c01ef5a7f05a56b80c9eb48618d4ea3",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "backend/app.py",
+      "sha256": "05d99747b848e95dc9f190b6a9a62568daa22b9cf99fb0c4702240b6587b8ffa",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "fd90a06d96194c95560f141553acd0701847c4e9f41132c17a83356581bdcb90",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "4006d8befc4d2343abfa167572f4033fa115764a3d48dd1f46dda24f8db70f12",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "de09236aa6a0216cc6205a047628236ec6a9ce87d0ba3c66e4b075d9feed8c6a",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/src/App.test.tsx",
+      "sha256": "21c84e1bc120e484592580be2199ad22df741df6fd9598a24e40cef1ad4604e0",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "sha256": "1185980ead1e64962c8716aae818a333fc610fdc6b9680c063a09963c47f74cd",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "sha256": "6b4d0350d5f024dba0e6f64b19f080e0d5a28986db8a2fd2d6337c76a3191b17",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "sha256": "5d7b8f69d779bb2a71b490a639a59800340a6f828666ffd174120bb3455ad501",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/src/test-setup.ts",
+      "sha256": "4d9bd80c64d4854c212aac89e167e4037b6180756c5917a4e0031e1935035182",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "sha256": "b89e5d28b89292912229b1974fe2a41449aa1fce20f38ef529403eac652e7bf3",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "a3abcbb1f037794447cac438e0e6a0deaf75927ce2dc4b24803c62e055330c18",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "team.json",
+      "sha256": "321db2688d5bf6ec141bd57a297370e720936b1c12a839df8aa765640df00a90",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "tests/test_security.py",
+      "sha256": "f8da7e32c3953168004831de12190c9eb81f5ac1ba5682a0993461cefdb918d0",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "lab/original/app.py",
+      "sha256": "2d25d7dc1282cf743c9702e910f090b81fad6272a8b8793156d8431c5ab3aaa6",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "scripts/reproduce_baseline.py",
+      "sha256": "33f5e127785b94e2514c58fc652d0798b89acfa63e1b90432d5c84875f1c58a9",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "scripts/record_audit_checks.py",
+      "sha256": "89741f18c13f9391fe95aaa18df77430063602bbbb79095976acb3c19f4a3bcd",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "scripts/build_report.py",
+      "sha256": "2f10df011d9de4dba64ca7b8594d024c4ce48946c30eb59be2a8c38926fcd224",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "release/team-outsiders-notevault.tar.gz",
+      "sha256": "587f0578afb24a4c663c7cb2192312964696d193914de6a07a66f1bc912ecadb",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "release/cosign.pub",
+      "sha256": "755c9f7fce1c1ab3a39744023c16ab57edc1e5601516546cec5acd18bb4ceb88",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "release/release.sigstore.json",
+      "sha256": "08a79afb6be812227afe1a5f7f26510b2744f711d242a7142e69daa634eac3e3",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "release/provenance.json",
+      "sha256": "0fba82a7431ef8ee9fcd1c5d8af73e053e867be3cefa175d07a9e486a5c1b7b5",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    },
+    {
+      "path": "release/SHA256SUMS",
+      "sha256": "d35b6e87f731d55cbb9b82b387277fcbcef6bc6f089b0f9b9f36bb97ac6ae830",
+      "scope": "source inspected; implementation inherited unless audit tooling"
+    }
+  ],
+  "retained_student_material": [
+    "evidence/f02-after-zaw-2026-11-05.png",
+    "evidence/f02-before-zaw-2026-11-05.png",
+    "evidence/wk6-f07-myo.png",
+    "evidence/baseline.json"
+  ],
+  "release": {
+    "source_head": "180958bb65578e97d60afa1b3c0cc4a723d8d581",
+    "sha256": "587f0578afb24a4c663c7cb2192312964696d193914de6a07a66f1bc912ecadb",
+    "runtime_build_input_hashes_match_current_workspace": true
+  },
+  "inherited_claims_excluded": [
+    "earlier Debian-image rejection",
+    "specific dependency-upgrade history",
+    "external deployment ownership/Nginx/remote persistence/salt configuration",
+    "private Classroom access date",
+    "uncited legacy evidence files"
+  ],
+  "limits": "An analyst-created hash ledger is not independent attestation. Student statements/screenshots are their own submissions; inherited code is not new work in this conversation."
+}

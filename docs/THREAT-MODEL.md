@@ -34,7 +34,7 @@ flowchart LR
   S -.->|Verified release| A
 ```
 
-The local preview is loopback-only. The live service at https://outsiders.3-0-126-159.nip.io/ uses HTTPS and a loopback-only application process behind Nginx. The runtime contains only the hardened application; the original vulnerable app is accessed by an isolated test client.
+The audited deployment is the loopback-only local Compose app and the container smoke test in the team-owned CI run. The inherited external host is not evidence of team deployment ownership or its reverse-proxy configuration. The original vulnerable app is accessed only by an isolated test client.
 
 ## STRIDE
 
