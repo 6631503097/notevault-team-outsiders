@@ -1,0 +1,8 @@
+2026-11-06T12:33:47.867464+07:00 | Wanna San - 6631503097
+Team Outsiders | marker=3d821afbe8a0 | mode=baseline
+Operator label (self-reported): Codex assistant - automated wrapper verification
+Temporary DB / Flask client only; no listener or retained token values
+F-01 | HTTP 302 | Injected username with an incorrect fixture password | {"session_cookie_issued": true}
+F-01 | HTTP 200 | Injected search as Alice | {"marker": "3d821afbe8a0", "other_owner_team_marker_present": true}
+F-05 | HTTP 200 | Export format appends only harmless printf NV_SAFE_PROBE | {"harmless_shell_probe_present": true}
+Evidence: evidence/review-wanna-f01-f05/baseline.json
