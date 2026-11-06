@@ -249,8 +249,8 @@
     },
     {
       "path": "team.json",
-      "sha256": "321db2688d5bf6ec141bd57a297370e720936b1c12a839df8aa765640df00a90",
-      "scope": "source inspected; implementation inherited unless audit tooling"
+      "sha256": "b5a7dcdf89d75a2cbae425c0c01e92709cda4a7c007675bb260a3be946224c26",
+      "scope": "Report metadata/editorial update; demo link supplied by team; no runtime change"
     },
     {
       "path": "tests/test_security.py",
@@ -274,8 +274,8 @@
     },
     {
       "path": "scripts/build_report.py",
-      "sha256": "2f10df011d9de4dba64ca7b8594d024c4ce48946c30eb59be2a8c38926fcd224",
-      "scope": "source inspected; implementation inherited unless audit tooling"
+      "sha256": "b4837a7b70672f1e0c11a78cdf47b98cfa8d84ca99f090d6ee1ee363b338d969",
+      "scope": "Report metadata/editorial update; demo link supplied by team; no runtime change"
     },
     {
       "path": "release/team-outsiders-notevault.tar.gz",

@@ -1,15 +1,15 @@
 {
   "scope": "Actual test-client/pytest records; operator labels are self-reported, not identity or understanding attestation",
   "capture_operators": {
-    "baseline": "Codex assistant - automated wrapper verification",
-    "patched": "Codex assistant - automated wrapper verification"
+    "baseline": "Wanna San - personally invoked with AI-assisted harness",
+    "patched": "Wanna San - personally invoked with AI-assisted harness"
   },
   "files": {
-    "evidence/review-wanna-f01-f05/regression.log": "5a71cfee04249258b5a6d71dc57ae420f3d72cb07840020862a66e767a72cf0a",
-    "evidence/review-wanna-f01-f05/baseline.log": "ebfb1df1026f334df6d3416434948c67851e8bd51dcbcfeb7ca83674c4182c1f",
-    "evidence/review-wanna-f01-f05/baseline.json": "b5d5cf2756f967a977421e4f0ec4d543c2fce8b332f2a1b1ed30bac07d47143d",
-    "evidence/review-wanna-f01-f05/patched.log": "de9e5357d9d70e2fe09de69589f5b42880b6f8fb043c7650c92c63fa8e08eb0a",
-    "evidence/review-wanna-f01-f05/regression.xml": "03d029efc3f377d0f69e5d9ce479f53a0cfc4a50d8dfec01c3dc8149d23c3e0d",
-    "evidence/review-wanna-f01-f05/patched.json": "e99a05af71b91fa8ddf7708f081e4407796cbb9454871353c8b94cb7c336ac2e"
+    "evidence/review-wanna-f01-f05/regression.log": "2f87a579db5ea7f6d21a59c522ec8588063ad850603ad742c64d084d19b81541",
+    "evidence/review-wanna-f01-f05/baseline.log": "3821255a5c4e79176d58db8d9c46ae66eda7d0593b149b02a54ce5c8a6e7a627",
+    "evidence/review-wanna-f01-f05/baseline.json": "a51a26454fc50234ec1cce1338dfaffc4f3cca985cd02901f0841f7ce79f8423",
+    "evidence/review-wanna-f01-f05/patched.log": "66fa968b2de477d44a24986ce732789b6af69f0d0643fc4d881a6efb6372340c",
+    "evidence/review-wanna-f01-f05/regression.xml": "697f809536c57544bd1e6409b34e6528b937c6b9ef85c6b3561f3124b4ace723",
+    "evidence/review-wanna-f01-f05/patched.json": "f4b6eb868bfa8489c8a99c8cd3a16f9aac0a961a18ba866159d695acdf592cb0"
   }
 }

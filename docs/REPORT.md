@@ -7,12 +7,12 @@
 | Team name | Team Outsiders |
 | Members (name + ID) | Zaw Win Htut 6631503101; Wanna San 6631503097; Myo Zin Thant 6631503076 |
 | Target application | Provided NoteVault, upgraded to Fieldnotes |
-| Repository URL | https://github.com/6631503097/notevault-team-outsiders (private; instructor access must be granted) |
+| Repository URL | https://github.com/6631503097/notevault-team-outsiders (private; nutthakorn7 invited with write access; acceptance pending) |
 | Audited application | Local loopback app at http://127.0.0.1:8081; no external deployment ownership claimed |
 | Evidence review date | 2026-11-06 (Asia/Bangkok) |
-| Recorded demo URL | Not supplied; required before portal upload |
+| Recorded demo URL | https://drive.google.com/file/d/1dyuYW3Ln3t05w3GKuYHs74RNAFCseIBZ/view |
 | Assessment baseline marker | 3d821afbe8a0 |
-| Status | Draft; student reviews, instructor access, demo and final human approval required |
+| Status | Submission report; instructor invitation sent; acceptance and individual documentation verification pending |
 
 ## AI-tool usage disclosure
 
@@ -22,7 +22,7 @@ OpenAI Codex assisted with requirements review, implementation, tests, local vul
 
 Team Outsiders uses NoteVault as a local private notebook with account registration, sessions, owner-scoped notes and exports. Its Fieldnotes interface organizes notes into Fieldwork, Research, Personal. The assessment verified ten harmless baseline probes grouped into eight findings: two Critical, four High, and two Medium, using qualitative severity. The critical risks are shell injection and session forgery; authorization, SQL construction, interpreted content and password handling add further risk.
 
-The inherited, disclosed React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
+The inherited, disclosed React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the team supplied the recorded presentation link; each student must attest to their own review before upload.
 
 ## Verification at a glance
 
@@ -357,6 +357,18 @@ AI-assisted technical assessment, not a student personal reflection: the stronge
 
 ## Appendix
 
+### Current team handoff status
+
+The presentation URL was supplied by Wanna San on 6 November 2026. Anonymous HTTP retrieval returned the Drive viewer for the MP4; this is not a playback/audio check. Latest verified remediation CI passed on 040b78e46865e30f58149b8e0286c7355eadb268: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42170648164 . Follow-up evidence branch CI passed on 76ccb728ac3291016d1b0a9b875b23752e003f39: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42190990151 . These observations supplement the earlier audited scan artifacts; they do not claim CI on later report-only edits. The recording itself has not been watched by the assistant. At the last verified GitHub check, Myo review PRs 1 and 3 and Zaw PR 2 were merged. Wanna guided-review PR 4 was merged; follow-up evidence PR 5 was still draft. No submitted GitHub reviews were recorded on these PRs. Wanna subsequently reported that all members completed their personal work. Zaw confirmation/signature fields remain unfinished in the last fetched remediation worksheet. Wanna explicitly confirmed her personal F-01/F-05 statement in chat on 6 November 2026; that confirmation is transcribed in the review branch worksheet and below, with assistant commit authorship preserved. This report does not attest those personal actions or claim portal submission.
+
+### Wanna San - confirmed personal reflection
+
+Wanna San (6631503097) explicitly confirmed the following statement in chat on 6 November 2026; the assistant transcribed it rather than signing on her behalf:
+
+"I, Wanna San, reviewed and understand the F-01/F-05 code and results and personally ran the saved capture commands. I learned that parameterized SQL and ownership checks solve separate problems, and that removing shell execution eliminates the demonstrated export command injection. I confirm this describes my own work. - Wanna San, 6 November 2026"
+
+The saved records contain six passing focused tests. The screenshots display retained results and were captured by the assistant. This confirmation does not attribute inherited implementation or assistant commits to Wanna.
+
 ### Final submission controls
 
 | Control | Status | Evidence or required action |
@@ -364,13 +376,13 @@ AI-assisted technical assessment, not a student personal reflection: the stronge
 | Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
 | Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/audit/provenance.json |
 | SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
-| Team repository and local app | Verified within stated scope | External deployment ownership and instructor access remain unverified |
+| Team repository and local app | Verified within stated scope | External deployment ownership is unverified; nutthakorn7 write invitation sent, acceptance pending |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
-| Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
+| Recorded demo URL | Supplied by team | Linked on cover; signed-out playback must be confirmed by team |
 | Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
 | Portal upload with term-project code | Required | One representative uploads this PDF after all controls above are satisfied |
 
-The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. The team repository and local app are present; portal upload, peer rating and video submission remain.
+The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. The team repository and local app are present; the presentation link is supplied; portal upload and private peer ratings are not verified.
 
 ### Tools and evidence index
 
