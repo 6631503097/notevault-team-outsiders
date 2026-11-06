@@ -102,3 +102,13 @@ This supports a claim of source/explanation review. It does not state that Wanna
 ### Wanna's F-05 correction and current activity
 
 Wanna clarified that the export fix eliminates external subprocess/shell execution and uses Python serialization instead. She explicitly stated: "So far, I have only reviewed the code and results." Her draft reflection preserves that limit. Personal reproduction/screenshots and final signature remain pending; they are not inferred from this PR or from the assistant's automated captures.
+
+## Assistant-captured screenshots of retained results
+
+The following real Terminal screenshots were captured by the assistant after displaying existing saved records. They are visibly labelled as saved-result displays, not live student reproductions. At capture time the source records had a self-reported Wanna operator label and a 12:51 run timestamp; the assistant did not infer identity or personal execution from that label. Source files were preserved as existing uncommitted changes for Wanna's personal commit. See the capture metadata/README for exact scope.
+
+![Saved baseline results](../evidence/review-wanna-f01-f05/assistant-captures/f01-f05-baseline-saved-results.png)
+
+![Saved patched results](../evidence/review-wanna-f01-f05/assistant-captures/f01-f05-patched-saved-results.png)
+
+![Saved focused regression results](../evidence/review-wanna-f01-f05/assistant-captures/f01-f05-regression-saved-results.png)
