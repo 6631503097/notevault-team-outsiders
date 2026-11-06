@@ -160,7 +160,7 @@ report=f'''# Term Project Report - Secure Build
 | Evidence review date | {audit["checked_at"][:10]} (Asia/Bangkok) |
 | Recorded demo URL | {team.get('demo_url') or 'Not supplied; required before portal upload'} |
 | Assessment baseline marker | {base['marker']} |
-| Status | Draft; student reviews, instructor access, demo and final human approval required |
+| Status | Submission report; personal confirmations and instructor access remain subject to team verification |
 
 ## AI-tool usage disclosure
 
@@ -170,7 +170,7 @@ OpenAI Codex assisted with requirements review, implementation, tests, local vul
 
 {team['id']} uses NoteVault as a local private notebook with account registration, sessions, owner-scoped notes and exports. Its {team['edition']} interface organizes notes into {', '.join(team['collections'])}. The assessment verified ten harmless baseline probes grouped into eight findings: two Critical, four High, and two Medium, using qualitative severity. The critical risks are shell injection and session forgery; authorization, SQL construction, interpreted content and password handling add further risk.
 
-The inherited, disclosed React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the students must supply the final demo link and attest to their own review before upload.
+The inherited, disclosed React/TypeScript client and Flask API remove the demonstrated mechanisms, retain legitimate application behavior and add persistent storage, conflict detection and reversible note removal. The security regression suite and frontend tests exercise both successful use and rejected attacks. Original source and actual probe outputs are retained. The report does not claim independent student authorship or invent personal contributions. The hosted Actions run is recorded as machine-generated evidence; the team supplied the recorded presentation link; each student must attest to their own review before upload.
 
 ## Verification at a glance
 
@@ -294,6 +294,10 @@ AI-assisted technical assessment, not a student personal reflection: the stronge
 
 ## Appendix
 
+### Current team handoff status
+
+The presentation URL was supplied by Wanna San on 6 November 2026. Anonymous HTTP retrieval returned the Drive viewer for the MP4; this is not a playback/audio check. Latest verified remediation CI passed on 040b78e46865e30f58149b8e0286c7355eadb268: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42170648164 . Follow-up evidence branch CI passed on 76ccb728ac3291016d1b0a9b875b23752e003f39: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42190990151 . These observations supplement the earlier audited scan artifacts; they do not claim CI on later report-only edits. The recording itself has not been watched by the assistant. At the last verified GitHub check, Myo review PRs 1 and 3 and Zaw PR 2 were merged. Wanna guided-review PR 4 was merged; follow-up evidence PR 5 was still draft. No submitted GitHub reviews were recorded on these PRs. Zaw confirmation/signature fields and Wanna personal reflection/attestation fields remained incomplete. This report does not attest those personal actions or claim portal submission.
+
 ### Final submission controls
 
 | Control | Status | Evidence or required action |
@@ -303,11 +307,11 @@ AI-assisted technical assessment, not a student personal reflection: the stronge
 | SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
 | Team repository and local app | Verified within stated scope | External deployment ownership and instructor access remain unverified |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
-| Recorded demo URL | Required before upload | Add viewable unlisted YouTube or Drive URL to the cover |
+| Recorded demo URL | Supplied by team | Linked on cover; signed-out playback must be confirmed by team |
 | Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
 | Portal upload with term-project code | Required | One representative uploads this PDF after all controls above are satisfied |
 
-The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. The team repository and local app are present; portal upload, peer rating and video submission remain.
+The report is due Friday, November 6 at 16:59 Bangkok time. One representative uploads the final PDF at https://learn.zcr.ai/submit with the private project code from Classroom. Use the project code, not a weekly worksheet code. The team repository and local app are present; the presentation link is supplied; portal upload and private peer ratings are not verified.
 
 ### Tools and evidence index
 
@@ -388,7 +392,7 @@ while i<len(lines):
     if not s:i+=1;continue
     if s.startswith('# '):
         story.append(para(team['id'].upper(),'Sub'));story.append(Paragraph('NoteVault<br/>Secure Build',ParagraphStyle('TitleCustom',fontName='Times-Roman',fontSize=34,leading=38,textColor=ink,spaceAfter=14)))
-        story.append(para('FINAL SUBMISSION DRAFT | '+team['edition'].upper(),'Sub'));i+=1;continue
+        story.append(para('SUBMISSION REPORT | '+team['edition'].upper(),'Sub'));i+=1;continue
     if s.startswith('## '):
         title=s[3:];story.append(para(title,'Section'));i+=1
         if title.startswith('3. Threat'):story.append(diagram())
@@ -415,10 +419,10 @@ while i<len(lines):
     story.append(para('\n'.join(content)))
 
 out=ROOT/'output/pdf';out.mkdir(parents=True,exist_ok=True)
-filename=out/(team['slug']+'-report-audited-draft.pdf')
+filename=out/(team['slug']+'-report-submission.pdf')
 def page(canvas,doc):
     canvas.saveState();canvas.setStrokeColor(colors.HexColor('#dbe2dd'));canvas.line(60,48,535,48)
-    canvas.setFillColor(ink);canvas.setFont('Helvetica',8);canvas.drawString(60,35,team['id']+' | NoteVault | Final submission draft')
+    canvas.setFillColor(ink);canvas.setFont('Helvetica',8);canvas.drawString(60,35,team['id']+' | NoteVault | Submission report')
     canvas.drawRightString(535,35,str(doc.page));canvas.restoreState()
-SimpleDocTemplate(str(filename),pagesize=(595.28,841.89),leftMargin=60,rightMargin=60,topMargin=45,bottomMargin=62,title=team['id']+' - NoteVault Secure Build Final Submission Draft',author='AI-assisted; student attestation required before submission').build(story,onFirstPage=page,onLaterPages=page)
+SimpleDocTemplate(str(filename),pagesize=(595.28,841.89),leftMargin=60,rightMargin=60,topMargin=45,bottomMargin=62,title=team['id']+' - NoteVault Secure Build Submission Report',author='AI-assisted; student attestation required before submission').build(story,onFirstPage=page,onLaterPages=page)
 print(filename)
