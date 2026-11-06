@@ -155,12 +155,12 @@ report=f'''# Term Project Report - Secure Build
 | Team name | {team['id']} |
 | Members (name + ID) | {'; '.join(m['name']+' '+m['student_id'] for m in team['members'])} |
 | Target application | Provided NoteVault, upgraded to {team['edition']} |
-| Repository URL | {team['repository_url']} (private; instructor access must be granted) |
+| Repository URL | {team['repository_url']} (private; nutthakorn7 invited with write access; acceptance pending) |
 | Audited application | Local loopback app at http://127.0.0.1:8081; no external deployment ownership claimed |
 | Evidence review date | {audit["checked_at"][:10]} (Asia/Bangkok) |
 | Recorded demo URL | {team.get('demo_url') or 'Not supplied; required before portal upload'} |
 | Assessment baseline marker | {base['marker']} |
-| Status | Submission report; personal confirmations and instructor access remain subject to team verification |
+| Status | Submission report; instructor invitation sent; acceptance and individual documentation verification pending |
 
 ## AI-tool usage disclosure
 
@@ -296,7 +296,7 @@ AI-assisted technical assessment, not a student personal reflection: the stronge
 
 ### Current team handoff status
 
-The presentation URL was supplied by Wanna San on 6 November 2026. Anonymous HTTP retrieval returned the Drive viewer for the MP4; this is not a playback/audio check. Latest verified remediation CI passed on 040b78e46865e30f58149b8e0286c7355eadb268: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42170648164 . Follow-up evidence branch CI passed on 76ccb728ac3291016d1b0a9b875b23752e003f39: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42190990151 . These observations supplement the earlier audited scan artifacts; they do not claim CI on later report-only edits. The recording itself has not been watched by the assistant. At the last verified GitHub check, Myo review PRs 1 and 3 and Zaw PR 2 were merged. Wanna guided-review PR 4 was merged; follow-up evidence PR 5 was still draft. No submitted GitHub reviews were recorded on these PRs. Zaw confirmation/signature fields and Wanna personal reflection/attestation fields remained incomplete. This report does not attest those personal actions or claim portal submission.
+The presentation URL was supplied by Wanna San on 6 November 2026. Anonymous HTTP retrieval returned the Drive viewer for the MP4; this is not a playback/audio check. Latest verified remediation CI passed on 040b78e46865e30f58149b8e0286c7355eadb268: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42170648164 . Follow-up evidence branch CI passed on 76ccb728ac3291016d1b0a9b875b23752e003f39: https://github.com/6631503097/notevault-team-outsiders/actions/runs/42190990151 . These observations supplement the earlier audited scan artifacts; they do not claim CI on later report-only edits. The recording itself has not been watched by the assistant. At the last verified GitHub check, Myo review PRs 1 and 3 and Zaw PR 2 were merged. Wanna guided-review PR 4 was merged; follow-up evidence PR 5 was still draft. No submitted GitHub reviews were recorded on these PRs. Wanna subsequently reported that all members completed their personal work. The latest fetched remediation worksheet still contains unfinished Zaw confirmation/signature fields and Wanna personal reflection/attestation fields; this report records the team statement without supplying personal signatures or claiming those fields were committed. This report does not attest those personal actions or claim portal submission.
 
 ### Final submission controls
 
@@ -305,7 +305,7 @@ The presentation URL was supplied by Wanna San on 6 November 2026. Anonymous HTT
 | Threat model, findings, fixes | Complete | Sections 3-5; linked evidence and commit references |
 | Tests, SAST, SCA, secrets, container | Check evidence scope and hosted commit | Verification-at-a-glance table; evidence/audit/provenance.json |
 | SBOM, signed artifact, provenance | Local integrity evidence; not student identity | Section 6 and release directory |
-| Team repository and local app | Verified within stated scope | External deployment ownership and instructor access remain unverified |
+| Team repository and local app | Verified within stated scope | External deployment ownership is unverified; nutthakorn7 write invitation sent, acceptance pending |
 | All three members review and understand work | Required before upload | Student attestation; not inferable from repository state |
 | Recorded demo URL | Supplied by team | Linked on cover; signed-out playback must be confirmed by team |
 | Private peer ratings | Required separately | Each member submits truthful rating and one-line reason |
