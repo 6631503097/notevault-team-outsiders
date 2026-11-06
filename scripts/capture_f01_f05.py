@@ -13,10 +13,21 @@ import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser()
-p.add_argument('--mode',choices=['baseline','patched'],required=True)
+p.add_argument('--mode',choices=['baseline','patched'])
+p.add_argument('--refresh-manifest',action='store_true',help='After all captures/tests finish, hash the current records without running probes')
 p.add_argument('--operator-label',default='Not attested; automated test-client execution')
 p.add_argument('--summary',action='store_true',help='Print compact results for a readable terminal capture; JSON is still retained')
 a=p.parse_args()
+if a.refresh_manifest:
+    out=ROOT/'evidence/review-wanna-f01-f05'
+    captures={mode:json.loads((out/(mode+'.json')).read_text()) for mode in ['baseline','patched']}
+    files=[f for f in out.glob('*') if f.is_file() and f.name!='MANIFEST.json']
+    manifest={'scope':'Actual test-client/pytest records; operator labels are self-reported, not identity or understanding attestation','capture_operators':{mode:data['operator_label'] for mode,data in captures.items()},'files':{str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}}
+    (out/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print('Current output hashes recorded in evidence/review-wanna-f01-f05/MANIFEST.json')
+    raise SystemExit(0)
+if not a.mode:
+    p.error('--mode is required unless --refresh-manifest is used')
 team=json.loads((ROOT/'team.json').read_text())
 assert team['id']=='Team Outsiders'
 rows=[]

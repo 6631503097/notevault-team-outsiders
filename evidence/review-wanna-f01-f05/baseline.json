@@ -4,13 +4,13 @@
   "prepared_for": "Wanna San - 6631503097",
   "operator_label": "Codex assistant - automated guided-review capture",
   "identity_limit": "Operator label is supplied text, not proof of student execution or understanding",
-  "captured_at": "2026-11-06T12:25:17.804790+07:00",
+  "captured_at": "2026-11-06T12:30:20.863146+07:00",
   "mode": "baseline",
-  "source_head": "ba388b6a355561fffc6205e2b2c953a23a517fb3",
+  "source_head": "5182fd6b668aa8cebea7651932f3cfab8abef7de",
   "source_sha256": {
     "lab/original/app.py": "2d25d7dc1282cf743c9702e910f090b81fad6272a8b8793156d8431c5ab3aaa6",
     "backend/app.py": "05d99747b848e95dc9f190b6a9a62568daa22b9cf99fb0c4702240b6587b8ffa",
-    "scripts/capture_f01_f05.py": "4434b34c5e1b479c9ae0c62381906430c147b154dcb3c4ec4d47f71bb6b14f12"
+    "scripts/capture_f01_f05.py": "37c5c62c8d70230e320dfc12a09bfb550944a22c479c74c8ed3fd713d12472e5"
   },
   "method": "Isolated temporary database and Flask test client; no public listener; no session or CSRF token values retained",
   "results": [

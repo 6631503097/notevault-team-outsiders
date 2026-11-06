@@ -49,11 +49,13 @@ Review the captures for these results: the baseline contains NV_SAFE_PROBE; the 
 On your own clone, check out this branch, inspect the source and results, and run the following commands yourself. Use the environments documented in docs/BASELINE.md and the README; do not start the vulnerable Compose app.
 
 ```sh
+set -o pipefail
 printf 'Wanna San | 6631503097 | Team Outsiders\n'
 date '+%Y-%m-%d %H:%M:%S %z'
-.lab-venv/bin/python scripts/capture_f01_f05.py --mode baseline --operator-label 'Wanna San - personally invoked' --summary
-PYTHONPATH=. .venv/bin/python scripts/capture_f01_f05.py --mode patched --operator-label 'Wanna San - personally invoked' --summary
-PYTHONPATH=. .venv/bin/pytest -q tests/test_security.py -k 'f01 or f05 or legitimate_note_lifecycle_and_exports'
+.lab-venv/bin/python scripts/capture_f01_f05.py --mode baseline --operator-label 'Wanna San - personally invoked' --summary | tee evidence/review-wanna-f01-f05/baseline.log
+PYTHONPATH=. .venv/bin/python scripts/capture_f01_f05.py --mode patched --operator-label 'Wanna San - personally invoked' --summary | tee evidence/review-wanna-f01-f05/patched.log
+PYTHONPATH=. .venv/bin/pytest -q tests/test_security.py -k 'f01 or f05 or legitimate_note_lifecycle_and_exports' --junitxml=evidence/review-wanna-f01-f05/regression.xml | tee evidence/review-wanna-f01-f05/regression.log
+.venv/bin/python scripts/capture_f01_f05.py --refresh-manifest
 ```
 
 These commands intentionally replace this branch's automated captures with the results from your own invocation. The source/operator/timestamp metadata must remain truthful. Capture readable screenshots of the full commands and results; include your actual name/ID, date/time/timezone and Team Outsiders marker. Do not reuse another member's screenshot or relabel an assistant-generated capture as your independent work.
