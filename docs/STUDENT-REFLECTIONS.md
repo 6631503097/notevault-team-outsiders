@@ -33,20 +33,22 @@ Verified technical facts are provided below. Personal reflection, contribution, 
 
 ## Wanna San — 6631503097
 
-- Verified GitHub username:
-- Verified Git email:
-- Review date/time/timezone:
-- Finding/fix personally reproduced:
-- Exact command or browser action:
-- Evidence filename/link:
-- Result observed in my own words:
-- Why the fix addresses the root cause:
-- One limitation/residual risk I identified:
-- My actual contribution to review/demo/submission:
-- What I learned or would do differently:
-- I reviewed and understand the AI-assisted material — **yes/no**
-- I confirm these are actions I personally performed — **yes/no**
-- Name/date:
+Draft based on Wanna's own answers during the guided review on 6 November 2026. The assistant formatted the answers and clarified implementation details. Wanna must personally review, complete and commit the remaining fields; this is not a signed attestation.
+
+- Verified GitHub username: 6631503097 (previously confirmed by Wanna)
+- Verified Git email: Pending Wanna's own choice/confirmation.
+- Review date/time/timezone: 2026-11-06, guided source/result review in Asia/Bangkok. No personal probe execution time is claimed.
+- Finding/fix personally reproduced: F-01/F-05 source and result review completed; personal reproduction is not yet confirmed.
+- Exact command or browser action: Wanna stated she reviewed the code, vulnerability explanations, remediation patches and results. Automated capture commands were invoked by the assistant and are not attributed to her as personal execution. See docs/REVIEW-WANNA-F01-F05.md for the commands she can invoke herself.
+- Evidence filename/link: evidence/review-wanna-f01-f05/baseline.json; patched.json; regression.log. These currently identify the assistant as operator and are not student screenshots.
+- Result observed in my own words: "So far, I have only reviewed the code and results." The assistant-produced records show baseline SQL/search injection and harmless shell-command output, followed by rejection in the patched app and successful legitimate exports. These are records I reviewed, not a claim that I personally invoked the commands.
+- Why the fix addresses the root cause: Based on Wanna's supplied explanations, with technical wording clarified by the assistant: SQL constructed by concatenation lets quotes/operators alter its grammar. Bound placeholders keep supplied values separate from SQL syntax. Owner predicates solve the separate authorization problem; the actual notes column here is owner_id. For F-05, this app removes external process/shell execution entirely and formats owned notes in memory using json.dumps, csv.writer/StringIO, or string joining for TXT. It does not replace the shell with a different subprocess call or write an export file. This removes the demonstrated shell-injection mechanism from the export path.
+- One limitation/residual risk I identified: Wanna's wording: "while parameterized queries prevent SQL injection, they do not inherently restrict data access boundaries—requiring explicit authorization and owner checks to be enforced alongside parameterized queries." This is a limitation of parameterization, not a claim that the patched app lacks owner checks; the patched app includes them.
+- My actual contribution to review/demo/submission: Reviewed source, explanations, patches and reported results during an AI-assisted guided review; supplied my explanations and identified the authorization limitation. Independent reproduction, screenshots and a final personal commit remain pending. I do not claim to have written the inherited implementation or fixes.
+- What I learned or would do differently: Pending Wanna's own personal learning statement.
+- I reviewed and understand the AI-assisted material — **pending Wanna's own yes/no confirmation**
+- I confirm these are actions I personally performed — **pending Wanna's own confirmation, limited to the activities actually performed above**
+- Name/date: Pending Wanna's own signature/date.
 
 ## Myo Zin Thant — 6631503076
 

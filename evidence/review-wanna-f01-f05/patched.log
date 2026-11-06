@@ -1,0 +1,15 @@
+2026-11-06T12:25:19.919639+07:00 | Wanna San - 6631503097
+Team Outsiders | marker=3d821afbe8a0 | mode=patched
+Operator label (self-reported): Codex assistant - automated guided-review capture
+Temporary DB / Flask client only; no listener or retained token values
+F-01 | HTTP 401 | Same injected username with incorrect fixture password | {"rejected": true}
+F-01 | HTTP 200 | Same injected search as Alice | {"note_count": 0, "treated_as_literal_data": true}
+F-01 | HTTP 200 | Legitimate literal search for a newly created own note | {"note_count": 1}
+F-05 | HTTP 400 | Reject unrecognized format: txt; printf NV_SAFE_PROBE | {"harmless_shell_probe_present": false, "rejected": true}
+F-05 | HTTP 400 | Reject unrecognized format: $(id) | {"harmless_shell_probe_present": false, "rejected": true}
+F-05 | HTTP 400 | Reject unrecognized format: ../../../etc/passwd | {"harmless_shell_probe_present": false, "rejected": true}
+F-05 | HTTP 400 | Reject unrecognized format: html | {"harmless_shell_probe_present": false, "rejected": true}
+F-05 | HTTP 200 | Legitimate owned-note json export | {"attachment": true, "own_fixture_present": true}
+F-05 | HTTP 200 | Legitimate owned-note csv export | {"attachment": true, "own_fixture_present": true}
+F-05 | HTTP 200 | Legitimate owned-note txt export | {"attachment": true, "own_fixture_present": true}
+Evidence: evidence/review-wanna-f01-f05/patched.json

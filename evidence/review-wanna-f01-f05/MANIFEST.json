@@ -1,0 +1,11 @@
+{
+  "scope": "Assistant-run preparation; Wanna personal reproduction/reflection not yet attested",
+  "files": {
+    "evidence/review-wanna-f01-f05/regression.log": "77a0842c5aec9956e6d14847e1728f9c42103315ef6484c665affa6154895f47",
+    "evidence/review-wanna-f01-f05/baseline.log": "c1f71e67ebd0fa4fe703f96d2491801915d54703bad6b0e6001eca1eba8db1da",
+    "evidence/review-wanna-f01-f05/baseline.json": "aa8ea6440cfb23249681302a7a2f270faaaeef93a1ff3abe8dc473926b26039f",
+    "evidence/review-wanna-f01-f05/patched.log": "6da3d35a46941a4e276e3769d2a8ee9e37f7c2ebd83b80dffab5002097aaa612",
+    "evidence/review-wanna-f01-f05/regression.xml": "36b7d894231dd7cdba451c0f2d1ba41794774d97407a82e3ecd3f390bc8ee589",
+    "evidence/review-wanna-f01-f05/patched.json": "6789833d570c486af3c152351b07ec8b9f674bfe77351c93de5a1e05efa531d9"
+  }
+}
