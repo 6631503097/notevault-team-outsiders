@@ -274,7 +274,7 @@
     },
     {
       "path": "scripts/build_report.py",
-      "sha256": "c33ff0a9448b1fd881942b6f265502dc2e41272b4d7fb5475372bc6f8e75d59a",
+      "sha256": "b4837a7b70672f1e0c11a78cdf47b98cfa8d84ca99f090d6ee1ee363b338d969",
       "scope": "Report metadata/editorial update; demo link supplied by team; no runtime change"
     },
     {

@@ -112,3 +112,7 @@ The following real Terminal screenshots were captured by the assistant after dis
 ![Saved patched results](../evidence/review-wanna-f01-f05/assistant-captures/f01-f05-patched-saved-results.png)
 
 ![Saved focused regression results](../evidence/review-wanna-f01-f05/assistant-captures/f01-f05-regression-saved-results.png)
+
+## Subsequent personal confirmation - 6 November 2026
+
+Wanna explicitly confirmed in chat that she reviewed and understood the F-01/F-05 code/results and personally ran the saved capture commands. Her confirmed learning statement and typed attestation are transcribed in docs/STUDENT-REFLECTIONS.md. This supersedes earlier pending-execution/confirmation statements for Wanna only. The assistant captured the saved-result screenshots and committed this transcription; no student authorship of assistant commits is claimed.
