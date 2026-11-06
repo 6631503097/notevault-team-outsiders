@@ -1,15 +1,15 @@
 {
   "scope": "Actual test-client/pytest records; operator labels are self-reported, not identity or understanding attestation",
   "capture_operators": {
-    "baseline": "Codex assistant - automated guided-review capture",
-    "patched": "Codex assistant - automated guided-review capture"
+    "baseline": "Codex assistant - automated wrapper verification",
+    "patched": "Codex assistant - automated wrapper verification"
   },
   "files": {
-    "evidence/review-wanna-f01-f05/regression.log": "77a0842c5aec9956e6d14847e1728f9c42103315ef6484c665affa6154895f47",
-    "evidence/review-wanna-f01-f05/baseline.log": "e8a530f932860aed4ad202e45eb014fdc53d9529d4de48f0e722bf4408da58f1",
-    "evidence/review-wanna-f01-f05/baseline.json": "7b65c67814f1828bda5920c00cd6872f9f12ca6d80d1231073ff40abe623c1ae",
-    "evidence/review-wanna-f01-f05/patched.log": "8b35615833a58f520ac38a0e158670bbfd447a01af88f3cd199afb0bbf81be69",
-    "evidence/review-wanna-f01-f05/regression.xml": "36b7d894231dd7cdba451c0f2d1ba41794774d97407a82e3ecd3f390bc8ee589",
-    "evidence/review-wanna-f01-f05/patched.json": "9311ec3ef5b340b1aeaf3dd055a3965cafbcce89597abf1061bc05a2174c984c"
+    "evidence/review-wanna-f01-f05/regression.log": "5a71cfee04249258b5a6d71dc57ae420f3d72cb07840020862a66e767a72cf0a",
+    "evidence/review-wanna-f01-f05/baseline.log": "ebfb1df1026f334df6d3416434948c67851e8bd51dcbcfeb7ca83674c4182c1f",
+    "evidence/review-wanna-f01-f05/baseline.json": "b5d5cf2756f967a977421e4f0ec4d543c2fce8b332f2a1b1ed30bac07d47143d",
+    "evidence/review-wanna-f01-f05/patched.log": "de9e5357d9d70e2fe09de69589f5b42880b6f8fb043c7650c92c63fa8e08eb0a",
+    "evidence/review-wanna-f01-f05/regression.xml": "03d029efc3f377d0f69e5d9ce479f53a0cfc4a50d8dfec01c3dc8149d23c3e0d",
+    "evidence/review-wanna-f01-f05/patched.json": "e99a05af71b91fa8ddf7708f081e4407796cbb9454871353c8b94cb7c336ac2e"
   }
 }

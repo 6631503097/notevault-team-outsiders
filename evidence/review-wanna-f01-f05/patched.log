@@ -1,6 +1,6 @@
-2026-11-06T12:30:21.385835+07:00 | Wanna San - 6631503097
+2026-11-06T12:33:48.429092+07:00 | Wanna San - 6631503097
 Team Outsiders | marker=3d821afbe8a0 | mode=patched
-Operator label (self-reported): Codex assistant - automated guided-review capture
+Operator label (self-reported): Codex assistant - automated wrapper verification
 Temporary DB / Flask client only; no listener or retained token values
 F-01 | HTTP 401 | Same injected username with incorrect fixture password | {"rejected": true}
 F-01 | HTTP 200 | Same injected search as Alice | {"note_count": 0, "treated_as_literal_data": true}

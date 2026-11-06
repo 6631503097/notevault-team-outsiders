@@ -44,6 +44,19 @@ Read the actual source:
 
 Review the captures for these results: the baseline contains NV_SAFE_PROBE; the patched app returns 400 for that malformed format and the other invalid formats. Valid JSON, CSV and text exports return 200 with the harmless own-note fixture and attachment headers.
 
+## One-command capture on the prepared review clone
+
+On this machine, the prepared clone is /tmp/outsiders-wanna-f01-f05. It is already on the review branch. The wrapper uses the documented local environments if present, or the prepared temporary environments on this machine. Those /tmp environments are temporary; use README/BASELINE setup on another machine.
+
+Run this yourself in Terminal, inspect the results, and take your own screenshots:
+
+```sh
+cd /tmp/outsiders-wanna-f01-f05
+bash scripts/run_f01_f05_review.sh --operator-label 'Wanna San - personally invoked with AI-assisted harness'
+```
+
+The wrapper prints the actual commands/date and captures outputs, runs the six focused tests, and refreshes hashes. It does not complete or sign your personal reflection. It has no default student operator label; the caller supplies a truthful label. The assistant tests it using its own label.
+
 ## What Wanna must personally do
 
 On your own clone, check out this branch, inspect the source and results, and run the following commands yourself. Use the environments documented in docs/BASELINE.md and the README; do not start the vulnerable Compose app.
